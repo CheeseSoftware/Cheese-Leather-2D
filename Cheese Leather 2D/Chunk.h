@@ -2,6 +2,8 @@
 
 #include "types.h"
 
+class Game;
+
 class Chunk {
 public:
 	Chunk();
@@ -15,13 +17,13 @@ public:
 	void placeBlockWithoutNotify(i8 x, i8 y, u16 block);
 	void placeBlockWithoutNotifyAndLock(i8 x, i8 y, u16 block);
 
-	boost::mutex getBlockMutex();
+	//boost::mutex getBlockMutex();
 	u16 getBlock(i8 x, i8 y);
 	u16 getBlockWithoutLock(i8 x, i8 y);
 
 private:
 	u16 *m_blocks;
-	boost::mutex m_blockMutex;
+	/*boost::mutex m_blockMutex;
 
 	BlockData *m_blockData;
 	boost::mutex m_blockDataMutex;
@@ -29,5 +31,5 @@ private:
 	std::vector<Vertex> m_mesh;
 	boost::mutex m_meshMutex;
 
-	boost::atomic<gluint> m_vertexBuffer;
+	boost::atomic<gluint> m_vertexBuffer;*/
 };

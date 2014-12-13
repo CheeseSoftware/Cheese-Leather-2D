@@ -1,6 +1,6 @@
 #pragma once
 
-#include <glfw-h>
+#include <GLFW\glfw3.h>
 
 class Window {
 public:
@@ -9,7 +9,7 @@ public:
 
 	bool shouldClose();
 private:
-	GLFWWindow *m_window;
+	GLFWwindow *m_window;
 	int m_width;
 	int m_height;
 };
