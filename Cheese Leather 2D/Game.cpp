@@ -3,6 +3,7 @@
 #include "Renderer.h"
 #include "Window.h"
 #include "PlayState.h"
+#include "State.h"
 
 Game::Game() {
 	m_renderer = new Renderer();
@@ -49,9 +50,10 @@ Game::Game() {
 		m_state->Update();
 
 #ifdef CLIENT
-		m_renderer->Clear(m_window);
+		m_renderer->Clear();
 		m_state->Draw(this, m_renderer);
-		m_renderer->Render(m_window);
+		m_renderer->SwapBuffers(m_window);
+		m_window->Update();
 #endif
 	}
 	this->Exit();
