@@ -1,5 +1,7 @@
 #include "Window.h"
 
+#include <iostream>
+
 Window::Window() {
 #ifdef CLIENT
 	if (!glfwInit())
@@ -33,7 +35,7 @@ Window::Window() {
 #endif
 }
 
-~Window::Window() {
+Window::~Window() {
 #ifdef CLIENT
 	if (!m_window)
 		glfwDestroyWindow(m_window);
@@ -41,11 +43,16 @@ Window::Window() {
 #endif
 }
 
-
 bool Window::shouldClose() {
 #ifdef CLIENT
 	return glfwWindowShouldClose(m_window);
 #else
 	return false;
 #endif
+}
+
+void Window::Error(const char *source, const char *description)
+{
+	std::cout << "ERROR " << description;
+	// eventHandler->ErrorCallback(this, source, description);
 }

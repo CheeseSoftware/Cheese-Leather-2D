@@ -12,4 +12,6 @@ private:
 	GLFWwindow *m_window;
 	int m_width;
 	int m_height;
+	virtual void Error(const char *source, const char *description);
+	void Exit();
 };
