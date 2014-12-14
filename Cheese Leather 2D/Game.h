@@ -1,9 +1,8 @@
 #pragma once
-
-#include <GL\glew.h>
 #include <iostream>
+#include <chrono>
 
-class Renderer;
+class IRenderer;
 class Window;
 class State;
 
@@ -15,13 +14,13 @@ public:
 	void Run();
 	void Exit();
 
-	double getDeltaTime() const;
+	std::chrono::duration<double> getDeltaTime() const;
 
 private:
-	Renderer *m_renderer;
+	IRenderer *m_renderer;
 	Window *m_window;
 	State *m_state;
 
-	double m_lastFrameTime;
-	double m_deltaTime;
+	std::chrono::time_point<std::chrono::system_clock> m_lastFrameTime;
+	std::chrono::duration<double> m_deltaTime;
 };

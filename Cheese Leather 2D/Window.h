@@ -7,7 +7,8 @@ public:
 	Window();
 	~Window();
 
-	bool shouldClose();
+	bool ShouldClose();
+	void SwapBuffers();
 private:
 	GLFWwindow *m_window;
 	int m_width;

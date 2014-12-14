@@ -2,16 +2,14 @@
 #ifdef CLIENT
 
 #include <vector>
+
+#include <GL\glew.h>
 #include <glm\glm.hpp>
-#include <GLFW\glfw3.h>
-
-#include "GL.h"
-#include "Color.h"
 #include "ShaderType.h"
-
 
 class IRenderable;
 class Shader;
+class Window;
 
 class IRenderer
 {
@@ -21,11 +19,11 @@ protected:
 public:
 #pragma region Matrix rendering
 	virtual void DeleteMatrix(GLuint matrixPtr, GLuint size) = 0;
-	virtual void RenderMatrix(IRenderable *matrix, glm::mat4 MVP, ShaderType shaderType) = 0;
+	virtual void RenderMatrix(IRenderable *matrix, glm::mat4 *MVP, ShaderType shaderType) = 0;
 #pragma endregion
 
-	virtual void Clear(GLFWwindow *window) = 0;
-	virtual void Render(GLFWwindow *window) = 0;
+	virtual void Clear(Window *window) = 0;
+	virtual void Render(Window *window) = 0;
 
 	virtual Shader *getShader(ShaderType shaderType) = 0;
 };

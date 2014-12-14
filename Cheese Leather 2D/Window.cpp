@@ -2,20 +2,12 @@
 
 #include <iostream>
 
-Window::Window() {
+Window::Window() 
+{
 #ifdef CLIENT
 	if (!glfwInit())
 		Error("Game", "glfwInit failed!");
-
-	//glfwWindowHint(GLFW_SAMPLES, 4);
-	//glfwWindowHint(GLFW_VERSION_MINOR, 3);
-	//glfwWindowHint(GLFW_VERSION_MAJOR, 3);
-	//glfwWindowHint(GLFW_FSAA_SAMPLES, 4);
-	//glfwWindowHint(GLFW_OPENGL_VERSION_MAJOR, 3);
-	//glfwWindowHint(GLFW_OPENGL_VERSION_MINOR, 3);
-	//glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-
-	m_window = glfwCreateWindow(1200, 900, "Voxel Engine", nullptr, nullptr);
+	m_window = glfwCreateWindow(1200, 900, "Cheese Leather 2D", nullptr, nullptr);
 
 	if (!m_window)
 	{
@@ -24,18 +16,14 @@ Window::Window() {
 		exit(EXIT_FAILURE);
 	}
 
-	/*glfwSetErrorCallback([](int error, const char *description)
-	{ Game::getGame()->Error("GLFW", description); });*/
-
-
-
 	glfwMakeContextCurrent(m_window);
 
-	glfwGetFramebufferSize(m_window, &m_width, &m_height);
+	//glfwGetFramebufferSize(m_window, &m_width, &m_height);
 #endif
 }
 
-Window::~Window() {
+Window::~Window() 
+{
 #ifdef CLIENT
 	if (!m_window)
 		glfwDestroyWindow(m_window);
@@ -43,7 +31,8 @@ Window::~Window() {
 #endif
 }
 
-bool Window::shouldClose() {
+bool Window::ShouldClose() 
+{
 #ifdef CLIENT
 	return glfwWindowShouldClose(m_window);
 #else
@@ -51,8 +40,12 @@ bool Window::shouldClose() {
 #endif
 }
 
+void Window::SwapBuffers()
+{
+	glfwSwapBuffers(m_window);
+}
+
 void Window::Error(const char *source, const char *description)
 {
 	std::cout << "ERROR " << description;
-	// eventHandler->ErrorCallback(this, source, description);
 }

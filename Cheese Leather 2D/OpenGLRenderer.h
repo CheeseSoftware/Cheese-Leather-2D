@@ -2,13 +2,12 @@
 
 #pragma once
 
-#include "GL.h"
+#include <windows.h>
+
 #include "IRenderer.h"
-#include "Color.h"
 #include "ShaderType.h"
 
 class Shader;
-
 class Game;
 
 class OpenGLRenderer : public IRenderer
@@ -22,11 +21,11 @@ public:
 
 #pragma region Matrix rendering
 	virtual void DeleteMatrix(GLuint matrixPtr, GLuint size) override;
-	virtual void RenderMatrix(IRenderable *matrix, glm::mat4 MVP, ShaderType shaderType) override;
+	virtual void RenderMatrix(IRenderable *matrix, glm::mat4 *MVP, ShaderType shaderType) override;
 #pragma endregion
 
-	virtual void Clear(GLFWwindow *window) override;
-	virtual void Render(GLFWwindow *window) override;
+	virtual void Clear(Window *window) override;
+	virtual void Render(Window *window) override;
 
 	virtual Shader *getShader(ShaderType shaderType) override;
 };

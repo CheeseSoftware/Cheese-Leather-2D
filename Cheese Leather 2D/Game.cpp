@@ -1,58 +1,66 @@
 #include "Game.h"
-#include "Renderer.h"
+#include "OpenGLRenderer.h"
 #include "Window.h"
 #include "PlayState.h"
 #include "State.h"
 
-Game::Game() {
-	m_renderer = new Renderer();
+#include <GL\glew.h>
+
+Game::Game()
+{
 	m_window = new Window();
-	m_state = new PlayState();
-	m_state->Load(this);
 	//m_eventhandler = new eventhandler();
 
 #ifdef CLIENT
-	// initialize glew
 	if (glewInit() != GLEW_OK) {
 		fprintf(stderr, "failed to initialize glew\n");
 		std::cin.get();
 		exit(EXIT_FAILURE);
 	}
-	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-	//glfwsetwindowtitle( "tutorial 01" );
+	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
 #endif
-	
-	m_state->Load(this);
-	m_lastFrameTime = 0; // todo
 
-	while (m_state && !m_window->shouldClose())
+	m_renderer = new OpenGLRenderer(this, 512, 512);
+	m_state = new PlayState();
+
+	m_state->Load(this);
+	m_lastFrameTime = std::chrono::system_clock::now();
+
+	while (m_state && !m_window->ShouldClose())
 	{
-		double newtime = 0; // todo
+		std::chrono::time_point<std::chrono::system_clock> newtime = std::chrono::system_clock::now();
 		m_deltaTime = newtime - m_lastFrameTime;
+		std::cout << m_deltaTime.count() << std::endl;
 		m_lastFrameTime = newtime;
 		m_state->Update();
 
 #ifdef CLIENT
-		m_renderer->Clear();
-		m_state->Draw(this, m_renderer);
-		m_renderer->SwapBuffers(m_window);
-		m_window->Update();
+		m_renderer->Clear(m_window);
+		m_state->Draw(m_state, m_renderer);
+		m_window->SwapBuffers();
+		glfwPollEvents();
+		//m_renderer->SwapBuffers(m_window);
+		//m_window->Update();
 #endif
 	}
 	this->Exit();
 }
 
-Game::~Game() {
+Game::~Game() 
+{
 }
 
-void Game::Run() {
+void Game::Run() 
+{
 
 }
 
-void Game::Exit() {
-
+void Game::Exit() 
+{
+	glfwTerminate();
 }
 
-double Game::getDeltaTime() const {
-
+std::chrono::duration<double> Game::getDeltaTime() const 
+{
+	return m_deltaTime;
 }

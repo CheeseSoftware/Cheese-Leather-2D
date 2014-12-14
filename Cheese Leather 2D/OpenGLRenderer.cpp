@@ -2,8 +2,8 @@
 
 #include "OpenglRenderer.h"
 
-#include "Game.h"
-#include "Shader.h"
+#include <GLFW\glfw3.h>
+#include <glm\glm.hpp>
 
 OpenGLRenderer::OpenGLRenderer(Game *game, int width, int height)
 {
@@ -21,18 +21,18 @@ void OpenGLRenderer::DeleteMatrix(GLuint matrixPtr, GLuint size)
 
 }
 
-void OpenGLRenderer::RenderMatrix(IRenderable *matrix, glm::mat4 MVP, ShaderType shaderType)
+void OpenGLRenderer::RenderMatrix(IRenderable *matrix, glm::mat4 *MVP, ShaderType shaderType)
 {
 
 }
 #pragma endregion
 
-void OpenGLRenderer::Clear(GLFWwindow *window)
+void OpenGLRenderer::Clear(Window *window)
 {
-
+	glClear(GL_COLOR_BUFFER_BIT);
 }
 
-void OpenGLRenderer::Render(GLFWwindow *window)
+void OpenGLRenderer::Render(Window *window)
 {
 
 }
