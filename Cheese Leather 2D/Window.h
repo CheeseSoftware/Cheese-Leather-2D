@@ -1,5 +1,7 @@
 #pragma once
 
+//struct GLFWwindow;
+#include <gl\glew.h>
 #include <GLFW\glfw3.h>
 
 class Window {
@@ -8,6 +10,9 @@ public:
 	~Window();
 
 	bool shouldClose();
+
+	int getWidth() const;
+	int heightHeight() const;
 private:
 	GLFWwindow *m_window;
 	int m_width;

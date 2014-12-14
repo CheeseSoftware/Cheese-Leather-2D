@@ -2,18 +2,18 @@
 
 #include <iostream>
 
+#include <gl\glew.h>
+#include <GLFW\glfw3.h>
+
 Window::Window() {
 #ifdef CLIENT
 	if (!glfwInit())
 		Error("Game", "glfwInit failed!");
 
-	//glfwWindowHint(GLFW_SAMPLES, 4);
-	//glfwWindowHint(GLFW_VERSION_MINOR, 3);
-	//glfwWindowHint(GLFW_VERSION_MAJOR, 3);
-	//glfwWindowHint(GLFW_FSAA_SAMPLES, 4);
-	//glfwWindowHint(GLFW_OPENGL_VERSION_MAJOR, 3);
-	//glfwWindowHint(GLFW_OPENGL_VERSION_MINOR, 3);
-	//glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+	glfwWindowHint(GLFW_SAMPLES, 4);
+	glfwWindowHint(GLFW_VERSION_MINOR, 3);
+	glfwWindowHint(GLFW_VERSION_MAJOR, 3);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 	m_window = glfwCreateWindow(1200, 900, "Voxel Engine", nullptr, nullptr);
 
@@ -55,4 +55,12 @@ void Window::Error(const char *source, const char *description)
 {
 	std::cout << "ERROR " << description;
 	// eventHandler->ErrorCallback(this, source, description);
+}
+
+
+int Window::getWidth() const {
+	return m_width;
+}
+int Window::heightHeight() const {
+	return m_height;
 }

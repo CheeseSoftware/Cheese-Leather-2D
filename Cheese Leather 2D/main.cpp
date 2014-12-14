@@ -3,7 +3,7 @@
 
 int main()
 {
-	Game *&game = new Game();
+	Game *game = new Game();
 	game->Run();
 	std::cin.get();
 	return 0;

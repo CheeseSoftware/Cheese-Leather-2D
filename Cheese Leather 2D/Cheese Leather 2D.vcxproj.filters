@@ -48,10 +48,7 @@
     <ClInclude Include="PlayState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IRenderer.h">
-      <Filter>Header Files\Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="OpenGLRenderer.h">
+    <ClInclude Include="Renderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -74,8 +71,8 @@
     <ClCompile Include="PlayState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="OpenGLRenderer.cpp">
-      <Filter>Source Files\Renderer</Filter>
+    <ClCompile Include="Renderer.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
