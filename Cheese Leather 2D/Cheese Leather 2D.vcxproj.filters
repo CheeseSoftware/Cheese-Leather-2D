@@ -28,6 +28,9 @@
     <Filter Include="Source Files\GameState">
       <UniqueIdentifier>{d4ba3bec-4070-4183-b5e9-0ee0d3705fcd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\World">
+      <UniqueIdentifier>{a82fc19c-1001-4184-a755-c860964def77}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ShaderProgram.h">
@@ -72,6 +75,9 @@
     <ClInclude Include="Texture.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Vertex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -94,6 +100,9 @@
     </ClCompile>
     <ClCompile Include="PlayState.cpp">
       <Filter>Source Files\GameState</Filter>
+    </ClCompile>
+    <ClCompile Include="Chunk.cpp">
+      <Filter>Source Files\World</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
