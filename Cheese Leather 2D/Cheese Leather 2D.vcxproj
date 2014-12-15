@@ -80,6 +80,8 @@
     <ClInclude Include="Shader.h" />
     <ClInclude Include="ShaderProgram.h" />
     <ClInclude Include="State.h" />
+    <ClInclude Include="Texture.h" />
+    <ClInclude Include="TextureHandler.h" />
     <ClInclude Include="types.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
