@@ -10,10 +10,11 @@ Window::Window() {
 	if (!glfwInit())
 		Error("Game", "glfwInit failed!");
 
-	glfwWindowHint(GLFW_SAMPLES, 4);
+	//glfwWindowHint(GLFW_SAMPLES, 4);
+	//glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	glfwWindowHint(GLFW_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_VERSION_MAJOR, 3);
-	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+	
 
 	m_window = glfwCreateWindow(1200, 900, "Voxel Engine", nullptr, nullptr);
 
@@ -23,11 +24,6 @@ Window::Window() {
 		std::cin.get();
 		exit(EXIT_FAILURE);
 	}
-
-	/*glfwSetErrorCallback([](int error, const char *description)
-	{ Game::getGame()->Error("GLFW", description); });*/
-
-
 
 	glfwMakeContextCurrent(m_window);
 
@@ -51,10 +47,27 @@ bool Window::shouldClose() {
 #endif
 }
 
+
+void Window::clear() {
+#ifdef CLIENT
+	glClear(GL_COLOR_BUFFER_BIT);
+#endif
+}
+
+void Window::swapBuffers()
+{
+#ifdef CLIENT
+	glfwSwapBuffers(m_window);
+#endif
+}
+
 void Window::Error(const char *source, const char *description)
 {
+#ifdef CLIENT
 	std::cout << "ERROR " << description;
+
 	// eventHandler->ErrorCallback(this, source, description);
+#endif
 }
 
 

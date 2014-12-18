@@ -38,18 +38,23 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>$(ProjectDir)\..\dependencies\glm-0.9.6.1\glm;$(ProjectDir)\..\dependencies\glfw-3.0.4\include;$(ProjectDir)\..\dependencies\glm-0.9.6.1\include;$(ProjectDir)\..\dependencies\glew-1.11.0\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)\..\dependencies\glfw-3.0.4\lib;$(ProjectDir)\..\dependencies\cegui-0.8.4\lib;$(ProjectDir)\..\dependencies\glew-1.11.0\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>CLIENT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(ProjectDir)\..\dependencies\glm-0.9.6.1\glm;$(ProjectDir)\..\dependencies\glfw-3.0.4\include;$(ProjectDir)\..\dependencies\glm-0.9.6.1\include;$(ProjectDir)\..\dependencies\glew-1.11.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(ProjectDir)\..\dependencies\glfw-3.0.4\Debug;$(ProjectDir)\..\dependencies\cegui-0.8.4\lib</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>
+      </AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glu32.lib;glew32.lib;glfw3dll.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -71,19 +76,23 @@
   <ItemGroup>
     <ClInclude Include="Chunk.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="OpenGLRenderer.h" />
     <ClInclude Include="PlayState.h" />
+    <ClInclude Include="RandomTestRenderable.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="ShaderProgram.h" />
     <ClInclude Include="State.h" />
+    <ClInclude Include="Texture.h" />
+    <ClInclude Include="TextureHandler.h" />
     <ClInclude Include="types.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="OpenGLRenderer.cpp" />
     <ClCompile Include="PlayState.cpp" />
-    <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="ShaderProgram.cpp" />
     <ClCompile Include="Window.cpp" />
