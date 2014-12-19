@@ -5,7 +5,7 @@
 #include <atomic>
 #include <vector>
 #include "types.h"
-#include "vertex.h"
+#include "Vertex.h"
 
 class Game;
 
@@ -21,7 +21,7 @@ const int cChunkSize = 32;
 class Chunk {
 public:
 	Chunk();
-	~Chunk();
+	~Chunk(void);
 
 
 	void Render(Game *game);
@@ -44,17 +44,17 @@ private:
 	void loadMesh();
 	void loadVertexBuffer();
 
-	u16 *m_blocks;
+	u16 *m_blocks = nullptr;
 	//std::mutex m_blockMutex;
-	bool m_blocksChanged;
+	bool m_blocksChanged = false;
 
-	BlockData *m_blockData;
+	BlockData *m_blockData = nullptr;
 	//std::mutex m_blockDataMutex;
-	bool m_blockDataChanged;
+	bool m_blockDataChanged = false;
 
 	std::vector<Vertex> m_mesh;
 	//std::mutex m_meshMutex;
-	bool m_meshChanged;
+	bool m_meshChanged = false;
 
-	std::atomic<GLuint> m_vertexBuffer;
+	std::atomic<GLuint> m_vertexBuffer = 0;
 };
