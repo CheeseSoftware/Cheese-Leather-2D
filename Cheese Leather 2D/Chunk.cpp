@@ -3,8 +3,10 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 #include "Chunk.h"
-
 #include "Vertex.h"
+#include "Game.h"
+#include "ShaderProgram.h"
+#include "Camera.h"
 
 struct Quad {
 	i8 x, y;
@@ -31,7 +33,7 @@ Chunk::~Chunk(void) {
 	}
 }
 
-void Chunk::Render(Game *game) {
+void Chunk::Render(Game *game, ShaderProgram *shaderProgram, Camera *camera) {
 	if (m_isBlocksChanged) { // && !m_isBlockMeshCalculating) {
 		// m_isBlockMeshCalculating = true;
 		m_isBlocksChanged = false;
@@ -46,16 +48,24 @@ void Chunk::Render(Game *game) {
 	}
 
 	if (m_vertexBuffer != 0) {
-		glm::mat3 mvp = glm::mat3(1.0f);
+		/*glm::mat4 mvp = glm::mat4(1.0f);
 		mvp[0][0] = 1.f * 4.f;
 		mvp[1][1] = 1.f * 4.f;
 
-		glUniformMatrix3fv(
+		glUniformMatrix4fv(
 			0,
 			1,
 			GL_FALSE,
 			&mvp[0][0]
-			);
+			);*/
+
+		GLuint matrixId = shaderProgram->addUniform("MVP");
+		//GLuint MatrixID = glGetUniformLocation(programID, "MVP");
+
+		// Send our transformation to the currently bound shader,
+		// in the "MVP" uniform
+		// For each model you render, since the MVP will be different (at least the M part)
+		glUniformMatrix4fv(matrixId, 1, GL_FALSE, &camera->getCameraMatrix()[0][0]);
 
 		glBindBuffer(GL_ARRAY_BUFFER, m_vertexBuffer);
 
@@ -63,19 +73,31 @@ void Chunk::Render(Game *game) {
 			glEnableVertexAttribArray(0);
 
 			
-			glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex),
-				reinterpret_cast<void*>(offsetof(Vertex, position)));
+			/*glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex),
+				reinterpret_cast<void*>(offsetof(Vertex, position)));*/
+			glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, offsetof(Vertex, position),
+				0);
 
 			
 		}
 		{
 			glEnableVertexAttribArray(1);
 
-			glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex),
-				reinterpret_cast<void*>(offsetof(Vertex, color)));
+			//glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex),
+				//reinterpret_cast<void*>(offsetof(Vertex, color)));
+			glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, offsetof(Vertex, color),
+				0);
 
 			
 		}
+		/*{
+			glEnableVertexAttribArray(2);
+
+			glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex),
+				reinterpret_cast<void*>(offsetof(Vertex, uv)));
+
+
+		}*/
 
 		glDrawArrays(GL_TRIANGLES, 0, m_vertexBufferSize);
 
@@ -242,7 +264,7 @@ void Chunk::loadVertexBuffer() {
 			//////////////////////////////////////////
 			// Send our vertices as a vertex buffer.//
 			//////////////////////////////////////////
-			glGenBuffers(1, &vertexBuffer);
+			glGenBuffers(0, &vertexBuffer);
 			glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
 
 			// Give our vertices to OpenGL.

@@ -4,9 +4,11 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 #include "World.h"
-
 #include "ShaderProgram.h"
 #include "Shader.h"
+#include "Camera.h"
+#include "Game.h"
+#include "Window.h"
 
 PlayState::PlayState()
 {
@@ -22,6 +24,7 @@ PlayState::PlayState()
 	m_shaderProgram->addUniforms(defaultUniforms);
 
 	m_world = new World();
+	m_camera = new Camera();
 }
 
 
@@ -29,9 +32,81 @@ PlayState::~PlayState()
 {
 }
 
-void PlayState::Update()
+void PlayState::Update(Game *game)
 {
+	Window *window = game->getWindow();
+	GLFWwindow *rawWindow = window->getRawWindow();
+	int width = window->getWidth();
+	int height = window->getHeight();
 
+	// position
+	/*glm::vec3 position = glm::vec3(0, 0, 5);
+	// horizontal angle : toward -Z
+	float horizontalAngle = 3.14f;
+	// vertical angle : 0, look at the horizon
+	float verticalAngle = 0.0f;*/
+	// Initial Field of View
+	float initialFoV = 0.0f;
+
+	float speed = 3.0f; // 3 units / second
+	float mouseSpeed = 0.6f;
+
+	double xpos, ypos;
+	glfwGetCursorPos(rawWindow, &xpos, &ypos);
+	// Reset mouse position for next frame
+	glfwSetCursorPos(rawWindow, width / 2, height / 2);
+	m_horizontalAngle += mouseSpeed * game->getDeltaTime().count() * float(width / 2 - xpos);
+	m_verticalAngle += mouseSpeed * game->getDeltaTime().count() * float(height / 2 - ypos);
+	glm::vec3 direction(
+		cos(m_verticalAngle) * sin(m_horizontalAngle),
+		sin(m_verticalAngle),
+		cos(m_verticalAngle) * cos(m_horizontalAngle)
+		);
+	// Right vector
+	glm::vec3 right = glm::vec3(
+		sin(m_horizontalAngle - 3.14f / 2.0f),
+		0,
+		cos(m_horizontalAngle - 3.14f / 2.0f)
+		);
+	// Up vector : perpendicular to both direction and right
+	glm::vec3 up = glm::cross(right, direction);
+	// Move forward
+	if (glfwGetKey(rawWindow, GLFW_KEY_W) == GLFW_PRESS){
+		m_position += direction * (GLfloat)game->getDeltaTime().count() * speed;
+	}
+	// Move backward
+	if (glfwGetKey(rawWindow, GLFW_KEY_S) == GLFW_PRESS){
+		m_position -= direction * (GLfloat)game->getDeltaTime().count() * speed;
+	}
+	// Strafe right
+	if (glfwGetKey(rawWindow, GLFW_KEY_D) == GLFW_PRESS){
+		m_position += right * (GLfloat)game->getDeltaTime().count() * speed;
+	}
+	// Strafe left
+	if (glfwGetKey(rawWindow, GLFW_KEY_A) == GLFW_PRESS){
+		m_position -= right * (GLfloat)game->getDeltaTime().count() * speed;
+	}
+
+	if (glfwGetKey(rawWindow, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS){
+		m_position -= up * (GLfloat)game->getDeltaTime().count() * speed;
+	}
+
+	if (glfwGetKey(rawWindow, GLFW_KEY_SPACE) == GLFW_PRESS){
+		m_position += up * (GLfloat)game->getDeltaTime().count() * speed;
+	}
+
+	//KILL THE GAME
+	if (glfwGetKey(rawWindow, GLFW_KEY_ESCAPE) == GLFW_PRESS){
+		exit(EXIT_FAILURE);
+	}
+	float FoV = initialFoV - 5;
+	// Projection matrix : 45° Field of View, 4:3 ratio, display range : 0.1 unit <-> 100 units
+
+	m_camera->setAngle(m_horizontalAngle, m_verticalAngle);
+	m_camera->setPosition(m_position);
+	m_camera->setFoV(FoV);
+
+	m_camera->update();
 }
 
 void PlayState::Draw(Game *game)
@@ -57,6 +132,6 @@ void PlayState::Draw(Game *game)
 	
 	glm::mat3 MVP;*/
 
-	m_world->Render(game);
+	m_world->Render(game, m_shaderProgram, m_camera);
 	m_shaderProgram->unbind();
 }

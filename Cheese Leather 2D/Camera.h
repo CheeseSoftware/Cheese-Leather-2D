@@ -1,6 +1,7 @@
 #pragma once
 
 #include <glm\glm.hpp>
+#include <GLFW\glfw3.h>
 
 class Camera {
 public:
@@ -11,11 +12,14 @@ public:
 	void setSize(int width, int height);
 	void setScale(float scale);
 	void setPosition(int x, int y);
+	void setPosition(glm::vec3 pos);
+	void setAngle(float horizontal, float vertical);
+	void setFoV(float FoV);
 
 
 	glm::vec2 toWorldPosition(glm::vec2 screenPosition);
 
-	glm::vec2 getPosition();
+	glm::vec3 getPosition();
 	float getScale();
 	glm::mat4 getCameraMatrix();
 
@@ -24,7 +28,10 @@ private:
 	int m_width = 800;
 	int m_height = 800;
 	float m_scale = 1.f;
-	glm::vec2 m_position = glm::vec2(0.f);
+	float m_horizontalAngle = 0;
+	float m_verticalAngle = 0;
+	float m_FoV = 45;
+	glm::vec3 m_position = glm::vec3(0.f);
 
 	glm::mat4 m_cameraMatrix = glm::mat4(1.f);
 	bool m_needsMatrixUpdate = true;

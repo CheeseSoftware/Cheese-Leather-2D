@@ -11,7 +11,7 @@ class ShaderProgram
 public:
 	ShaderProgram(std::vector<Shader> &&shaders);
 
-	void addUniform(std::string uniform);
+	GLuint addUniform(std::string uniform);
 	void addUniforms(std::vector<std::string> uniforms);
 
 	void bind();

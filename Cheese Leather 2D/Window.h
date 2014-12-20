@@ -13,6 +13,7 @@ public:
 	int getHeight() const;
 
 	bool getShouldClose();
+	GLFWwindow *getRawWindow() { return m_window; }
 	void Clear();
 	void SwapBuffers();
 

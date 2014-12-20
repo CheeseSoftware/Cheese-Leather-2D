@@ -17,6 +17,7 @@ public:
 	void run();
 	void exit();
 	TextureHandler *getTextureHandler() { return m_textureHandler; }
+	Window *getWindow() { return m_window; }
 
 	std::chrono::duration<double> getDeltaTime() const;
 

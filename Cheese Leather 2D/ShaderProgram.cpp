@@ -41,13 +41,15 @@ ShaderProgram::ShaderProgram(std::vector<Shader> &&shaders)
 
 
 
-void ShaderProgram::addUniform(std::string uniform)
+GLuint ShaderProgram::addUniform(std::string uniform)
 {
 	glLinkProgram(m_program);
 
-	m_uniforms.push_back(glGetUniformLocation(m_program, uniform.c_str()));
+	GLuint uniformId = glGetUniformLocation(m_program, uniform.c_str());
+	m_uniforms.push_back(uniformId);
 
 	glLinkProgram(0);
+	return uniformId;
 }
 
 void ShaderProgram::addUniforms(std::vector<std::string> uniforms)

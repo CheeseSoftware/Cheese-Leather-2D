@@ -8,4 +8,5 @@ out vec3 color;
 void main(){
 	
 	color = clamp(vec3(fragmentPosition.x, fragmentPosition.y, fragmentPosition.x), 0.f, 1.f);
+	//color = fragmentColor;
 }

@@ -8,6 +8,8 @@
 #include "Vertex.h"
 
 class Game;
+class ShaderProgram;
+class Camera;
 
 struct BlockData
 {
@@ -24,7 +26,7 @@ public:
 	~Chunk(void);
 
 
-	void Render(Game *game);
+	void Render(Game *game, ShaderProgram *shaderProgram, Camera *camera);
 
 	void NotifyAll();
 

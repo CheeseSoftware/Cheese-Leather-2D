@@ -35,7 +35,7 @@ Game::Game()
 		m_deltaTime = newtime - m_lastFrameTime;
 		//std::cout << m_deltaTime.count() << std::endl;			SPAM-sjuk sak
 		m_lastFrameTime = newtime;
-		m_state->Update();
+		m_state->Update(this);
 
 #ifdef CLIENT
 		m_window->Clear();
