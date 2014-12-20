@@ -14,6 +14,8 @@ class TextureHandler {
 	// b will change texture of a.
 
 public:
+	TextureHandler();
+	~TextureHandler();
 	size_t getTextureId(std::string textureName);
 	Texture *getTexture(size_t id);
 	Texture *getTexture(std::string textureName);
