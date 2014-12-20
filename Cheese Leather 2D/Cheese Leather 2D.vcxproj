@@ -39,8 +39,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(ProjectDir)\..\dependencies\glm-0.9.6.1\glm;$(ProjectDir)\..\dependencies\glfw-3.0.4\include;$(ProjectDir)\..\dependencies\glm-0.9.6.1\include;$(ProjectDir)\..\dependencies\glew-1.11.0\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(ProjectDir)\..\dependencies\glfw-3.0.4\lib;$(ProjectDir)\..\dependencies\cegui-0.8.4\lib;$(ProjectDir)\..\dependencies\glew-1.11.0\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)\..\dependencies\glm-0.9.6.1\glm;$(ProjectDir)\..\dependencies\glfw-3.0.4\include;$(ProjectDir)\..\dependencies\glm-0.9.6.1\include;$(ProjectDir)\..\dependencies\glew-1.11.0\include;$(ProjectDir)\..\dependencies\SOIL\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)\..\dependencies\glfw-3.0.4\lib;$(ProjectDir)\..\dependencies\cegui-0.8.4\lib;$(ProjectDir)\..\dependencies\glew-1.11.0\lib;$(ProjectDir)\..\dependencies\SOIL\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -54,7 +54,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>
       </AdditionalLibraryDirectories>
-      <AdditionalDependencies>opengl32.lib;glu32.lib;glew32.lib;glfw3dll.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glu32.lib;glew32.lib;glfw3dll.lib;SOILd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -96,6 +96,8 @@
     <ClCompile Include="PlayState.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="ShaderProgram.cpp" />
+    <ClCompile Include="TextureHandler.cpp" />
+    <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Window.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>

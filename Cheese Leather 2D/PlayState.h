@@ -4,7 +4,6 @@
 
 
 class ShaderProgram;
-class RandomTestRenderable;
 class World;
 
 class PlayState : public State
@@ -18,9 +17,8 @@ public:
 	virtual void Draw(Game *game);
 
 private:
-	RandomTestRenderable *renderable;
-	ShaderProgram *shaderProgram;
+	ShaderProgram *m_shaderProgram;
 
-	World *world;
+	World *m_world;
 };
 

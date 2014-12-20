@@ -12,6 +12,13 @@ public:
 	Texture(std::string path);
 
 	GLuint getGlTexture();
+	int getWidth();
+	int getHeight();
+	std::string getPath();
+	std::string getFileName();
 private:
 	GLuint m_glTexture;
+	std::string m_path;
+	int m_width;
+	int m_height;
 };
