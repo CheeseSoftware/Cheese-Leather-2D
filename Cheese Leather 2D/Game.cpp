@@ -2,12 +2,14 @@
 #include "Window.h"
 #include "PlayState.h"
 #include "State.h"
+#include "TextureHandler.h"
 
 #include <GL\glew.h>
 
 Game::Game()
 {
 	m_window = new Window();
+	m_textureHandler = new TextureHandler();
 	//m_eventhandler = new eventhandler();
 
 #ifdef CLIENT

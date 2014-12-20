@@ -8,12 +8,8 @@
 #include "ShaderProgram.h"
 #include "Shader.h"
 
-#include "RandomTestRenderable.h"
-
 PlayState::PlayState()
 {
-	this->renderable = new RandomTestRenderable();
-
 	std::vector<Shader> defaultShaders;
 	defaultShaders.emplace_back(GL_VERTEX_SHADER, "shaders\\default_Vertex.glsl");
 	defaultShaders.emplace_back(GL_FRAGMENT_SHADER, "shaders\\default_Fragment.glsl");
@@ -22,10 +18,10 @@ PlayState::PlayState()
 	defaultUniforms.push_back("MVP");
 	defaultUniforms.push_back("baseTexture");
 
-	shaderProgram = new ShaderProgram(std::move(defaultShaders));
-	shaderProgram->addUniforms(defaultUniforms);
+	m_shaderProgram = new ShaderProgram(std::move(defaultShaders));
+	m_shaderProgram->addUniforms(defaultUniforms);
 
-	world = new World();
+	m_world = new World();
 }
 
 
@@ -40,9 +36,7 @@ void PlayState::Update()
 
 void PlayState::Draw(Game *game)
 {
-	shaderProgram->bind();
-	renderable->Render(glm::mat3(1.f));
-
+	m_shaderProgram->bind();
 
 	// Camera matrix
 	/*// Camera matrix
@@ -61,6 +55,6 @@ void PlayState::Draw(Game *game)
 	
 	glm::mat3 MVP;*/
 
-	world->Render(game);
-	shaderProgram->unbind();
+	m_world->Render(game);
+	m_shaderProgram->unbind();
 }

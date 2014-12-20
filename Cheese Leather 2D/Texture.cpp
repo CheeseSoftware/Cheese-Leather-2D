@@ -4,7 +4,7 @@
 
 Texture::Texture(std::string path)
 {
-	int width, height;
+	int width = 0, height = 0;
 	GLuint image = SOIL_load_OGL_texture
 		(std::string("textures/" + path).c_str(),
 		SOIL_LOAD_AUTO,
