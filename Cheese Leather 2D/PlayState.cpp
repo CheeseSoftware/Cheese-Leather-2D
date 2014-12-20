@@ -41,7 +41,7 @@ void PlayState::Update()
 void PlayState::Draw(Game *game)
 {
 	shaderProgram->bind();
-	renderable->Render(glm::mat3(1.f));
+	//renderable->Render(glm::mat3(1.f));
 
 
 	// Camera matrix

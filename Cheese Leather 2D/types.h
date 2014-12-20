@@ -60,6 +60,35 @@ using glm::u64vec4;
 using glm::fvec4;
 using glm::dvec4;
 
+template <typename T>
+struct hash
+{
+	size_t operator()(T k) const
+	{
+		std::size_t seed = 0;
+
+		for (int i = 0; i < sizeof(k); ++i) {
+			seed ^= reinterpret_cast<i8*>(&k)[i] + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+		}
+
+		return seed;
+	}
+
+	bool operator()(const T& a, const T& b)const
+	{
+		return (a == b);
+	}
+
+	// TODO: Make a functor for std::set and std::map
+	//bool operator<(const tvec2 &o) const
+	//{
+	//	if (x != o.x)
+	//		return x < o.x;
+	//	else
+	//		return y < o.y;
+	//}
+};
+
 //template <typename T>
 //struct tvec2_hash
 //{
