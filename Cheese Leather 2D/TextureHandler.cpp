@@ -1,11 +1,15 @@
 #include "TextureHandler.h"
 
+#include <iostream>
+
 #include "Texture.h"
 
 TextureHandler::TextureHandler()
 {
 	m_textureIdMap = std::unordered_map<std::string, size_t>();
 	m_textureList = std::vector<Texture*>();
+
+	loadTexture("carl-bildt.jpg");
 }
 
 TextureHandler::~TextureHandler()
@@ -60,6 +64,7 @@ void TextureHandler::loadTexture(std::string path)
 		m_textureList.push_back(texture);
 		size_t id = m_textureList.size() - 1;
 		m_textureIdMap.emplace(path, id);
+		std::cout << "Successfully loaded texture \"" << path << "\"" << std::endl;
 	}
 }
 

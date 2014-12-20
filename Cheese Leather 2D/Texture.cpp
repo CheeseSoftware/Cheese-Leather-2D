@@ -1,10 +1,12 @@
 #include "Texture.h"
 
+#include <iostream>
 #include <SOIL.h>
 
 Texture::Texture(std::string path)
 {
 	int width = 0, height = 0;
+	//std::cout << "\"" << std::string("textures/" + path).c_str() << "\"";
 	GLuint image = SOIL_load_OGL_texture
 		(std::string("textures/" + path).c_str(),
 		SOIL_LOAD_AUTO,
@@ -18,7 +20,7 @@ Texture::Texture(std::string path)
 		m_path = path;
 	}
 	else
-		printf(("Unable to load texture \"" + path + "\": '%s'\n", SOIL_last_result()));
+		std::cout << "Unable to load texture \"" << path << "\": " << SOIL_last_result() << std::endl;
 }
 
 GLuint Texture::getGlTexture()

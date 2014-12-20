@@ -29,7 +29,7 @@ Game::Game()
 	{
 		std::chrono::time_point<std::chrono::system_clock> newtime = std::chrono::system_clock::now();
 		m_deltaTime = newtime - m_lastFrameTime;
-		std::cout << m_deltaTime.count() << std::endl;
+		//std::cout << m_deltaTime.count() << std::endl;			SPAM-sjuk sak
 		m_lastFrameTime = newtime;
 		m_state->Update();
 
