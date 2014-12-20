@@ -12,8 +12,9 @@ public:
 	Game();
 	~Game();
 
-	void Run();
-	void Exit();
+	void run();
+	void exit();
+	TextureHandler *getTextureHandler() { return m_textureHandler; }
 
 	std::chrono::duration<double> getDeltaTime() const;
 

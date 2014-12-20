@@ -16,7 +16,7 @@ Game::Game()
 	if (glewInit() != GLEW_OK) {
 		fprintf(stderr, "failed to initialize glew\n");
 		std::cin.get();
-		exit(EXIT_FAILURE);
+		exit();
 	}
 	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
 #endif
@@ -40,19 +40,19 @@ Game::Game()
 		glfwPollEvents();
 #endif
 	}
-	this->Exit();
+	this->exit();
 }
 
 Game::~Game() 
 {
 }
 
-void Game::Run() 
+void Game::run() 
 {
 
 }
 
-void Game::Exit() 
+void Game::exit() 
 {
 	glfwTerminate();
 }
