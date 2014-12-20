@@ -76,6 +76,7 @@ void Chunk::Render(Game *game) {
 		glDrawArrays(GL_TRIANGLES, 0, m_vertexBufferSize);
 
 	}
+
 }
 
 void Chunk::NotifyAll() {
@@ -98,7 +99,7 @@ void Chunk::placeBlock(i8 x, i8 y, u16 block) {
 //void placeBlockWithoutLock(i8 x, i8 y, u16 block);
 //void placeBlockWithoutNotify(i8 x, i8 y, u16 block);
 //void placeBlockWithoutNotifyAndLock(i8 x, i8 y, u16 block);
-
+//u16 getBlockWithoutLock(i8 x, i8 y);
 //std::mutex getBlockMutex();
 u16 Chunk::getBlock(i8 x, i8 y) {
 	if (m_blocks == nullptr)
@@ -106,14 +107,14 @@ u16 Chunk::getBlock(i8 x, i8 y) {
 	else
 		return m_blocks[y* cChunkSize + x];
 }
-//u16 getBlockWithoutLock(i8 x, i8 y);
+
 /******************************************
 *              Private                    *
 *******************************************/
 
 void Chunk::initalizeBlocks() {
 	m_blocks = new u16[cChunkSize*cChunkSize];
-	
+
 	memset(m_blocks, 0, cChunkSize*cChunkSize * sizeof(u16));
 }
 
@@ -143,65 +144,65 @@ void Chunk::loadMesh() {
 		bool changed = false;
 
 		for (auto itB = quads.begin(); itB != quads.end();) {
-			if (itA == itB) continue;
+		if (itA == itB) continue;
 
-			bool changedB = false;
+		bool changedB = false;
 
-			i8vec2 posB = itB->first;
-			Quad& quadB = itB->second;
+		i8vec2 posB = itB->first;
+		Quad& quadB = itB->second;
 
-			if (quadA.x == quadB.x) {
-				if (quadA.y + quadA.h == quadB.y && quadA.w == quadB.w) {
-					quadA.h += quadB.h;
+		if (quadA.x == quadB.x) {
+		if (quadA.y + quadA.h == quadB.y && quadA.w == quadB.w) {
+		quadA.h += quadB.h;
 
-					changedB = true;
-				}
-				else if (quadB.y + quadB.h == quadA.y && quadA.w == quadB.w) {
-					quadA.h += quadB.h;
-					quadA.y = quadB.y;
+		changedB = true;
+		}
+		else if (quadB.y + quadB.h == quadA.y && quadA.w == quadB.w) {
+		quadA.h += quadB.h;
+		quadA.y = quadB.y;
 
-					changedB = true;
-				}
-			}
-			if (quadA.y == quadB.y) {
-				if (quadA.x + quadA.w = quadB.x && quadA.h == quadB.h) {
-					quadA.w += quadB.w;
+		changedB = true;
+		}
+		}
+		if (quadA.y == quadB.y) {
+		if (quadA.x + quadA.w = quadB.x && quadA.h == quadB.h) {
+		quadA.w += quadB.w;
 
-					changedB = true;
-				}
-				else if (quadB.x + quadB.w = quadA.x && quadA.h == quadB.h) {
-					quadA.w += quadB.w;
-					quadA.x = quadB.x;
+		changedB = true;
+		}
+		else if (quadB.x + quadB.w = quadA.x && quadA.h == quadB.h) {
+		quadA.w += quadB.w;
+		quadA.x = quadB.x;
 
-					changedB = true;
-				}
-			}
+		changedB = true;
+		}
+		}
 
-			if (changedB)
-			{
-				changed = true;
-				it = quads.erase(posB);
-			}
-			else
-				++it;
+		if (changedB)
+		{
+		changed = true;
+		it = quads.erase(posB);
+		}
+		else
+		++it;
 		}
 
 		posA.x = quadA.x;
 		posA.y = quadA.y;
 
 		return changed;
-	};
+		};
 
-	
+
 		for (auto itA = quads.begin(); itA != quads.end(); ++itA) {
-			i8vec2 posA = itA->first;
-			Quad& quadA = itA->second;
+		i8vec2 posA = itA->first;
+		Quad& quadA = itA->second;
 
-			if (mergeQuad(quadA, posA))
-				itA = quads.find(posA);
+		if (mergeQuad(quadA, posA))
+		itA = quads.find(posA);
 
 		}
-	}*/
+		}*/
 
 #pragma endregion
 
@@ -219,7 +220,7 @@ void Chunk::loadMesh() {
 			0.5f, // g
 			0.5f, // b
 			1.f // a
-		);
+			);
 
 		vertices.emplace_back(
 			q.x + q.w, // x
@@ -231,7 +232,7 @@ void Chunk::loadMesh() {
 			0.5f, // g
 			0.5f, // b
 			1.f // a
-		);
+			);
 
 		vertices.emplace_back(
 			q.x + q.w, // x
@@ -243,7 +244,7 @@ void Chunk::loadMesh() {
 			1.f, // g
 			1.f, // b
 			1.f // a
-		);
+			);
 
 		vertices.emplace_back(
 			q.x, // x
@@ -255,7 +256,7 @@ void Chunk::loadMesh() {
 			0.5f, // g
 			0.5f, // b
 			1.f // a
-		);
+			);
 
 		vertices.emplace_back(
 			q.x, // x
@@ -267,7 +268,7 @@ void Chunk::loadMesh() {
 			1.f, // g
 			1.f, // b
 			1.f // a
-		);
+			);
 
 		vertices.emplace_back(
 			q.x + q.w, // x
@@ -279,9 +280,9 @@ void Chunk::loadMesh() {
 			0.5f, // g
 			0.5f, // b
 			1.f // a
-		);
+			);
 
-		
+
 	}
 
 

@@ -3,11 +3,12 @@
 #include <glm\glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-#include "IRenderer.h"
-#include "RandomTestRenderable.h"
+#include "World.h"
 
 #include "ShaderProgram.h"
 #include "Shader.h"
+
+#include "RandomTestRenderable.h"
 
 PlayState::PlayState()
 {
@@ -23,6 +24,8 @@ PlayState::PlayState()
 
 	shaderProgram = new ShaderProgram(std::move(defaultShaders));
 	shaderProgram->addUniforms(defaultUniforms);
+
+	world = new World();
 }
 
 
@@ -35,11 +38,14 @@ void PlayState::Update()
 
 }
 
-void PlayState::Draw(State *state)
+void PlayState::Draw(Game *game)
 {
 	shaderProgram->bind();
+	renderable->Render(glm::mat3(1.f));
+
 
 	// Camera matrix
+	/*// Camera matrix
 	glm::mat4 View = glm::lookAt(
 		glm::vec3(4, 3, 3), // Camera is at (4,3,3), in World Space
 		glm::vec3(0, 0, 0), // and looks at the origin
@@ -52,5 +58,9 @@ void PlayState::Draw(State *state)
 
 	renderable->Render(MVP);
 
+	
+	glm::mat3 MVP;*/
+
+	world->Render(game);
 	shaderProgram->unbind();
 }

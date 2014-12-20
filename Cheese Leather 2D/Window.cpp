@@ -16,7 +16,7 @@ Window::Window() {
 	glfwWindowHint(GLFW_VERSION_MAJOR, 3);
 	
 
-	m_window = glfwCreateWindow(1200, 900, "Voxel Engine", nullptr, nullptr);
+	m_window = glfwCreateWindow(1024, 512, "Cheese Leather 2D", nullptr, nullptr);
 
 	if (!m_window)
 	{
@@ -39,7 +39,7 @@ Window::~Window() {
 #endif
 }
 
-bool Window::shouldClose() {
+bool Window::getShouldClose() {
 #ifdef CLIENT
 	return glfwWindowShouldClose(m_window);
 #else
@@ -48,13 +48,13 @@ bool Window::shouldClose() {
 }
 
 
-void Window::clear() {
+void Window::Clear() {
 #ifdef CLIENT
 	glClear(GL_COLOR_BUFFER_BIT);
 #endif
 }
 
-void Window::swapBuffers()
+void Window::SwapBuffers()
 {
 #ifdef CLIENT
 	glfwSwapBuffers(m_window);
@@ -74,6 +74,6 @@ void Window::Error(const char *source, const char *description)
 int Window::getWidth() const {
 	return m_width;
 }
-int Window::heightHeight() const {
+int Window::getHeight() const {
 	return m_height;
 }

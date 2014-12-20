@@ -10,11 +10,11 @@ public:
 	~Window();
 
 	int getWidth() const;
-	int heightHeight() const;
+	int getHeight() const;
 
-	bool shouldClose();
-	void clear();
-	void swapBuffers();
+	bool getShouldClose();
+	void Clear();
+	void SwapBuffers();
 
 private:
 	GLFWwindow *m_window;

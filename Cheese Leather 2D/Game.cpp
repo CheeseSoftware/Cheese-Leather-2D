@@ -1,5 +1,4 @@
 #include "Game.h"
-#include "OpenGLRenderer.h"
 #include "Window.h"
 #include "PlayState.h"
 #include "State.h"
@@ -24,7 +23,7 @@ Game::Game()
 	m_state->Load(this);
 	m_lastFrameTime = std::chrono::system_clock::now();
 
-	while (m_state && !m_window->shouldClose())
+	while (m_state && !m_window->getShouldClose())
 	{
 		std::chrono::time_point<std::chrono::system_clock> newtime = std::chrono::system_clock::now();
 		m_deltaTime = newtime - m_lastFrameTime;
@@ -33,12 +32,10 @@ Game::Game()
 		m_state->Update();
 
 #ifdef CLIENT
-		m_window->clear();
-		m_state->Draw(m_state);
-		m_window->swapBuffers();
+		m_window->Clear();
+		m_state->Draw(this);
+		m_window->SwapBuffers();
 		glfwPollEvents();
-		//m_renderer->SwapBuffers(m_window);
-		//m_window->Update();
 #endif
 	}
 	this->Exit();
