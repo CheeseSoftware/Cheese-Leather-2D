@@ -54,9 +54,9 @@ void PlayState::Update(Game *game)
 	double xpos, ypos;
 	glfwGetCursorPos(rawWindow, &xpos, &ypos);
 	// Reset mouse position for next frame
-	glfwSetCursorPos(rawWindow, width / 2, height / 2);
-	m_horizontalAngle += mouseSpeed * game->getDeltaTime().count() * float(width / 2 - xpos);
-	m_verticalAngle += mouseSpeed * game->getDeltaTime().count() * float(height / 2 - ypos);
+	//glfwSetCursorPos(rawWindow, width / 2, height / 2);
+	//m_horizontalAngle += mouseSpeed * game->getDeltaTime().count() * float(width / 2 - xpos);
+	//m_verticalAngle += mouseSpeed * game->getDeltaTime().count() * float(height / 2 - ypos);
 	glm::vec3 direction(
 		cos(m_verticalAngle) * sin(m_horizontalAngle),
 		sin(m_verticalAngle),
