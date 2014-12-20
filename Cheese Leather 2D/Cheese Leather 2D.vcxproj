@@ -78,10 +78,7 @@
     <ClInclude Include="ChunkMesher.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="IWorld.h" />
-    <ClInclude Include="OpenGLRenderer.h" />
     <ClInclude Include="PlayState.h" />
-    <ClInclude Include="RandomTestRenderable.h" />
-    <ClInclude Include="Renderer.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="ShaderProgram.h" />
     <ClInclude Include="State.h" />
@@ -96,7 +93,6 @@
     <ClCompile Include="Chunk.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="OpenGLRenderer.cpp" />
     <ClCompile Include="PlayState.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="ShaderProgram.cpp" />

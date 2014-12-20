@@ -1,5 +1,4 @@
 #include "Game.h"
-#include "OpenGLRenderer.h"
 #include "Window.h"
 #include "PlayState.h"
 #include "State.h"
@@ -34,7 +33,7 @@ Game::Game()
 
 #ifdef CLIENT
 		m_window->Clear();
-		m_state->Draw(m_state);
+		m_state->Draw(this);
 		m_window->SwapBuffers();
 		glfwPollEvents();
 #endif
