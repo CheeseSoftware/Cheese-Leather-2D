@@ -2,12 +2,11 @@
 
 #include "State.h"
 
+class ShaderProgram;
 class RandomTestRenderable;
 
 class PlayState : public State
 {
-private:
-	RandomTestRenderable *renderable;
 public:
 	PlayState();
 	~PlayState();
@@ -15,5 +14,9 @@ public:
 
 	virtual void Update();
 	virtual void Draw(State *state);
+
+private:
+	RandomTestRenderable *renderable;
+	ShaderProgram *shaderProgram;
 };
 

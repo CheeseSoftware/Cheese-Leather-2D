@@ -6,10 +6,23 @@
 #include "IRenderer.h"
 #include "RandomTestRenderable.h"
 
+#include "ShaderProgram.h"
+#include "Shader.h"
 
 PlayState::PlayState()
 {
 	this->renderable = new RandomTestRenderable();
+
+	std::vector<Shader> defaultShaders;
+	defaultShaders.emplace_back(GL_VERTEX_SHADER, "shaders\\default_Vertex.glsl");
+	defaultShaders.emplace_back(GL_FRAGMENT_SHADER, "shaders\\default_Fragment.glsl");
+
+	std::vector<std::string> defaultUniforms;
+	defaultUniforms.push_back("MVP");
+	defaultUniforms.push_back("baseTexture");
+
+	shaderProgram = new ShaderProgram(std::move(defaultShaders));
+	shaderProgram->addUniforms(defaultUniforms);
 }
 
 
@@ -24,6 +37,8 @@ void PlayState::Update()
 
 void PlayState::Draw(State *state)
 {
+	shaderProgram->bind();
+
 	// Camera matrix
 	glm::mat4 View = glm::lookAt(
 		glm::vec3(4, 3, 3), // Camera is at (4,3,3), in World Space
@@ -36,4 +51,6 @@ void PlayState::Draw(State *state)
 	glm::mat3 MVP;
 
 	renderable->Render(MVP);
+
+	shaderProgram->unbind();
 }

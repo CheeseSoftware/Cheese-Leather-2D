@@ -46,15 +46,16 @@ private:
 
 	u16 *m_blocks = nullptr;
 	//std::mutex m_blockMutex;
-	bool m_blocksChanged = false;
+	bool m_isBlocksChanged = false;
 
 	BlockData *m_blockData = nullptr;
 	//std::mutex m_blockDataMutex;
-	bool m_blockDataChanged = false;
+	bool m_isBlockDataChanged = false;
 
 	std::vector<Vertex> m_mesh;
 	//std::mutex m_meshMutex;
-	bool m_meshChanged = false;
+	bool m_isMeshChanged = false;
 
-	std::atomic<GLuint> m_vertexBuffer = 0;
+	GLuint m_vertexBuffer = 0;
+	GLuint m_vertexBufferSize = 0;
 };

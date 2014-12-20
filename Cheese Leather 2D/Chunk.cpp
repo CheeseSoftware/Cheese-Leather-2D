@@ -24,14 +24,58 @@ Chunk::~Chunk(void) {
 	if (m_blockData != nullptr)
 		delete[] m_blockData;
 
-	if (m_vertexBuffer)
-	{
+	if (m_vertexBuffer) {
 		// TODO: Destroy vertex buffer.
 	}
 }
 
 void Chunk::Render(Game *game) {
-	// TODO: Render chunks.
+	if (m_isBlocksChanged) { // && !m_isBlockMeshCalculating) {
+		// m_isBlockMeshCalculating = true;
+		m_isBlocksChanged = false;
+
+		loadMesh();
+	}
+
+	if (m_isMeshChanged) {
+		m_isMeshChanged = false;
+
+		loadVertexBuffer();
+	}
+
+	if (m_vertexBuffer != 0) {
+		glm::mat3 mvp = glm::mat3(1.f);
+
+		glUniformMatrix3fv(
+			0,
+			1,
+			GL_FALSE,
+			&mvp[0][0]
+			);
+
+		glBindBuffer(GL_ARRAY_BUFFER, m_vertexBuffer);
+
+		{
+			glEnableVertexAttribArray(0);
+
+			
+			glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex),
+				reinterpret_cast<void*>(offsetof(Vertex, position)));
+
+			glDisableVertexAttribArray(0);
+		}
+		{
+			glEnableVertexAttribArray(1);
+
+			glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex),
+				reinterpret_cast<void*>(offsetof(Vertex, color)));
+
+			glDisableVertexAttribArray(1);
+		}
+
+		glDrawArrays(GL_TRIANGLES, 0, m_vertexBufferSize);
+
+	}
 }
 
 void Chunk::NotifyAll() {
@@ -49,7 +93,7 @@ void Chunk::placeBlock(i8 x, i8 y, u16 block) {
 
 	m_blocks[y*cChunkSize + x] = block;
 
-	m_blocksChanged = true;
+	m_isBlocksChanged = true;
 }
 //void placeBlockWithoutLock(i8 x, i8 y, u16 block);
 //void placeBlockWithoutNotify(i8 x, i8 y, u16 block);
@@ -171,9 +215,9 @@ void Chunk::loadMesh() {
 			0, // depth
 			q.baseTexture % 16, // u
 			q.baseTexture / 16, // v
-			1.f, // r
-			1.f, // g
-			1.f, // b
+			0.5f, // r
+			0.5f, // g
+			0.5f, // b
 			1.f // a
 		);
 
@@ -183,9 +227,9 @@ void Chunk::loadMesh() {
 			0, // depth
 			q.baseTexture % 16 + 16, // u
 			q.baseTexture / 16 + 16, // v
-			1.f, // r
-			1.f, // g
-			1.f, // b
+			0.5f, // r
+			0.5f, // g
+			0.5f, // b
 			1.f // a
 		);
 
@@ -207,9 +251,9 @@ void Chunk::loadMesh() {
 			0, // depth
 			q.baseTexture % 16, // u
 			q.baseTexture / 16, // v
-			1.f, // r
-			1.f, // g
-			1.f, // b
+			0.5f, // r
+			0.5f, // g
+			0.5f, // b
 			1.f // a
 		);
 
@@ -231,9 +275,9 @@ void Chunk::loadMesh() {
 			0, // depth
 			q.baseTexture % 16 + 16, // u
 			q.baseTexture / 16 + 16, // v
-			1.f, // r
-			1.f, // g
-			1.f, // b
+			0.5f, // r
+			0.5f, // g
+			0.5f, // b
 			1.f // a
 		);
 
@@ -247,5 +291,35 @@ void Chunk::loadMesh() {
 }
 
 void Chunk::loadVertexBuffer() {
-	
+	GLuint vertexBuffer;
+	GLuint vertexBufferSize;
+
+	{
+		//std::lock_guard<std::mutex> guard(m_meshMutex);
+		if (m_mesh.size() >= 0)
+		{
+			//////////////////////////////////////////
+			// Send our vertices as a vertex buffer.//
+			//////////////////////////////////////////
+			glGenBuffers(1, &vertexBuffer);
+			glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
+
+			// Give our vertices to OpenGL.
+			glBufferData(GL_ARRAY_BUFFER, m_mesh.size() * sizeof(Vertex), m_mesh.data(), GL_DYNAMIC_DRAW);
+
+			vertexBufferSize = m_mesh.size();
+		}
+		else
+		{
+			vertexBuffer = NULL;
+		}
+	}
+
+	{
+		//std::lock_guard<boost::mutex> guard(m_voxelContainerMutex);
+		m_vertexBuffer = vertexBuffer;
+		m_vertexBufferSize = vertexBufferSize;
+	}
+
+	return;
 }
