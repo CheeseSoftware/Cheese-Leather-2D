@@ -16,11 +16,8 @@
     <Filter Include="Header Files\world">
       <UniqueIdentifier>{f87f139b-e35d-49cb-aaba-28890fe4fc5b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Renderer">
-      <UniqueIdentifier>{dab35775-d3cc-4437-a21c-93dce519f9de}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Renderer">
-      <UniqueIdentifier>{9810e9e2-4db8-43cb-aeb4-e14b069e6d13}</UniqueIdentifier>
+    <Filter Include="Source Files\World">
+      <UniqueIdentifier>{4842306f-b965-4d36-b095-7b155ff4ecb6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -69,6 +66,12 @@
     <ClInclude Include="Vertex.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="IWorld.h">
+      <Filter>Header Files\world</Filter>
+    </ClInclude>
+    <ClInclude Include="World.h">
+      <Filter>Header Files\world</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -93,7 +96,10 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Chunk.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\World</Filter>
+    </ClCompile>
+    <ClCompile Include="World.cpp">
+      <Filter>Source Files\World</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

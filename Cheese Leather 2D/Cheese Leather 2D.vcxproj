@@ -77,6 +77,7 @@
     <ClInclude Include="Chunk.h" />
     <ClInclude Include="ChunkMesher.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="IWorld.h" />
     <ClInclude Include="OpenGLRenderer.h" />
     <ClInclude Include="PlayState.h" />
     <ClInclude Include="RandomTestRenderable.h" />
@@ -89,6 +90,7 @@
     <ClInclude Include="types.h" />
     <ClInclude Include="Vertex.h" />
     <ClInclude Include="Window.h" />
+    <ClInclude Include="World.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Chunk.cpp" />
@@ -99,6 +101,7 @@
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="ShaderProgram.cpp" />
     <ClCompile Include="Window.cpp" />
+    <ClCompile Include="World.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
