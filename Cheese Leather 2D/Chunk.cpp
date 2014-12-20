@@ -33,7 +33,11 @@ Chunk::~Chunk(void) {
 void Chunk::Render(Game *game) {
 	// TODO: Fix proper chunk rendering.
 
-	GLuint vertexbuffer;
+
+
+
+
+	/*GLuint vertexbuffer;
 	GLuint VertexArrayID;
 	glGenVertexArrays(1, &VertexArrayID);
 	glBindVertexArray(VertexArrayID);
@@ -67,7 +71,7 @@ void Chunk::Render(Game *game) {
 	// Draw the triangle !
 	glDrawArrays(GL_TRIANGLES, 0, 3); // Starting from vertex 0; 3 vertices total -> 1 triangle
 
-	glDisableVertexAttribArray(0);
+	glDisableVertexAttribArray(0);*/
 }
 
 void Chunk::NotifyAll() {
