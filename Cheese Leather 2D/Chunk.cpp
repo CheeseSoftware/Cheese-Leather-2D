@@ -1,4 +1,6 @@
 #include <map>
+#include <glm\glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
 
 #include "Chunk.h"
 
@@ -44,7 +46,9 @@ void Chunk::Render(Game *game) {
 	}
 
 	if (m_vertexBuffer != 0) {
-		glm::mat3 mvp = glm::mat3(1.f);
+		glm::mat3 mvp = glm::mat3(1.0f);
+		mvp[0][0] = 1.f * 4.f;
+		mvp[1][1] = 1.f * 4.f;
 
 		glUniformMatrix3fv(
 			0,
@@ -62,7 +66,7 @@ void Chunk::Render(Game *game) {
 			glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex),
 				reinterpret_cast<void*>(offsetof(Vertex, position)));
 
-			glDisableVertexAttribArray(0);
+			
 		}
 		{
 			glEnableVertexAttribArray(1);
@@ -70,11 +74,13 @@ void Chunk::Render(Game *game) {
 			glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex),
 				reinterpret_cast<void*>(offsetof(Vertex, color)));
 
-			glDisableVertexAttribArray(1);
+			
 		}
 
 		glDrawArrays(GL_TRIANGLES, 0, m_vertexBufferSize);
 
+		glDisableVertexAttribArray(0);
+		glDisableVertexAttribArray(1);
 	}
 
 }
@@ -132,7 +138,7 @@ void Chunk::loadMesh() {
 	for (int x = 0; x < cChunkSize; ++x) {
 		for (int y = 0; y < cChunkSize; ++y) {
 			if (m_blocks[x + y * cChunkSize] != 0) {
-				Quad quad = { x, y, 1, 1, 0 };
+				Quad quad = { 1*x, 1*y, 1, 1, 0 };
 				quads.push_back(quad);
 			}
 		}
@@ -288,6 +294,8 @@ void Chunk::loadMesh() {
 
 	vertices.shrink_to_fit();
 	m_mesh = vertices;
+
+	m_isMeshChanged = true;
 
 }
 

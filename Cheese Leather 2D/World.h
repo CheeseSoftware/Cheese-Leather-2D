@@ -1,9 +1,10 @@
 #pragma once
 
 //#include <vector>
-#include <deque>
+#include <unordered_map>
 
 #include "IWorld.h"
+#include "types.h"
 
 class Chunk;
 
@@ -14,10 +15,8 @@ public:
 	~World();
 	virtual void Render(Game *game);
 private:
-	std::pair<std::deque<std::pair<std::deque<Chunk*>, long>>, long> chunkMatrix;
+	std::unordered_map<i32vec2, Chunk*, hash<i32vec2>, hash<i32vec2>> m_chunks;
 
-	void Expand(long x, long y, Chunk* chunk);
 	Chunk *getChunk(long x, long y);
-	Chunk *GenerateChunk(long x, long y);
 };
 
