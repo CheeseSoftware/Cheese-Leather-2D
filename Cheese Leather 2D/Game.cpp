@@ -1,10 +1,14 @@
 #include "Game.h"
+
+#include <GL\glew.h>
+#include <fstream>
+#include <algorithm>
+
 #include "Window.h"
 #include "PlayState.h"
 #include "State.h"
 #include "TextureHandler.h"
 
-#include <GL\glew.h>
 
 Game::Game()
 {
@@ -61,3 +65,7 @@ std::chrono::duration<double> Game::getDeltaTime() const
 {
 	return m_deltaTime;
 }
+
+/******************************************
+*              Private                    *
+*******************************************/

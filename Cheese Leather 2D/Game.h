@@ -7,6 +7,8 @@ class Window;
 class State;
 class TextureHandler;
 
+typedef unsigned int GLuint;
+
 class Game {
 public:
 	Game();

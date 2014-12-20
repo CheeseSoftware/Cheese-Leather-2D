@@ -144,74 +144,6 @@ void Chunk::loadMesh() {
 		}
 	}
 
-#pragma region merge quads
-	/*{
-		auto mergeQuad = [&](Quad &quadA, i8vec2 &posA)->bool {
-		bool changed = false;
-
-		for (auto itB = quads.begin(); itB != quads.end();) {
-		if (itA == itB) continue;
-
-		bool changedB = false;
-
-		i8vec2 posB = itB->first;
-		Quad& quadB = itB->second;
-
-		if (quadA.x == quadB.x) {
-		if (quadA.y + quadA.h == quadB.y && quadA.w == quadB.w) {
-		quadA.h += quadB.h;
-
-		changedB = true;
-		}
-		else if (quadB.y + quadB.h == quadA.y && quadA.w == quadB.w) {
-		quadA.h += quadB.h;
-		quadA.y = quadB.y;
-
-		changedB = true;
-		}
-		}
-		if (quadA.y == quadB.y) {
-		if (quadA.x + quadA.w = quadB.x && quadA.h == quadB.h) {
-		quadA.w += quadB.w;
-
-		changedB = true;
-		}
-		else if (quadB.x + quadB.w = quadA.x && quadA.h == quadB.h) {
-		quadA.w += quadB.w;
-		quadA.x = quadB.x;
-
-		changedB = true;
-		}
-		}
-
-		if (changedB)
-		{
-		changed = true;
-		it = quads.erase(posB);
-		}
-		else
-		++it;
-		}
-
-		posA.x = quadA.x;
-		posA.y = quadA.y;
-
-		return changed;
-		};
-
-
-		for (auto itA = quads.begin(); itA != quads.end(); ++itA) {
-		i8vec2 posA = itA->first;
-		Quad& quadA = itA->second;
-
-		if (mergeQuad(quadA, posA))
-		itA = quads.find(posA);
-
-		}
-		}*/
-
-#pragma endregion
-
 	for (auto itA = quads.begin(); itA != quads.end(); ++itA) {
 
 		auto &q = *itA; //itA->second;
@@ -332,3 +264,71 @@ void Chunk::loadVertexBuffer() {
 
 	return;
 }
+
+#pragma region merge quads
+/*{
+auto mergeQuad = [&](Quad &quadA, i8vec2 &posA)->bool {
+bool changed = false;
+
+for (auto itB = quads.begin(); itB != quads.end();) {
+if (itA == itB) continue;
+
+bool changedB = false;
+
+i8vec2 posB = itB->first;
+Quad& quadB = itB->second;
+
+if (quadA.x == quadB.x) {
+if (quadA.y + quadA.h == quadB.y && quadA.w == quadB.w) {
+quadA.h += quadB.h;
+
+changedB = true;
+}
+else if (quadB.y + quadB.h == quadA.y && quadA.w == quadB.w) {
+quadA.h += quadB.h;
+quadA.y = quadB.y;
+
+changedB = true;
+}
+}
+if (quadA.y == quadB.y) {
+if (quadA.x + quadA.w = quadB.x && quadA.h == quadB.h) {
+quadA.w += quadB.w;
+
+changedB = true;
+}
+else if (quadB.x + quadB.w = quadA.x && quadA.h == quadB.h) {
+quadA.w += quadB.w;
+quadA.x = quadB.x;
+
+changedB = true;
+}
+}
+
+if (changedB)
+{
+changed = true;
+it = quads.erase(posB);
+}
+else
+++it;
+}
+
+posA.x = quadA.x;
+posA.y = quadA.y;
+
+return changed;
+};
+
+
+for (auto itA = quads.begin(); itA != quads.end(); ++itA) {
+i8vec2 posA = itA->first;
+Quad& quadA = itA->second;
+
+if (mergeQuad(quadA, posA))
+itA = quads.find(posA);
+
+}
+}*/
+
+#pragma endregion
