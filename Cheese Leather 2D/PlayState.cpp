@@ -104,7 +104,8 @@ void PlayState::Update(Game *game)
 
 	m_camera->setAngle(m_horizontalAngle, m_verticalAngle);
 	m_camera->setPosition(m_position);
-	m_camera->setFoV(FoV);
+	//m_camera->setFoV(FoV);
+	//std::cout << m_position.x << " smask " <<  m_position.y << " smask " << m_position.z << " smask " << std::endl;
 
 	m_camera->update();
 }

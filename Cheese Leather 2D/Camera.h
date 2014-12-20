@@ -14,7 +14,7 @@ public:
 	void setPosition(int x, int y);
 	void setPosition(glm::vec3 pos);
 	void setAngle(float horizontal, float vertical);
-	void setFoV(float FoV);
+	//void setFoV(float FoV);
 
 
 	glm::vec2 toWorldPosition(glm::vec2 screenPosition);
@@ -30,7 +30,7 @@ private:
 	float m_scale = 1.f;
 	float m_horizontalAngle = 0;
 	float m_verticalAngle = 0;
-	float m_FoV = 45;
+	//float m_FoV = 45;
 	glm::vec3 m_position = glm::vec3(0.f);
 
 	glm::mat4 m_cameraMatrix = glm::mat4(1.f);

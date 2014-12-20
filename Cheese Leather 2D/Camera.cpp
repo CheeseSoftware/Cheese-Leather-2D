@@ -26,7 +26,7 @@ void Camera::update() {
 			cos(m_verticalAngle) * cos(m_horizontalAngle)
 			);
 
-		glm::mat4 projectionMatrix = glm::perspective(m_FoV, 4.0f / 3.0f, 0.1f, 100.0f);
+		glm::mat4 projectionMatrix = glm::perspective(45.0f, 4.0f / 3.0f, 0.1f, 100.0f);
 		// Camera matrix
 		glm::mat4 viewMatrix = glm::lookAt(
 			m_position,           // Camera is here
@@ -57,6 +57,7 @@ void Camera::setScale(float scale) {
 void Camera::setPosition(int x, int y) {
 	m_position.x = x;
 	m_position.y = y;
+	m_position.z = 0;
 
 	m_needsMatrixUpdate = true;
 }
@@ -75,24 +76,23 @@ void Camera::setAngle(float horizontal, float vertical)
 	m_needsMatrixUpdate = true;
 }
 
-void Camera::setFoV(float FoV)
+/*void Camera::setFoV(float FoV)
 {
 	m_FoV = FoV;
 
 	m_needsMatrixUpdate = true;
-}
+}*/
 
 
 glm::vec2 Camera::toWorldPosition(glm::vec2 screenPosition) {
 
-	/*screenPosition.y = m_height - screenPosition.y;
+	screenPosition.y = m_height - screenPosition.y;
 
 	screenPosition -= glm::vec2(m_width / 2, m_height / 2);
 	screenPosition /= m_scale;
-	screenPosition += m_position;
+	screenPosition += glm::vec2(m_position.x, m_position.y);
 
-	return screenPosition;*/
-	return glm::vec2(0, 0);
+	return screenPosition;
 }
 
 glm::vec3 Camera::getPosition() {

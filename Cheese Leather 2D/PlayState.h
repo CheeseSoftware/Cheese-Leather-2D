@@ -22,7 +22,7 @@ private:
 	Camera *m_camera;
 	World *m_world;
 
-	glm::vec3 m_position = glm::vec3(0, 0, 5);
+	glm::vec3 m_position = glm::vec3(3, 5, 3);
 	float m_horizontalAngle = 3.14f;
 	float m_verticalAngle = 0.0f;
 };
