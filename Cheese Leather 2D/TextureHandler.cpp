@@ -52,6 +52,11 @@ Texture *TextureHandler::getTexture(std::string textureName)
 	return nullptr;
 }
 
+Texture *TextureHandler::getBlockTexture(int blockId)
+{
+	return m_textureList.front();
+}
+
 /******************************************
 *              Private                    *
 *******************************************/

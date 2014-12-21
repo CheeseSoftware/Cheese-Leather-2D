@@ -15,4 +15,5 @@ void main(){
 	//color = vec3(fragmentColor);
 	//color = fract(sin(dot(co.xy ,vec2(12.9898,78.233))) * 43758.5453);
 	color = texture( myTextureSampler, UV ).rgb;
+	//color = vec3(1,0,0);
 }

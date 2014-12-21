@@ -19,6 +19,7 @@ public:
 	size_t getTextureId(std::string textureName);
 	Texture *getTexture(size_t id);
 	Texture *getTexture(std::string textureName);
+	Texture *getBlockTexture(int blockId);
 
 	void loadTexture(std::string path);
 	void unloadTexture(std::string name);

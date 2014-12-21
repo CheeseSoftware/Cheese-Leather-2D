@@ -43,7 +43,7 @@ private:
 	void initalizeBlocks();
 	void initalizeBlockData();
 
-	void loadMesh();
+	void loadMesh(Game *game);
 	void loadVertexBuffer();
 
 	u16 *m_blocks = nullptr;

@@ -7,6 +7,8 @@
 #include "Game.h"
 #include "ShaderProgram.h"
 #include "Camera.h"
+#include "TextureHandler.h"
+#include "Texture.h"
 
 struct Quad {
 	i8 x, y;
@@ -38,7 +40,7 @@ void Chunk::Render(Game *game, ShaderProgram *shaderProgram, Camera *camera) {
 		// m_isBlockMeshCalculating = true;
 		m_isBlocksChanged = false;
 
-		loadMesh();
+		loadMesh(game);
 	}
 
 	if (m_isMeshChanged) {
@@ -58,17 +60,29 @@ void Chunk::Render(Game *game, ShaderProgram *shaderProgram, Camera *camera) {
 			GL_FALSE,
 			&mvp[0][0]
 			);*/
-
-		GLuint matrixId = shaderProgram->addUniform("MVP");
+		////////////////////////////////////////GLuint matrixId = shaderProgram->addUniform("MVP");
 		//GLuint MatrixID = glGetUniformLocation(programID, "MVP");
 
 		// Send our transformation to the currently bound shader,
 		// in the "MVP" uniform
 		// For each model you render, since the MVP will be different (at least the M part)
-		glUniformMatrix4fv(matrixId, 1, GL_FALSE, &camera->getCameraMatrix()[0][0]);
+		
+		glUniformMatrix4fv(shaderProgram->getMVPUniform(), 1, GL_FALSE, &camera->getCameraMatrix()[0][0]);
+
+		// Load the texture using any two methods
+		//GLuint Texture = loadBMP_custom("uvtemplate.bmp");
+		///GLuint Texture = loadDDS("uvtemplate.DDS");
+		//GLuint Texture = loadDDS
+		// Get a handle for our "myTextureSampler" uniform
+		/////////////////////////////////////GLuint textureId = shaderProgram->addUniform("myTextureSampler");
+		//GLuint TextureID = glGetUniformLocation(programID, "myTextureSampler");
+		// Bind our texture in Texture Unit 0
+		glActiveTexture(GL_TEXTURE0);
+		glBindTexture(GL_TEXTURE_2D, game->getTextureHandler()->getBlockTexture(1)->getGlTexture());
+		// Set our "myTextureSampler" sampler to user Texture Unit 0
+		glUniform1i(shaderProgram->getTextureUniform(), 0);
 
 		glBindBuffer(GL_ARRAY_BUFFER, m_vertexBuffer);
-
 		{
 			glEnableVertexAttribArray(0);		
 			glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex),
@@ -89,6 +103,7 @@ void Chunk::Render(Game *game, ShaderProgram *shaderProgram, Camera *camera) {
 
 		glDisableVertexAttribArray(0);
 		glDisableVertexAttribArray(1);
+		glDisableVertexAttribArray(2);
 	}
 
 }
@@ -138,15 +153,17 @@ void Chunk::initalizeBlockData() {
 	memset(m_blocks, 0, cChunkSize*cChunkSize * sizeof(BlockData));
 }
 
-void Chunk::loadMesh() {
+void Chunk::loadMesh(Game *game) {
 	std::vector<Vertex> vertices;
 	std::vector<Quad> quads;
 	/*std::map<i8vec2, Quad, i8vec2_hash, i8vec2_hash> quads;*/
 
 	for (int x = 0; x < cChunkSize; ++x) {
 		for (int y = 0; y < cChunkSize; ++y) {
-			if (m_blocks[x + y * cChunkSize] != 0) {
-				Quad quad = { 16*x, 16*y, 16, 16, 0 };
+			u16 block = m_blocks[x + y * cChunkSize];
+			if (block != 0) {
+				//Texture *texture = game->getTextureHandler()->getBlockTexture(block);
+				Quad quad = { 16*x, 16*y, 16, 16, /*texture->getGlTexture()*/0 };
 				quads.push_back(quad);
 			}
 		}

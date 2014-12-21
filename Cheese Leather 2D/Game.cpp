@@ -12,8 +12,11 @@
 
 Game::Game()
 {
+	int a = glGetError();
 	m_window = new Window(800, 600);
+	a = glGetError();
 	m_textureHandler = new TextureHandler();
+	a = glGetError();
 	//m_eventhandler = new eventhandler();
 
 #ifdef CLIENT
@@ -22,9 +25,12 @@ Game::Game()
 		std::cin.get();
 		exit();
 	}
+	a = glGetError();
 	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
+	a = glGetError();
 #endif
 	m_state = new PlayState(this);
+	a = glGetError();
 
 	m_state->Load(this);
 	m_lastFrameTime = std::chrono::system_clock::now();
@@ -38,6 +44,7 @@ Game::Game()
 		m_state->Update(this);
 
 #ifdef CLIENT
+		
 		m_window->Clear();
 		m_state->Draw(this);
 		m_window->SwapBuffers();

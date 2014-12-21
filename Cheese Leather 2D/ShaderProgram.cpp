@@ -37,6 +37,9 @@ ShaderProgram::ShaderProgram(std::vector<Shader> &&shaders)
 	// Unlink program
 	//glLinkProgram(0);
 
+	m_textureUniform = addUniform("myTextureSampler");
+	m_MVPUniform = addUniform("MVP");
+
 }
 
 
@@ -48,7 +51,6 @@ GLuint ShaderProgram::addUniform(std::string uniform)
 	GLuint uniformId = glGetUniformLocation(m_program, uniform.c_str());
 	m_uniforms.push_back(uniformId);
 
-	glLinkProgram(0);
 	return uniformId;
 }
 
@@ -62,8 +64,6 @@ void ShaderProgram::addUniforms(std::vector<std::string> uniforms)
 	{
 		m_uniforms.push_back(glGetUniformLocation(m_program, str.c_str()));
 	}
-
-	glLinkProgram(0);
 }
 
 
