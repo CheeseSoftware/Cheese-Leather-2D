@@ -36,7 +36,7 @@ World::World()
 	{
 		for (int y = 0; y < cChunkSize; ++y)
 		{
-			chunk->setBlock(x, y, åke(x, y));
+			chunk->setBlock(x, y, 1);
 		}
 	}
 	m_chunks.emplace(glm::i32vec2(0, 0), chunk);
@@ -87,11 +87,11 @@ void World::setBlock(i64 x, i64 y, u16 id)
 	{
 		//return;
 		Chunk *newChunk = new Chunk();
-		for (int x = 0; x < cChunkSize; ++x)
+		for (int xx = 0; xx < cChunkSize; ++xx)
 		{
-			for (int y = 0; y < cChunkSize; ++y)
+			for (int yy = 0; yy < cChunkSize; ++yy)
 			{
-				newChunk->setBlock(x, y, 1);
+				newChunk->setBlock(xx, yy, 0);
 			}
 		}
 		m_chunks.emplace(glm::i32vec2(chunkX, chunkY), newChunk);
