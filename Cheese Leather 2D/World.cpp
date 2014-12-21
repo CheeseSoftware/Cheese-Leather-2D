@@ -36,7 +36,7 @@ World::World()
 	{
 		for (int y = 0; y < cChunkSize; ++y)
 		{
-			chunk->setBlock(x, y, 0);
+			chunk->setBlock(x, y, 1);
 		}
 	}
 	m_chunks.emplace(glm::i32vec2(0, 0), chunk);
