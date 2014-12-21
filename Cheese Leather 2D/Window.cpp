@@ -14,11 +14,12 @@ Window::Window(int width, int height) {
 	//glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	glfwWindowHint(GLFW_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_VERSION_MAJOR, 3);
+	glfwWindowHint(GLFW_REFRESH_RATE , 0);
 	
 	m_width = width;
 	m_height = height;
 	m_window = glfwCreateWindow(m_width, m_height, "Cheese Leather 2D", nullptr, nullptr);
-
+	
 	if (!m_window)
 	{
 		glfwTerminate();

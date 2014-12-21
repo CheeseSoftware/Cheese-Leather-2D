@@ -38,12 +38,12 @@ Chunk::~Chunk(void) {
 }
 
 void Chunk::Render(glm::mat4 &mvp, Game *game, ShaderProgram *shaderProgram, Camera *camera) {
-	//if (m_isBlocksChanged) { // && !m_isBlockMeshCalculating) {
+	if (m_isBlocksChanged) { // && !m_isBlockMeshCalculating) {
 		// m_isBlockMeshCalculating = true;
 		m_isBlocksChanged = false;
 
 		loadMesh(game);
-	//}
+	}
 
 //	if (m_isMeshChanged) {
 		m_isMeshChanged = false;
