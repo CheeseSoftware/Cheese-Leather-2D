@@ -14,10 +14,12 @@ Camera::~Camera() {
 
 void Camera::update() {
 	if (m_needsMatrixUpdate) {
-		glm::vec3 translate(-m_position.x + m_width / 2, m_position.y + m_height / 2, 0);
+		glm::vec3 translate(m_position.x + m_width / 2, -m_position.y + m_height / 2, 0);
 		glm::vec3 scale(m_position.z, m_position.z, 0.f);
 		
-		m_cameraMatrix = glm::ortho(0.0f, (float)m_height, 0.0f, (float)m_width);
+		//m_cameraMatrix = glm::ortho(0.0f, (float)m_height, 0.0f, (float)m_width);
+		m_cameraMatrix = glm::ortho(0.0f, (float)m_width, 0.0f, (float)m_height);
+
 		m_cameraMatrix = glm::translate(m_cameraMatrix, translate);
 		m_cameraMatrix = glm::scale(glm::mat4(1.f), scale) * m_cameraMatrix;
 

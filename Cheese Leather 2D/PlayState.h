@@ -6,6 +6,7 @@
 class ShaderProgram;
 class World;
 class Camera;
+class GLFWwindow;
 
 class PlayState : public State
 {
@@ -18,6 +19,8 @@ public:
 	virtual void Draw(Game *game);
 
 private:
+	//void onMouseButton(GLFWwindow *window, int button, int action, int mods);
+
 	ShaderProgram *m_shaderProgram;
 	Camera *m_camera;
 	World *m_world;

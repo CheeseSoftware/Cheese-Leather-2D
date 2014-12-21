@@ -12,12 +12,8 @@
 
 Game::Game()
 {
-	int a = glGetError();
 	m_window = new Window(800, 600);
-	a = glGetError();
 	m_textureHandler = new TextureHandler();
-	a = glGetError();
-	//m_eventhandler = new eventhandler();
 
 #ifdef CLIENT
 	if (glewInit() != GLEW_OK) {
@@ -25,12 +21,9 @@ Game::Game()
 		std::cin.get();
 		exit();
 	}
-	a = glGetError();
 	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
-	a = glGetError();
 #endif
 	m_state = new PlayState(this);
-	a = glGetError();
 
 	m_state->Load(this);
 	m_lastFrameTime = std::chrono::system_clock::now();
@@ -46,6 +39,13 @@ Game::Game()
 #ifdef CLIENT
 		
 		m_window->Clear();
+
+		/*glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+		glGenerateMipmap(GL_TEXTURE_2D);*/
+
 		m_state->Draw(this);
 		m_window->SwapBuffers();
 		glfwPollEvents();

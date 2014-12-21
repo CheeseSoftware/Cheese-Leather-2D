@@ -26,9 +26,9 @@ PlayState::PlayState(Game *game)
 	m_world = new World();
 	m_camera = new Camera();
 	m_camera->setSize(game->getWindow()->getWidth(), game->getWindow()->getHeight());
-	m_position = glm::vec3(170,10,5);
+	m_position = glm::vec3(72,-77,1.0f);
 }
-
+//typedef void(*GLFWmousebuttonfun)(GLFWwindow *, int, int, int)
 
 PlayState::~PlayState()
 {
@@ -50,7 +50,7 @@ void PlayState::Update(Game *game)
 	// Initial Field of View
 	//float initialFoV = 0.0f;
 	
-	float speed = 50.0f; // 3 units / second
+	float speed = 200.0f; // 3 units / second
 	//float mouseSpeed = 0.6f;
 
 	//double xpos, ypos;
@@ -59,42 +59,31 @@ void PlayState::Update(Game *game)
 	//glfwSetCursorPos(rawWindow, width / 2, height / 2);
 	//m_horizontalAngle += mouseSpeed * game->getDeltaTime().count() * float(width / 2 - xpos);
 	//m_verticalAngle += mouseSpeed * game->getDeltaTime().count() * float(height / 2 - ypos);
-	glm::vec3 direction(
-		cos(m_verticalAngle) * sin(m_horizontalAngle),
-		sin(m_verticalAngle),
-		cos(m_verticalAngle) * cos(m_horizontalAngle)
-		);
 	// Right vector
-	glm::vec3 right = glm::vec3(
-		sin(m_horizontalAngle - 3.14f / 2.0f),
-		0,
-		cos(m_horizontalAngle - 3.14f / 2.0f)
-		);
 	// Up vector : perpendicular to both direction and right
-	glm::vec3 up = glm::cross(right, direction);
 	// Move forward
-	if (glfwGetKey(rawWindow, GLFW_KEY_W) == GLFW_PRESS){
+	if (glfwGetKey(rawWindow, GLFW_KEY_SPACE) == GLFW_PRESS){
 		m_position.z += 1 * (GLfloat)game->getDeltaTime().count() * 2;
 	}
 	// Move backward
-	if (glfwGetKey(rawWindow, GLFW_KEY_S) == GLFW_PRESS){
+	if (glfwGetKey(rawWindow, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS){
 		m_position.z -= 1 * (GLfloat)game->getDeltaTime().count() * 2;
 	}
 	// Strafe right
 	if (glfwGetKey(rawWindow, GLFW_KEY_D) == GLFW_PRESS){
-		m_position += right * (GLfloat)game->getDeltaTime().count() * speed;
+		m_position.x += 1 * (GLfloat)game->getDeltaTime().count() * speed;
 	}
 	// Strafe left
 	if (glfwGetKey(rawWindow, GLFW_KEY_A) == GLFW_PRESS){
-		m_position -= right * (GLfloat)game->getDeltaTime().count() * speed;
+		m_position.x -= 1 * (GLfloat)game->getDeltaTime().count() * speed;
 	}
 
-	if (glfwGetKey(rawWindow, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS){
-		m_position -= up * (GLfloat)game->getDeltaTime().count() * speed;
+	if (glfwGetKey(rawWindow, GLFW_KEY_S) == GLFW_PRESS){
+		m_position.y += 1 * (GLfloat)game->getDeltaTime().count() * speed;
 	}
 
-	if (glfwGetKey(rawWindow, GLFW_KEY_SPACE) == GLFW_PRESS){
-		m_position += up * (GLfloat)game->getDeltaTime().count() * speed;
+	if (glfwGetKey(rawWindow, GLFW_KEY_W) == GLFW_PRESS){
+		m_position.y -= 1 * (GLfloat)game->getDeltaTime().count() * speed;
 	}
 
 	//KILL THE GAME
@@ -107,9 +96,29 @@ void PlayState::Update(Game *game)
 	//m_camera->setAngle(m_horizontalAngle, m_verticalAngle);
 	m_camera->setPosition(m_position);
 	//m_camera->setFoV(FoV);
-	std::cout << m_position.x << " smask " <<  m_position.y << " smask " << m_position.z << " smask " << std::endl;
+	//std::cout << m_position.x << " smask " <<  m_position.y << " smask " << m_position.z << " smask " << std::endl;
 
 	m_camera->update();
+
+	std::cout << glfwGetKey(rawWindow, GLFW_MOUSE_BUTTON_LEFT) << std::endl;
+
+	double xpos, ypos;
+	glfwGetCursorPos(rawWindow, &xpos, &ypos);
+	/*if (glfwGetMouseButton(rawWindow, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS){
+		glm::vec2 worldPos = m_camera->toWorldPosition(glm::vec2(xpos, ypos));
+		m_world->setBlock(worldPos.x / 16, worldPos.y / 16, 1);
+		std::cout << "Placed block at X:" << worldPos.x/16 << " Y:" << worldPos.y/16 << std::endl;
+	}
+	else */if (glfwGetMouseButton(rawWindow, GLFW_MOUSE_BUTTON_RIGHT) == GLFW_PRESS){
+		//glm::vec2 worldPos = m_camera->toWorldPosition(glm::vec2(xpos, ypos));
+		//int x = (m_camera->getPosition().x + xpos) / 16;
+		//int y = (m_camera->getPosition().y + ypos) / 16;
+		glm::vec2 pos = m_camera->toWorldPosition(glm::vec2(xpos, ypos));
+		int x = pos.x / 16;
+		int y = pos.y / 16;
+		m_world->setBlock(x, y, 0);
+		std::cout << "X:" << x << " Y:" << y << std::endl;
+	}
 }
 
 void PlayState::Draw(Game *game)
@@ -138,3 +147,14 @@ void PlayState::Draw(Game *game)
 	m_world->Render(game, m_shaderProgram, m_camera);
 	m_shaderProgram->unbind();
 }
+
+/******************************************
+*              Private                    *
+*******************************************/
+
+/*void PlayState::onMouseButton(GLFWwindow *window, int button, int action, int mods) {
+	if (button == GLFW_MOUSE_BUTTON_RIGHT)
+	{
+		// ... some code
+	}
+}*/

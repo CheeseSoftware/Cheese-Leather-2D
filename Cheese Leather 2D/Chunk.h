@@ -18,7 +18,7 @@ struct BlockData
 
 // TODO: Multithreading and mutexes
 
-const int cChunkSize = 32;
+#define cChunkSize 32
 
 class Chunk {
 public:
@@ -26,11 +26,11 @@ public:
 	~Chunk(void);
 
 
-	void Render(Game *game, ShaderProgram *shaderProgram, Camera *camera);
+	void Render(glm::mat4 &mvp, Game *game, ShaderProgram *shaderProgram, Camera *camera);
 
 	void NotifyAll();
 
-	void placeBlock(i8 x, i8 y, u16 block);
+	void setBlock(i8 x, i8 y, u16 block);
 	//void placeBlockWithoutLock(i8 x, i8 y, u16 block);
 	//void placeBlockWithoutNotify(i8 x, i8 y, u16 block);
 	//void placeBlockWithoutNotifyAndLock(i8 x, i8 y, u16 block);

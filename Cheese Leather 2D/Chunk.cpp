@@ -35,7 +35,7 @@ Chunk::~Chunk(void) {
 	}
 }
 
-void Chunk::Render(Game *game, ShaderProgram *shaderProgram, Camera *camera) {
+void Chunk::Render(glm::mat4 &mvp, Game *game, ShaderProgram *shaderProgram, Camera *camera) {
 	if (m_isBlocksChanged) { // && !m_isBlockMeshCalculating) {
 		// m_isBlockMeshCalculating = true;
 		m_isBlocksChanged = false;
@@ -67,7 +67,7 @@ void Chunk::Render(Game *game, ShaderProgram *shaderProgram, Camera *camera) {
 		// in the "MVP" uniform
 		// For each model you render, since the MVP will be different (at least the M part)
 		
-		glUniformMatrix4fv(shaderProgram->getMVPUniform(), 1, GL_FALSE, &camera->getCameraMatrix()[0][0]);
+		glUniformMatrix4fv(shaderProgram->getMVPUniform(), 1, GL_FALSE, &mvp[0][0]);
 
 		// Load the texture using any two methods
 		//GLuint Texture = loadBMP_custom("uvtemplate.bmp");
@@ -112,7 +112,7 @@ void Chunk::NotifyAll() {
 	// TODO: NotifyAll (generate blockData)
 }
 
-void Chunk::placeBlock(i8 x, i8 y, u16 block) {
+void Chunk::setBlock(i8 x, i8 y, u16 block) {
 	if (m_blocks == nullptr)
 	{
 		if (block == 0)
@@ -177,8 +177,8 @@ void Chunk::loadMesh(Game *game) {
 			q.x, // x
 			q.y, // y
 			0, // depth
-			q.baseTexture % 16, // u
-			q.baseTexture / 16, // v
+			0, // u
+			0, // v
 			0.5f, // r
 			0.5f, // g
 			0.5f, // b
@@ -189,8 +189,8 @@ void Chunk::loadMesh(Game *game) {
 			q.x + q.w, // x
 			q.y + q.h, // y
 			0, // depth
-			q.baseTexture % 16 + 16, // u
-			q.baseTexture / 16 + 16, // v
+			1, // u
+			1, // v
 			0.5f, // r
 			0.5f, // g
 			0.5f, // b
@@ -201,8 +201,8 @@ void Chunk::loadMesh(Game *game) {
 			q.x + q.w, // x
 			q.y, // y
 			0, // depth
-			q.baseTexture % 16 + 16, // u
-			q.baseTexture / 16, // v
+			1, // u
+			0, // v
 			1.f, // r
 			1.f, // g
 			1.f, // b
@@ -213,8 +213,8 @@ void Chunk::loadMesh(Game *game) {
 			q.x, // x
 			q.y, // y
 			0, // depth
-			q.baseTexture % 16, // u
-			q.baseTexture / 16, // v
+			0, // u
+			0, // v
 			0.5f, // r
 			0.5f, // g
 			0.5f, // b
@@ -225,8 +225,8 @@ void Chunk::loadMesh(Game *game) {
 			q.x, // x
 			q.y + q.h, // y
 			0, // depth
-			q.baseTexture % 16, // u
-			q.baseTexture / 16 + 16, // v
+			0, // u
+			1, // v
 			1.f, // r
 			1.f, // g
 			1.f, // b
@@ -237,8 +237,8 @@ void Chunk::loadMesh(Game *game) {
 			q.x + q.w, // x
 			q.y + q.h, // y
 			0, // depth
-			q.baseTexture % 16 + 16, // u
-			q.baseTexture / 16 + 16, // v
+			1, // u
+			1, // v
 			0.5f, // r
 			0.5f, // g
 			0.5f, // b
