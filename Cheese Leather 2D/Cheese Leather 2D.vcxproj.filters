@@ -82,7 +82,7 @@
       <Filter>Header Files\entity</Filter>
     </ClInclude>
     <ClInclude Include="EntityManager.h">
-      <Filter>Source Files\entity</Filter>
+      <Filter>Header Files\entity</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -123,6 +123,9 @@
       <Filter>Source Files\entity</Filter>
     </ClCompile>
     <ClCompile Include="EntityFactory.cpp">
+      <Filter>Source Files\entity</Filter>
+    </ClCompile>
+    <ClCompile Include="EntityManager.cpp">
       <Filter>Source Files\entity</Filter>
     </ClCompile>
   </ItemGroup>

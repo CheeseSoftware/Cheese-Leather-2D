@@ -11,6 +11,7 @@ class IRenderSystem;
 class EntityManager {
 public:
 	EntityManager();
+	~EntityManager();
 
 	void update();
 	void render();
@@ -24,4 +25,10 @@ public:
 
 private:
 	std::unordered_map<u32, Entity> m_entities;
+
+	std::vector<ISystem*> m_systems;
+	std::vector<IRenderSystem*> m_renderSystems;
+
+	u32 m_maxEntityId;
+	std::vector<u32> m_unusedEntityIds;
 };
