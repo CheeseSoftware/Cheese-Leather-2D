@@ -18,7 +18,7 @@ struct BlockData
 
 // TODO: Multithreading and mutexes
 
-#define cChunkSize 32
+#define cChunkSize 16
 
 class Chunk {
 public:

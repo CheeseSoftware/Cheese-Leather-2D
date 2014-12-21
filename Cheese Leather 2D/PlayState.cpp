@@ -26,7 +26,7 @@ PlayState::PlayState(Game *game)
 	m_world = new World();
 	m_camera = new Camera();
 	m_camera->setSize(game->getWindow()->getWidth(), game->getWindow()->getHeight());
-	m_position = glm::vec3(72,-77,1.0f);
+	m_position = glm::vec3(0,0,1.0f);
 }
 //typedef void(*GLFWmousebuttonfun)(GLFWwindow *, int, int, int)
 
@@ -100,10 +100,12 @@ void PlayState::Update(Game *game)
 
 	m_camera->update();
 
-	std::cout << glfwGetKey(rawWindow, GLFW_MOUSE_BUTTON_LEFT) << std::endl;
+	//std::cout << glfwGetKey(rawWindow, GLFW_MOUSE_BUTTON_LEFT) << std::endl;
+
 
 	double xpos, ypos;
 	glfwGetCursorPos(rawWindow, &xpos, &ypos);
+	//std::cout << "X:" << xpos << " Y:" << ypos << std::endl;
 	/*if (glfwGetMouseButton(rawWindow, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS){
 		glm::vec2 worldPos = m_camera->toWorldPosition(glm::vec2(xpos, ypos));
 		m_world->setBlock(worldPos.x / 16, worldPos.y / 16, 1);

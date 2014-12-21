@@ -34,6 +34,5 @@ private:
 	glm::vec3 m_position = glm::vec3(0.f);
 
 	glm::mat4 m_cameraMatrix = glm::mat4(1.f);
-	glm::mat4 m_inverseCameraMatrix = glm::mat4(1.f);
 	bool m_needsMatrixUpdate = true;
 };
