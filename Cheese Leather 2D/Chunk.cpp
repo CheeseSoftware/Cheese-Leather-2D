@@ -11,8 +11,10 @@
 #include "Texture.h"
 
 struct Quad {
-	i8 x, y;
-	i8 w, h;
+	//DO NOT USE i8
+	//It creates unforseen consequenses.
+	i16 x, y;
+	i16 w, h;
 
 	u16 baseTexture;
 };
@@ -115,15 +117,17 @@ void Chunk::NotifyAll() {
 void Chunk::setBlock(i8 x, i8 y, u16 block) {
 	if (m_blocks == nullptr)
 	{
-		if (block == 0)
-			return;
-		else
+		//if (block == 0)
+			//return;
+		//else
 			initalizeBlocks();
 	}
 
-	m_blocks[y*cChunkSize + x] = block;
-
-	m_isBlocksChanged = true;
+	if (x >= 0 && x < cChunkSize && y >= 0 && y < cChunkSize)
+	{
+		m_blocks[y*cChunkSize + x] = block;
+		m_isBlocksChanged = true;
+	}
 }
 //void placeBlockWithoutLock(i8 x, i8 y, u16 block);
 //void placeBlockWithoutNotify(i8 x, i8 y, u16 block);

@@ -105,20 +105,18 @@ void PlayState::Update(Game *game)
 
 	double xpos, ypos;
 	glfwGetCursorPos(rawWindow, &xpos, &ypos);
-	//std::cout << "X:" << xpos << " Y:" << ypos << std::endl;
-	/*if (glfwGetMouseButton(rawWindow, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS){
-		glm::vec2 worldPos = m_camera->toWorldPosition(glm::vec2(xpos, ypos));
-		m_world->setBlock(worldPos.x / 16, worldPos.y / 16, 1);
-		std::cout << "Placed block at X:" << worldPos.x/16 << " Y:" << worldPos.y/16 << std::endl;
-	}
-	else */if (glfwGetMouseButton(rawWindow, GLFW_MOUSE_BUTTON_RIGHT) == GLFW_PRESS){
-		//glm::vec2 worldPos = m_camera->toWorldPosition(glm::vec2(xpos, ypos));
-		//int x = (m_camera->getPosition().x + xpos) / 16;
-		//int y = (m_camera->getPosition().y + ypos) / 16;
+	if (glfwGetMouseButton(rawWindow, GLFW_MOUSE_BUTTON_RIGHT) == GLFW_PRESS){
 		glm::vec2 pos = m_camera->toWorldPosition(glm::vec2(xpos, ypos));
 		int x = pos.x / 16;
 		int y = pos.y / 16;
 		m_world->setBlock(x, y, 0);
+		std::cout << "X:" << x << " Y:" << y << std::endl;
+	}
+	if (glfwGetMouseButton(rawWindow, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS){
+		glm::vec2 pos = m_camera->toWorldPosition(glm::vec2(xpos, ypos));
+		int x = pos.x / 16;
+		int y = pos.y / 16;
+		m_world->setBlock(x, y, 1);
 		std::cout << "X:" << x << " Y:" << y << std::endl;
 	}
 }

@@ -9,6 +9,29 @@
 World::World()
 {
 	Chunk *chunk = new Chunk();
+
+
+	//andragrads!
+	std::function<int(int, int)> karl = [](int x, int y) -> int { return x^y ^ (x + y) % 5 ^ (x*y) % 3 <= 1; };
+
+	std::function<int(int, int)> sven = [](int x, int y) -> int { i32 key = x | (y << 16); auto r = hash<i32>()(key); return (r%=3)==0; };
+
+	std::function<int(int, int)> göran = [](int x, int y) -> int { return ((x / 2) ^ (y / 2)) % 2 == 0; };
+
+	std::function<int(int, int)> bertil = [karl](int x, int y) -> int { return ((x / 2) ^ (y / 2)) % 2 == 0 || karl(x, y); };
+
+	std::function<int(int, int)> åke = [karl](int x, int y) -> int { return x == 0 || y == 0 || x == y; };
+
+	std::function<int(int, int)> karl_erik = [karl](int x, int y) -> int { 	
+		if (((x + y) % (x | y + 1)) % 2 != 1)
+		{
+			return ((x + y + x / (y + 1) + y / (x + 1)) % (x | y + 1)) <= 3;
+		}
+		else {
+			return (((x + y) % (x | y + 1)) % 4) <= 3;
+		}
+	};
+
 	for (int x = 0; x < cChunkSize; ++x)
 	{
 		for (int y = 0; y < cChunkSize; ++y)
@@ -64,11 +87,11 @@ void World::setBlock(i64 x, i64 y, u16 id)
 	{
 		//return;
 		Chunk *newChunk = new Chunk();
-		for (int x = 0; x < cChunkSize; ++x)
+		for (int xx = 0; xx < cChunkSize; ++xx)
 		{
-			for (int y = 0; y < cChunkSize; ++y)
+			for (int yy = 0; yy < cChunkSize; ++yy)
 			{
-				newChunk->setBlock(x, y, 1);
+				newChunk->setBlock(xx, yy, 0);
 			}
 		}
 		m_chunks.emplace(glm::i32vec2(chunkX, chunkY), newChunk);

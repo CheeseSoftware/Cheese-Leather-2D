@@ -94,7 +94,7 @@ void Camera::setAngle(float horizontal, float vertical)
 
 glm::vec2 Camera::toWorldPosition(glm::vec2 screenPosition) {
 
-	//screenPosition.y = m_height - screenPosition.y;
+	screenPosition.y = m_height - screenPosition.y;
 
 	screenPosition -= glm::vec2(m_width / 2, m_height / 2);
 	screenPosition /= m_scale;
