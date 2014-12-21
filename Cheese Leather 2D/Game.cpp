@@ -12,7 +12,7 @@
 
 Game::Game()
 {
-	m_window = new Window();
+	m_window = new Window(800, 600);
 	m_textureHandler = new TextureHandler();
 	//m_eventhandler = new eventhandler();
 
@@ -24,7 +24,7 @@ Game::Game()
 	}
 	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
 #endif
-	m_state = new PlayState();
+	m_state = new PlayState(this);
 
 	m_state->Load(this);
 	m_lastFrameTime = std::chrono::system_clock::now();

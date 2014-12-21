@@ -1,9 +1,11 @@
 #version 330 core
 layout(location = 0) in vec2 vertexPosition_modelspace;
 layout(location = 1) in vec4 vertexColor;
+layout(location = 2) in vec2 vertexUV;
 
 out vec4 fragmentColor;
 out vec2 fragmentPosition;
+out vec2 UV;
 
 uniform mat4 MVP;
 
@@ -17,6 +19,7 @@ void main()
 		
 	fragmentPosition = vertexPosition_modelspace;
 	fragmentColor = vertexColor;
+	UV = vertexUV;
 }
 
 

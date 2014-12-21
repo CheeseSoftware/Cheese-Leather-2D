@@ -14,13 +14,19 @@ Camera::~Camera() {
 
 void Camera::update() {
 	if (m_needsMatrixUpdate) {
-		/*glm::vec3 translate(-m_position.x + m_width / 2, -m_position.y + m_height / 2, 0.0f);
-		glm::vec3 scale(m_scale, m_scale, 0.f);
+		glm::vec3 translate(-m_position.x + m_width / 2, m_position.y + m_height / 2, 0);
+		glm::vec3 scale(m_position.z, m_position.z, 0.f);
 		
 		m_cameraMatrix = glm::ortho(0.0f, (float)m_height, 0.0f, (float)m_width);
 		m_cameraMatrix = glm::translate(m_cameraMatrix, translate);
-		m_cameraMatrix = glm::scale(glm::mat4(1.f), scale) * m_cameraMatrix;*/
-		glm::vec3 direction(
+		m_cameraMatrix = glm::scale(glm::mat4(1.f), scale) * m_cameraMatrix;
+
+
+
+
+
+
+		/*glm::vec3 direction(
 			cos(m_verticalAngle) * sin(m_horizontalAngle),
 			sin(m_verticalAngle),
 			cos(m_verticalAngle) * cos(m_horizontalAngle)
@@ -35,7 +41,7 @@ void Camera::update() {
 			);
 		glm::mat4 modelMatrix = glm::mat4(1.0f);
 
-		m_cameraMatrix = projectionMatrix * viewMatrix * modelMatrix;
+		m_cameraMatrix = projectionMatrix * viewMatrix * modelMatrix;*/
 		m_needsMatrixUpdate = false;
 	}
 }

@@ -5,7 +5,7 @@
 #include <gl\glew.h>
 #include <GLFW\glfw3.h>
 
-Window::Window() {
+Window::Window(int width, int height) {
 #ifdef CLIENT
 	if (!glfwInit())
 		Error("Game", "glfwInit failed!");
@@ -15,8 +15,9 @@ Window::Window() {
 	glfwWindowHint(GLFW_VERSION_MINOR, 3);
 	glfwWindowHint(GLFW_VERSION_MAJOR, 3);
 	
-
-	m_window = glfwCreateWindow(1024, 512, "Cheese Leather 2D", nullptr, nullptr);
+	m_width = width;
+	m_height = height;
+	m_window = glfwCreateWindow(m_width, m_height, "Cheese Leather 2D", nullptr, nullptr);
 
 	if (!m_window)
 	{

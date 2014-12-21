@@ -25,8 +25,8 @@ public:
 
 
 private:
-	int m_width = 800;
-	int m_height = 800;
+	int m_width = 0;
+	int m_height = 0;
 	float m_scale = 1.f;
 	float m_horizontalAngle = 0;
 	float m_verticalAngle = 0;

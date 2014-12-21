@@ -10,7 +10,7 @@
 #include "Game.h"
 #include "Window.h"
 
-PlayState::PlayState()
+PlayState::PlayState(Game *game)
 {
 	std::vector<Shader> defaultShaders;
 	defaultShaders.emplace_back(GL_VERTEX_SHADER, "shaders\\default_Vertex.glsl");
@@ -25,6 +25,8 @@ PlayState::PlayState()
 
 	m_world = new World();
 	m_camera = new Camera();
+	m_camera->setSize(game->getWindow()->getWidth(), game->getWindow()->getHeight());
+	m_position = glm::vec3(170,10,5);
 }
 
 
@@ -46,13 +48,13 @@ void PlayState::Update(Game *game)
 	// vertical angle : 0, look at the horizon
 	float verticalAngle = 0.0f;*/
 	// Initial Field of View
-	float initialFoV = 0.0f;
+	//float initialFoV = 0.0f;
+	
+	float speed = 50.0f; // 3 units / second
+	//float mouseSpeed = 0.6f;
 
-	float speed = 3.0f; // 3 units / second
-	float mouseSpeed = 0.6f;
-
-	double xpos, ypos;
-	glfwGetCursorPos(rawWindow, &xpos, &ypos);
+	//double xpos, ypos;
+	//glfwGetCursorPos(rawWindow, &xpos, &ypos);
 	// Reset mouse position for next frame
 	//glfwSetCursorPos(rawWindow, width / 2, height / 2);
 	//m_horizontalAngle += mouseSpeed * game->getDeltaTime().count() * float(width / 2 - xpos);
@@ -72,11 +74,11 @@ void PlayState::Update(Game *game)
 	glm::vec3 up = glm::cross(right, direction);
 	// Move forward
 	if (glfwGetKey(rawWindow, GLFW_KEY_W) == GLFW_PRESS){
-		m_position += direction * (GLfloat)game->getDeltaTime().count() * speed;
+		m_position.z += 1 * (GLfloat)game->getDeltaTime().count() * 2;
 	}
 	// Move backward
 	if (glfwGetKey(rawWindow, GLFW_KEY_S) == GLFW_PRESS){
-		m_position -= direction * (GLfloat)game->getDeltaTime().count() * speed;
+		m_position.z -= 1 * (GLfloat)game->getDeltaTime().count() * 2;
 	}
 	// Strafe right
 	if (glfwGetKey(rawWindow, GLFW_KEY_D) == GLFW_PRESS){
@@ -99,13 +101,13 @@ void PlayState::Update(Game *game)
 	if (glfwGetKey(rawWindow, GLFW_KEY_ESCAPE) == GLFW_PRESS){
 		exit(EXIT_FAILURE);
 	}
-	float FoV = initialFoV - 5;
+	//float FoV = initialFoV - 5;
 	// Projection matrix : 45° Field of View, 4:3 ratio, display range : 0.1 unit <-> 100 units
 
-	m_camera->setAngle(m_horizontalAngle, m_verticalAngle);
+	//m_camera->setAngle(m_horizontalAngle, m_verticalAngle);
 	m_camera->setPosition(m_position);
 	//m_camera->setFoV(FoV);
-	//std::cout << m_position.x << " smask " <<  m_position.y << " smask " << m_position.z << " smask " << std::endl;
+	std::cout << m_position.x << " smask " <<  m_position.y << " smask " << m_position.z << " smask " << std::endl;
 
 	m_camera->update();
 }

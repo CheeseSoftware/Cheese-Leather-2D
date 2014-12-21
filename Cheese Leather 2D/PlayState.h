@@ -10,7 +10,7 @@ class Camera;
 class PlayState : public State
 {
 public:
-	PlayState();
+	PlayState(Game *game);
 	~PlayState();
 	virtual void Load(Game *game) { m_game = game; }
 
@@ -22,8 +22,8 @@ private:
 	Camera *m_camera;
 	World *m_world;
 
-	glm::vec3 m_position = glm::vec3(3, 5, 3);
-	float m_horizontalAngle = 3.14f;
+	glm::vec3 m_position = glm::vec3(0.f);
+	float m_horizontalAngle = 0.0f;
 	float m_verticalAngle = 0.0f;
 };
 

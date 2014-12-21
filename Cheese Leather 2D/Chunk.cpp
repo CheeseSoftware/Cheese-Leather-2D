@@ -79,6 +79,11 @@ void Chunk::Render(Game *game, ShaderProgram *shaderProgram, Camera *camera) {
 			glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex),
 				reinterpret_cast<void*>(offsetof(Vertex, color)));		
 		}
+		{
+			glEnableVertexAttribArray(2);
+			glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex),
+				reinterpret_cast<void*>(offsetof(Vertex, uv)));
+		}
 
 		glDrawArrays(GL_TRIANGLES, 0, m_vertexBufferSize);
 
@@ -141,7 +146,7 @@ void Chunk::loadMesh() {
 	for (int x = 0; x < cChunkSize; ++x) {
 		for (int y = 0; y < cChunkSize; ++y) {
 			if (m_blocks[x + y * cChunkSize] != 0) {
-				Quad quad = { 1*x, 1*y, 1, 1, 0 };
+				Quad quad = { 16*x, 16*y, 16, 16, 0 };
 				quads.push_back(quad);
 			}
 		}
