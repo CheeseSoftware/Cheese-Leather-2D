@@ -36,18 +36,18 @@ Chunk::~Chunk(void) {
 }
 
 void Chunk::Render(glm::mat4 &mvp, Game *game, ShaderProgram *shaderProgram, Camera *camera) {
-	if (m_isBlocksChanged) { // && !m_isBlockMeshCalculating) {
+	//if (m_isBlocksChanged) { // && !m_isBlockMeshCalculating) {
 		// m_isBlockMeshCalculating = true;
 		m_isBlocksChanged = false;
 
 		loadMesh(game);
-	}
+	//}
 
-	if (m_isMeshChanged) {
+//	if (m_isMeshChanged) {
 		m_isMeshChanged = false;
 
 		loadVertexBuffer();
-	}
+	//}
 
 	if (m_vertexBuffer != 0) {
 		/*glm::mat4 mvp = glm::mat4(1.0f);
@@ -160,7 +160,7 @@ void Chunk::loadMesh(Game *game) {
 
 	for (int x = 0; x < cChunkSize; ++x) {
 		for (int y = 0; y < cChunkSize; ++y) {
-			u16 block = m_blocks[x + y * cChunkSize];
+			u16 block = m_blocks[y * cChunkSize + x];
 			if (block != 0) {
 				//Texture *texture = game->getTextureHandler()->getBlockTexture(block);
 				Quad quad = { 16*x, 16*y, 16, 16, /*texture->getGlTexture()*/0 };

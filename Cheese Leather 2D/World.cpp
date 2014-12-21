@@ -9,9 +9,9 @@
 World::World()
 {
 	Chunk *chunk = new Chunk();
-	for (int x = 0; x < 16; ++x)
+	for (int x = 0; x < cChunkSize; ++x)
 	{
-		for (int y = 0; y < 16; ++y)
+		for (int y = 0; y < cChunkSize; ++y)
 		{
 			chunk->setBlock(x, y, 1);
 		}
@@ -38,7 +38,7 @@ void World::Render(Game *game, ShaderProgram *shaderProgram, Camera *camera)
 			if (chunk == nullptr)
 				continue;
 
-			chunk->Render(camera->getCameraMatrix() * glm::translate(glm::mat4(1.f), glm::vec3(x*256, y*256, 0)), game, shaderProgram, camera);
+			chunk->Render(camera->getCameraMatrix() * glm::translate(glm::mat4(1.f), glm::vec3(x*cChunkSize*16, y*cChunkSize*16, 0)), game, shaderProgram, camera);
 		}
 	}
 }
@@ -62,15 +62,16 @@ void World::setBlock(i64 x, i64 y, u16 id)
 	auto it = m_chunks.find(i32vec2(chunkX, chunkY));
 	if (it == m_chunks.end())
 	{
-		Chunk *chunk = new Chunk();
-		for (int x = 0; x < 16; ++x)
+		//return;
+		Chunk *newChunk = new Chunk();
+		for (int x = 0; x < cChunkSize; ++x)
 		{
-			for (int y = 0; y < 16; ++y)
+			for (int y = 0; y < cChunkSize; ++y)
 			{
-				chunk->setBlock(x, y, 1);
+				newChunk->setBlock(x, y, 1);
 			}
 		}
-		m_chunks.emplace(glm::i32vec2(chunkX, chunkY), chunk);
+		m_chunks.emplace(glm::i32vec2(chunkX, chunkY), newChunk);
 	}
 
 	Chunk *chunk = m_chunks.at(i32vec2(chunkX, chunkY));
