@@ -18,8 +18,13 @@ public:
 	void unbind();
 
 	GLint getUniform(size_t index);
+	inline GLuint getTextureUniform() { return m_textureUniform; };
+	inline GLuint getMVPUniform() { return m_MVPUniform; };
 
 private:
 	GLuint m_program;
 	std::vector<GLint> m_uniforms;
+
+	GLuint m_textureUniform;
+	GLuint m_MVPUniform;
 };

@@ -14,7 +14,6 @@ Game::Game()
 {
 	m_window = new Window(800, 600);
 	m_textureHandler = new TextureHandler();
-	//m_eventhandler = new eventhandler();
 
 #ifdef CLIENT
 	if (glewInit() != GLEW_OK) {
@@ -38,7 +37,15 @@ Game::Game()
 		m_state->Update(this);
 
 #ifdef CLIENT
+		
 		m_window->Clear();
+
+		/*glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+		glGenerateMipmap(GL_TEXTURE_2D);*/
+
 		m_state->Draw(this);
 		m_window->SwapBuffers();
 		glfwPollEvents();

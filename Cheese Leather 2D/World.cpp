@@ -1,15 +1,21 @@
 #include "World.h"
 
+#include <glm/gtc/matrix_transform.hpp>
+
 #include "Chunk.h"
+#include "Camera.h"
 
 
 World::World()
 {
 	Chunk *chunk = new Chunk();
-	chunk->placeBlock(3, 4, 1);
-	chunk->placeBlock(3, 5, 1);
-	chunk->placeBlock(3, 6, 1);
-	chunk->placeBlock(5, 6, 1);
+	for (int x = 0; x < 16; ++x)
+	{
+		for (int y = 0; y < 16; ++y)
+		{
+			chunk->setBlock(x, y, 1);
+		}
+	}
 	m_chunks.emplace(glm::i32vec2(0, 0), chunk);
 }
 
@@ -32,9 +38,43 @@ void World::Render(Game *game, ShaderProgram *shaderProgram, Camera *camera)
 			if (chunk == nullptr)
 				continue;
 
-			chunk->Render(game, shaderProgram, camera);
+			chunk->Render(camera->getCameraMatrix() * glm::translate(glm::mat4(1.f), glm::vec3(x*256, y*256, 0)), game, shaderProgram, camera);
 		}
 	}
+}
+
+u16 World::getBlock(i64 x, i64 y)
+{
+	int chunkX = x/cChunkSize;
+	int chunkY = y/cChunkSize;
+	i8 blockX = x%cChunkSize;
+	i8 blockY = y%cChunkSize;
+	Chunk *chunk = m_chunks.at(i32vec2(chunkX, chunkY));
+	return chunk->getBlock(blockX, blockY);
+}
+
+void World::setBlock(i64 x, i64 y, u16 id)
+{
+	int chunkX = x / cChunkSize;
+	int chunkY = y / cChunkSize;
+	i8 blockX = x%cChunkSize;
+	i8 blockY = y%cChunkSize;
+	auto it = m_chunks.find(i32vec2(chunkX, chunkY));
+	if (it == m_chunks.end())
+	{
+		Chunk *chunk = new Chunk();
+		for (int x = 0; x < 16; ++x)
+		{
+			for (int y = 0; y < 16; ++y)
+			{
+				chunk->setBlock(x, y, 1);
+			}
+		}
+		m_chunks.emplace(glm::i32vec2(chunkX, chunkY), chunk);
+	}
+
+	Chunk *chunk = m_chunks.at(i32vec2(chunkX, chunkY));
+	chunk->setBlock(blockX, blockY, id);
 }
 
 /******************************************
