@@ -78,6 +78,12 @@
     <ClInclude Include="IComponent.h">
       <Filter>Header Files\entity</Filter>
     </ClInclude>
+    <ClInclude Include="EntityFactory.h">
+      <Filter>Header Files\entity</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityManager.h">
+      <Filter>Source Files\entity</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -114,6 +120,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Entity.cpp">
+      <Filter>Source Files\entity</Filter>
+    </ClCompile>
+    <ClCompile Include="EntityFactory.cpp">
       <Filter>Source Files\entity</Filter>
     </ClCompile>
   </ItemGroup>
