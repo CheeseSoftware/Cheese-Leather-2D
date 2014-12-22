@@ -3,6 +3,7 @@
 
 #include "ISystem.h"
 #include "IRenderSystem.h"
+#include "IComponent.h"
 #include "Game.h"
 
 EntityManager::EntityManager() {
@@ -21,7 +22,7 @@ EntityManager::~EntityManager() {
 		delete pair.second;
 }
 
-void EntityManager::update() {
+void EntityManager::update(Game *game, World *world) {
 	for (auto system : m_systems) {
 		std::vector<std::type_index> componentTypes = system->getComponentTypes();
 		IComponent **componentBuffer = new IComponent*[componentTypes.size()];
@@ -48,14 +49,14 @@ void EntityManager::update() {
 				continue;
 
 			// We can finally execute the system.
-			system->update(entityPair.second, componentBuffer);
+			system->update(game, world, entityPair.second, componentBuffer);
 		}
 
 		delete[] componentBuffer;
 	}
 }
 
-void EntityManager::render(Game *game, ShaderProgram *shaderProgram) {
+void EntityManager::render(Game *game, ShaderProgram *shaderProgram, Camera *camera) {
 	for (auto system : m_renderSystems) {
 		std::vector<std::type_index> componentTypes = system->getComponentTypes();
 		IComponent **componentBuffer = new IComponent*[componentTypes.size()];
@@ -82,7 +83,7 @@ void EntityManager::render(Game *game, ShaderProgram *shaderProgram) {
 				continue;
 
 			// We can finally execute the system.
-			system->render(game, shaderProgram, entityPair.second, componentBuffer);
+			system->render(game, shaderProgram, camera, entityPair.second, componentBuffer);
 		}
 
 		delete[] componentBuffer;

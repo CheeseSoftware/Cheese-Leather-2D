@@ -6,7 +6,7 @@
 class ShaderProgram;
 class World;
 class Camera;
-class GLFWwindow;
+class EntityManager;
 
 class PlayState : public State
 {
@@ -22,6 +22,7 @@ private:
 	ShaderProgram *m_shaderProgram;
 	Camera *m_camera;
 	World *m_world;
+	EntityManager *m_entityManager;
 
 	glm::vec3 m_position = glm::vec3(0.f);
 	float m_horizontalAngle = 0.0f;

@@ -137,5 +137,8 @@
     <ClCompile Include="IRenderSystem.cpp">
       <Filter>Source Files\entity</Filter>
     </ClCompile>
+    <ClCompile Include="ISystem.cpp">
+      <Filter>Source Files\entity</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

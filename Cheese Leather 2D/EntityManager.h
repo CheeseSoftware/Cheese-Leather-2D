@@ -10,14 +10,16 @@ class ISystem;
 class IRenderSystem;
 class Game;
 class ShaderProgram;
+class Camera;
+class World;
 
 class EntityManager {
 public:
 	EntityManager();
 	~EntityManager();
 
-	void update();
-	void render(Game *game, ShaderProgram *shaderProgram);
+	void update(Game *game, World *world);
+	void render(Game *game, ShaderProgram *shaderProgram, Camera *camera);
 
 	u32 addEntity(Entity *entity);
 

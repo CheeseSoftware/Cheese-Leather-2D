@@ -8,8 +8,14 @@
 #include "TextureHandler.h"
 #include "Texture.h"
 
-void RenderSystemSprite::render(Game *game, ShaderProgram *shaderProgram, Entity *entity, IComponent **components) {
-	ComponentSprite *componentSprite = reinterpret_cast<ComponentSprite*>(components[0]);
+#include "Game.h"
+#include "Entity.h"
+#include "IComponent.h"
+#include "Vertex.h"
+#include "Camera.h"
+
+void RenderSystemSprite::render(Game *game, ShaderProgram *shaderProgram, Camera *camera, Entity *entity, IComponent **components) {
+	ComponentSprite *componentSprite = dynamic_cast<ComponentSprite*>(components[0]);
 
 	// Update spriteMatrix/modelMatrix
 	if (componentSprite->needsMatrixUpdate) {
@@ -25,15 +31,14 @@ void RenderSystemSprite::render(Game *game, ShaderProgram *shaderProgram, Entity
 	}
 
 	if (componentSprite->vertexBuffer == 0) {
-		Vertex quad[] = {
-			Vertex(0, 0, 0, 0, 0, 1.f, 1.f, 1.f, 1.f),
-			Vertex(0, 1, 0, 0, 1, 1.f, 1.f, 1.f, 1.f),
-			Vertex(1, 1, 0, 1, 1, 1.f, 1.f, 1.f, 1.f),
+		Vertex *quad = new Vertex[6];
+		quad[0] = Vertex(-32, -32, 0, 0, 0, 0.625f, 1.f, 1.f, 1.f);
+		quad[1] = Vertex(-32, 32, 0, 0, 0.625f, 1.f, 1.f, 1.f, 1.f);
+		quad[2] = Vertex(32, 32, 0, 0.625f, 0.625f, 1.f, 1.f, 1.f, 1.f);
 
-			Vertex(0, 0, 0, 0, 0, 1.f, 1.f, 1.f, 1.f),
-			Vertex(1, 1, 0, 1, 1, 1.f, 1.f, 1.f, 1.f),
-			Vertex(1, 0, 0, 1, 0, 1.f, 1.f, 1.f, 1.f)
-		};
+		quad[3] = Vertex(-32, -32, 0, 0, 0, 0.625f, 1.f, 1.f, 1.f);
+		quad[4] = Vertex(32, 32, 0, 0.625f, 0.625f, 1.f, 1.f, 1.f, 1.f);
+		quad[5] = Vertex(32, -32, 0, 0.625f, 0, 1.f, 1.f, 1.f, 1.f);
 
 
 		glGenBuffers(1, &componentSprite->vertexBuffer);
@@ -43,7 +48,7 @@ void RenderSystemSprite::render(Game *game, ShaderProgram *shaderProgram, Entity
 
 	if (&componentSprite->vertexBuffer != 0) {
 
-		glm::mat4 mvp = componentSprite->spriteMatrix;
+		glm::mat4 mvp = camera->getCameraMatrix() * componentSprite->spriteMatrix;
 
 		glUniformMatrix4fv(shaderProgram->getMVPUniform(), 1, GL_FALSE, &mvp[0][0]);
 
@@ -81,11 +86,11 @@ void RenderSystemSprite::render(Game *game, ShaderProgram *shaderProgram, Entity
 
 std::vector<std::type_index> RenderSystemSprite::getComponentTypes() {
 
-	static const std::type_index type_index_array[] = {
+	 const std::type_index type_index_array[] = {
 		typeid(ComponentSprite)
 	};
 
-	static const std::vector<std::type_index> componentTypes(type_index_array, type_index_array + sizeof(type_index_array) / sizeof(type_index_array[0]));
+	 const std::vector<std::type_index> componentTypes(type_index_array, type_index_array + sizeof(type_index_array) / sizeof(type_index_array[0]));
 
 	return componentTypes;
 }

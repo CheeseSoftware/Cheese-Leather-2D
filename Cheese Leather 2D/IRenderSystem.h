@@ -11,17 +11,18 @@ class ShaderProgram;
 
 class Entity;
 class IComponent;
+class Camera;
 
 class IRenderSystem {
 public:
-	virtual void render(Game *game, ShaderProgram *shaderProgram, Entity *entity, IComponent **components) = 0;
+	virtual void render(Game *game, ShaderProgram *shaderProgram, Camera *camera, Entity *entity, IComponent **components) = 0;
 	virtual std::vector<std::type_index> getComponentTypes() = 0;
 
 };
 
-class RenderSystemSprite {
+class RenderSystemSprite : virtual public IRenderSystem {
 public:
-	virtual void render(Game *game, ShaderProgram *shaderProgram, Entity *entity, IComponent **components);
+	virtual void render(Game *game, ShaderProgram *shaderProgram, Camera *camera, Entity *entity, IComponent **components);
 	virtual std::vector<std::type_index> getComponentTypes();
 
 };

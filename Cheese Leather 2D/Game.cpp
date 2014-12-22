@@ -8,12 +8,13 @@
 #include "PlayState.h"
 #include "State.h"
 #include "TextureHandler.h"
-
+#include "EntityFactory.h"
 
 Game::Game()
 {
 	m_window = new Window(800, 600);
 	m_textureHandler = new TextureHandler();
+	m_entityFactory = new EntityFactory();
 
 #ifdef CLIENT
 	if (glewInit() != GLEW_OK) {

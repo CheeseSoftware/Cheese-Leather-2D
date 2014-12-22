@@ -1,6 +1,8 @@
 #include "EntityFactory.h"
 #include "Entity.h"
 
+#include "IComponent.h"
+
 EntityFactory::~EntityFactory() {
 	for (auto pair : m_entityTemplates) {
 		delete pair.second;
@@ -13,6 +15,8 @@ EntityFactory::~EntityFactory() {
 * Existing entities with same names will be overwritten.
 */
 void EntityFactory::registerEntity(std::string name, Entity* entityTemplate) {
+	float xsize = dynamic_cast<ComponentSprite*>(entityTemplate->getComponent(std::type_index(typeid(ComponentSprite))))->scale.x;
+	
 	auto it = m_entityTemplates.find(name);
 
 	if (it != m_entityTemplates.end()) {
@@ -28,8 +32,12 @@ void EntityFactory::registerEntity(std::string name, Entity* entityTemplate) {
 Entity *EntityFactory::createEntity(std::string name) {
 	auto it = m_entityTemplates.find(name);
 
-	if (it != m_entityTemplates.end())
-		return it->second->clone();
+	if (it != m_entityTemplates.end()) {
+		Entity *clone = it->second->clone();
+		float xsize = dynamic_cast<ComponentSprite*>(clone->getComponent(std::type_index(typeid(ComponentSprite))))->scale.x;
+		float xsize2 = dynamic_cast<ComponentSprite*>(it->second->getComponent(std::type_index(typeid(ComponentSprite))))->scale.x;
+		return clone;
+	}
 	else
 		return nullptr;
 }

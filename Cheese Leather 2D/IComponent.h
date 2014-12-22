@@ -12,8 +12,15 @@ public:
 
 class ComponentSprite : virtual public IComponent {
 public:
+	ComponentSprite() {
+		vertexBuffer = 0;
+	}
 	virtual ~ComponentSprite() {}
-	virtual IComponent *clone() { return new ComponentSprite(*this); }
+	virtual IComponent *clone() {
+		auto n = new ComponentSprite(*this);
+		n->scale = scale;
+		return n;
+	}
 
 	// Data:
 
