@@ -29,7 +29,7 @@ World::World() {
 		}
 	};
 
-	generateChunk(0, 0, 1);
+	generateChunk(0, 0, 54);
 }
 
 
