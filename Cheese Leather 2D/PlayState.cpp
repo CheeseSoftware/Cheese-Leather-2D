@@ -22,12 +22,13 @@ PlayState::PlayState(Game *game) {
 
 	m_shaderProgram = new ShaderProgram(std::move(defaultShaders));
 	m_shaderProgram->addUniforms(defaultUniforms);
-#endif
 
-	m_world = new World();
 	m_camera = new Camera();
 	m_camera->setSize(game->getWindow()->getWidth(), game->getWindow()->getHeight());
 	m_position = glm::vec3(0, 0, 1.0f);
+#endif
+
+	m_world = new World();
 }
 
 PlayState::~PlayState() {

@@ -10,14 +10,17 @@
 #include "TextureHandler.h"
 #include "Texture.h"
 
+#ifdef CLIENT
 struct Quad {
 	//DO NOT USE i8
 	//It creates unforseen consequenses.
 	i16 x, y;
 	i16 w, h;
+	i16 xs, ys;
 
 	u16 baseTexture;
 };
+#endif
 
 
 
@@ -31,12 +34,15 @@ Chunk::~Chunk(void) {
 	if (m_blockData != nullptr)
 		delete[] m_blockData;
 
+#ifdef CLIENT
 	if (m_vertexBuffer) {
 		// TODO: Destroy vertex buffer.
 	}
+#endif
 }
 
 void Chunk::render(glm::mat4 &mvp, Game *game, ShaderProgram *shaderProgram, Camera *camera) {
+#ifdef CLIENT
 	if (m_isBlocksChanged) {
 		m_isBlocksChanged = false;
 
@@ -81,7 +87,7 @@ void Chunk::render(glm::mat4 &mvp, Game *game, ShaderProgram *shaderProgram, Cam
 		glDisableVertexAttribArray(1);
 		glDisableVertexAttribArray(2);
 	}
-
+#endif
 }
 
 void Chunk::notifyAll() {
@@ -132,6 +138,7 @@ void Chunk::initalizeBlockData() {
 }
 
 void Chunk::loadMesh(Game *game) {
+#ifdef CLIENT
 	std::vector<Vertex> vertices;
 	std::vector<Quad> quads;
 	/*std::map<i8vec2, Quad, i8vec2_hash, i8vec2_hash> quads;*/
@@ -140,7 +147,7 @@ void Chunk::loadMesh(Game *game) {
 		for (int y = 0; y < cChunkSize; ++y) {
 			u16 block = m_blocks[y * cChunkSize + x];
 			if (block != 0) {
-				Quad quad = { 16 * x, 16 * y, 16, 16, 0 };
+				Quad quad = { 16 * x, 16 * y, 16, 16, block * 16, 256 - ((block / (256 / 16)) * 16), block };
 				quads.push_back(quad);
 			}
 		}
@@ -150,12 +157,20 @@ void Chunk::loadMesh(Game *game) {
 
 		auto &q = *itA; //itA->second;
 
+		/*std::cout << "U:" << (GLfloat)q.xs / 256 << " V:" << (GLfloat)q.ys / 256 << std::endl;
+		std::cout << "U:" << (GLfloat)((GLfloat)q.xs + q.w) / 256 << " V:" << (GLfloat)((GLfloat)q.ys + q.h) / 256 << std::endl;
+		std::cout << "U:" << (GLfloat)((GLfloat)q.xs + q.w) / 256 << " V:" << (GLfloat)q.ys / 256 << std::endl;
+		std::cout << "U:" << (GLfloat)q.xs / 256 << " V:" << (GLfloat)q.ys / 256 << std::endl;
+		std::cout << "U:" << (GLfloat)q.xs / 256 << " V:" << (GLfloat)((GLfloat)q.ys + q.h) / 256 << std::endl;
+		std::cout << "U:" << (GLfloat)((GLfloat)q.xs + q.w) / 256 << " V:" << (GLfloat)((GLfloat)q.ys + q.h) / 256 << std::endl;
+		//std::cin.get();*/
+
 		vertices.emplace_back(
 			q.x, // x
 			q.y, // y
 			0, // depth
-			0, // u
-			0, // v
+			(GLfloat)q.xs / 256, // u
+			(GLfloat)q.ys / 256, // v
 			0.5f, // r
 			0.5f, // g
 			0.5f, // b
@@ -166,8 +181,8 @@ void Chunk::loadMesh(Game *game) {
 			q.x + q.w, // x
 			q.y + q.h, // y
 			0, // depth
-			1, // u
-			1, // v
+			(GLfloat)((GLfloat)q.xs + q.w) / 256, // u
+			(GLfloat)((GLfloat)q.ys - q.h) / 256, // v
 			0.5f, // r
 			0.5f, // g
 			0.5f, // b
@@ -178,8 +193,8 @@ void Chunk::loadMesh(Game *game) {
 			q.x + q.w, // x
 			q.y, // y
 			0, // depth
-			1, // u
-			0, // v
+			(GLfloat)((GLfloat)q.xs + q.w) / 256, // u
+			(GLfloat)q.ys / 256, // v
 			1.f, // r
 			1.f, // g
 			1.f, // b
@@ -190,8 +205,8 @@ void Chunk::loadMesh(Game *game) {
 			q.x, // x
 			q.y, // y
 			0, // depth
-			0, // u
-			0, // v
+			(GLfloat)q.xs / 256, // u
+			(GLfloat)q.ys / 256, // v
 			0.5f, // r
 			0.5f, // g
 			0.5f, // b
@@ -202,8 +217,8 @@ void Chunk::loadMesh(Game *game) {
 			q.x, // x
 			q.y + q.h, // y
 			0, // depth
-			0, // u
-			1, // v
+			(GLfloat)q.xs / 256, // u
+			(GLfloat)((GLfloat)q.ys - q.h) / 256, // v
 			1.f, // r
 			1.f, // g
 			1.f, // b
@@ -214,8 +229,8 @@ void Chunk::loadMesh(Game *game) {
 			q.x + q.w, // x
 			q.y + q.h, // y
 			0, // depth
-			1, // u
-			1, // v
+			(GLfloat)((GLfloat)q.xs + q.w) / 256, // u
+			(GLfloat)((GLfloat)q.ys - q.h) / 256, // v
 			0.5f, // r
 			0.5f, // g
 			0.5f, // b
@@ -230,10 +245,11 @@ void Chunk::loadMesh(Game *game) {
 	m_mesh = vertices;
 
 	m_isMeshChanged = true;
-
+#endif
 }
 
 void Chunk::loadVertexBuffer() {
+#ifdef CLIENT
 	GLuint vertexBuffer;
 	GLuint vertexBufferSize;
 
@@ -258,8 +274,7 @@ void Chunk::loadVertexBuffer() {
 		m_vertexBuffer = vertexBuffer;
 		m_vertexBufferSize = vertexBufferSize;
 	}
-
-	return;
+#endif
 }
 
 #pragma region merge quads
