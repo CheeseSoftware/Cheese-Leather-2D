@@ -108,6 +108,7 @@
     <ClCompile Include="EntityFactory.cpp" />
     <ClCompile Include="EntityManager.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="IRenderSystem.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PlayState.cpp" />
     <ClCompile Include="Shader.cpp" />

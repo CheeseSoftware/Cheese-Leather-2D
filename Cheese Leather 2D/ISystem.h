@@ -14,3 +14,4 @@ public:
 	virtual std::vector<std::type_index> getComponentTypes() = 0;
 
 };
+

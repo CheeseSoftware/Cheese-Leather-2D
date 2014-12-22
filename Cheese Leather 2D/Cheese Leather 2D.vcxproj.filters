@@ -134,5 +134,8 @@
     <ClCompile Include="EntityManager.cpp">
       <Filter>Source Files\entity</Filter>
     </ClCompile>
+    <ClCompile Include="IRenderSystem.cpp">
+      <Filter>Source Files\entity</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

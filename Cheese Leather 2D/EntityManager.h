@@ -1,12 +1,15 @@
 #pragma once
 
 #include <unordered_map>
+#include <vector>
 
 #include "types.h"
 
 class Entity;
 class ISystem;
 class IRenderSystem;
+class Game;
+class ShaderProgram;
 
 class EntityManager {
 public:
@@ -14,7 +17,7 @@ public:
 	~EntityManager();
 
 	void update();
-	void render();
+	void render(Game *game, ShaderProgram *shaderProgram);
 
 	u32 addEntity(Entity *entity);
 
