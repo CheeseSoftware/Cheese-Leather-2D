@@ -88,7 +88,7 @@ void PlayState::update(Game *game) {
 	else
 		rmbDown = false;
 	if (glfwGetMouseButton(rawWindow, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS){
-		if (!rmbDown)
+		if (!lmbDown)
 		{
 			lmbDown = true;
 			glm::vec2 pos = m_camera->toWorldPosition(glm::vec2(xpos, ypos));
