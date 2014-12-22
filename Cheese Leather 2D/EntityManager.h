@@ -24,11 +24,11 @@ public:
 
 
 private:
-	std::unordered_map<u32, Entity> m_entities;
+	std::unordered_map<u32, Entity*> m_entities;
 
 	std::vector<ISystem*> m_systems;
 	std::vector<IRenderSystem*> m_renderSystems;
 
-	u32 m_maxEntityId;
+	u32 m_maxEntityId = 0;
 	std::vector<u32> m_unusedEntityIds;
 };

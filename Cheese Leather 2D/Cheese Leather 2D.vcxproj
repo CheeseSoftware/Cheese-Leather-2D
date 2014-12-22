@@ -87,6 +87,8 @@
     <ClInclude Include="EntityManager.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="IComponent.h" />
+    <ClInclude Include="IRenderSystem.h" />
+    <ClInclude Include="ISystem.h" />
     <ClInclude Include="IWorld.h" />
     <ClInclude Include="PlayState.h" />
     <ClInclude Include="Shader.h" />

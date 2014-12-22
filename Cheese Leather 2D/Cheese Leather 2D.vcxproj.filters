@@ -84,6 +84,12 @@
     <ClInclude Include="EntityManager.h">
       <Filter>Header Files\entity</Filter>
     </ClInclude>
+    <ClInclude Include="ISystem.h">
+      <Filter>Header Files\entity</Filter>
+    </ClInclude>
+    <ClInclude Include="IRenderSystem.h">
+      <Filter>Header Files\entity</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
