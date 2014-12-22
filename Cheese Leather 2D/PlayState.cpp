@@ -82,21 +82,21 @@ void PlayState::update(Game *game) {
 			int x = pos.x / 16;
 			int y = pos.y / 16;
 			m_world->setBlock(x, y, 0);
+			std::cout << "X:" << x << " Y:" << y << std::endl;
 		}
-		//std::cout << "X:" << x << " Y:" << y << std::endl;
 	}
 	else
 		rmbDown = false;
 	if (glfwGetMouseButton(rawWindow, GLFW_MOUSE_BUTTON_LEFT) == GLFW_PRESS){
-		if (!rmbDown)
+		if (!lmbDown)
 		{
 			lmbDown = true;
 			glm::vec2 pos = m_camera->toWorldPosition(glm::vec2(xpos, ypos));
 			int x = pos.x / 16;
 			int y = pos.y / 16;
 			m_world->setBlock(x, y, 1);
+			std::cout << "X:" << x << " Y:" << y << std::endl;
 		}
-		//std::cout << "X:" << x << " Y:" << y << std::endl;
 	}
 	else
 		lmbDown = false;

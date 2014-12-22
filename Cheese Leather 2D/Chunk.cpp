@@ -179,7 +179,7 @@ void Chunk::loadMesh(Game *game) {
 
 		vertices.emplace_back(
 			q.x + q.w, // x
-			q.y + q.h, // y
+			q.y - q.h, // y
 			0, // depth
 			(GLfloat)((GLfloat)q.xs + q.w) / 256, // u
 			(GLfloat)((GLfloat)q.ys - q.h) / 256, // v
@@ -215,7 +215,7 @@ void Chunk::loadMesh(Game *game) {
 
 		vertices.emplace_back(
 			q.x, // x
-			q.y + q.h, // y
+			q.y - q.h, // y
 			0, // depth
 			(GLfloat)q.xs / 256, // u
 			(GLfloat)((GLfloat)q.ys - q.h) / 256, // v
@@ -227,7 +227,7 @@ void Chunk::loadMesh(Game *game) {
 
 		vertices.emplace_back(
 			q.x + q.w, // x
-			q.y + q.h, // y
+			q.y - q.h, // y
 			0, // depth
 			(GLfloat)((GLfloat)q.xs + q.w) / 256, // u
 			(GLfloat)((GLfloat)q.ys - q.h) / 256, // v
