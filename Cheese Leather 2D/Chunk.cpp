@@ -43,12 +43,11 @@ void Chunk::render(glm::mat4 &mvp, Game *game, ShaderProgram *shaderProgram, Cam
 		loadMesh(game);
 	}
 
-	//TODO: "m_isMeshChanged" creates strange things
-	//if (m_isMeshChanged) {
-		//m_isMeshChanged = false;
+	if (m_isMeshChanged) {
+		m_isMeshChanged = false;
 
-	loadVertexBuffer();
-	//}
+		loadVertexBuffer();
+	}
 
 	if (m_vertexBuffer != 0) {
 
@@ -242,7 +241,7 @@ void Chunk::loadVertexBuffer() {
 		//std::lock_guard<std::mutex> guard(m_meshMutex);
 		if (m_mesh.size() >= 0)
 		{
-			glGenBuffers(0, &vertexBuffer);
+			glGenBuffers(1, &vertexBuffer);
 			glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
 			glBufferData(GL_ARRAY_BUFFER, m_mesh.size() * sizeof(Vertex), m_mesh.data(), GL_DYNAMIC_DRAW);
 
