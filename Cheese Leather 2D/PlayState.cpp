@@ -82,8 +82,8 @@ void PlayState::update(Game *game) {
 			int x = pos.x / 16;
 			int y = pos.y / 16;
 			m_world->setBlock(x, y, 0);
+			std::cout << "X:" << x << " Y:" << y << std::endl;
 		}
-		//std::cout << "X:" << x << " Y:" << y << std::endl;
 	}
 	else
 		rmbDown = false;
@@ -95,8 +95,8 @@ void PlayState::update(Game *game) {
 			int x = pos.x / 16;
 			int y = pos.y / 16;
 			m_world->setBlock(x, y, 1);
+			std::cout << "X:" << x << " Y:" << y << std::endl;
 		}
-		//std::cout << "X:" << x << " Y:" << y << std::endl;
 	}
 	else
 		lmbDown = false;

@@ -65,7 +65,7 @@ glm::vec2 Camera::toWorldPosition(glm::vec2 screenPosition) {
 
 	screenPosition.y = m_height - screenPosition.y;
 
-	screenPosition -= glm::vec2(m_width / 2, m_height / 2);
+	screenPosition -= glm::vec2(m_width / 2, m_height / 2 - 16);
 	screenPosition /= m_scale;
 	screenPosition += glm::vec2(m_position.x, m_position.y);
 
