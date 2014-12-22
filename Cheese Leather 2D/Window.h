@@ -14,13 +14,12 @@ public:
 
 	bool getShouldClose();
 	GLFWwindow *getRawWindow() { return m_window; }
-	void Clear();
-	void SwapBuffers();
+	void clear();
+	void swapBuffers();
 
 private:
 	GLFWwindow *m_window;
 	int m_width;
 	int m_height;
-	virtual void Error(const char *source, const char *description);
-	void Exit();
+	void error(const char *source, const char *description);
 };

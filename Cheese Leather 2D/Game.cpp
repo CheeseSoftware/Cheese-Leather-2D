@@ -25,7 +25,7 @@ Game::Game()
 #endif
 	m_state = new PlayState(this);
 
-	m_state->Load(this);
+	m_state->load(this);
 	m_lastFrameTime = std::chrono::system_clock::now();
 
 	while (m_state && !m_window->getShouldClose())
@@ -34,11 +34,11 @@ Game::Game()
 		m_deltaTime = newtime - m_lastFrameTime;
 		//std::cout << m_deltaTime.count() << std::endl;			SPAM-sjuk sak
 		m_lastFrameTime = newtime;
-		m_state->Update(this);
+		m_state->update(this);
 
 #ifdef CLIENT
 		
-		m_window->Clear();
+		m_window->clear();
 
 		/*glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
@@ -46,8 +46,8 @@ Game::Game()
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 		glGenerateMipmap(GL_TEXTURE_2D);*/
 
-		m_state->Draw(this);
-		m_window->SwapBuffers();
+		m_state->draw(this);
+		m_window->swapBuffers();
 		glfwPollEvents();
 #endif
 	}

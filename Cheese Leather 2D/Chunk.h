@@ -26,15 +26,13 @@ public:
 	~Chunk(void);
 
 
-	void Render(glm::mat4 &mvp, Game *game, ShaderProgram *shaderProgram, Camera *camera);
-
-	void NotifyAll();
+	void render(glm::mat4 &mvp, Game *game, ShaderProgram *shaderProgram, Camera *camera);
+	void notifyAll();
 
 	void setBlock(i8 x, i8 y, u16 block);
 	//void placeBlockWithoutLock(i8 x, i8 y, u16 block);
 	//void placeBlockWithoutNotify(i8 x, i8 y, u16 block);
 	//void placeBlockWithoutNotifyAndLock(i8 x, i8 y, u16 block);
-
 	//std::mutex getBlockMutex();
 	u16 getBlock(i8 x, i8 y);
 	//u16 getBlockWithoutLock(i8 x, i8 y);

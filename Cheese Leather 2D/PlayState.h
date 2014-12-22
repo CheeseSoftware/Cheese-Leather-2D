@@ -13,14 +13,12 @@ class PlayState : public State
 public:
 	PlayState(Game *game);
 	~PlayState();
-	virtual void Load(Game *game) { m_game = game; }
+	virtual void load(Game *game) { m_game = game; }
 
-	virtual void Update(Game *game);
-	virtual void Draw(Game *game);
+	virtual void update(Game *game);
+	virtual void draw(Game *game);
 
 private:
-	//void onMouseButton(GLFWwindow *window, int button, int action, int mods);
-
 	ShaderProgram *m_shaderProgram;
 	Camera *m_camera;
 	World *m_world;

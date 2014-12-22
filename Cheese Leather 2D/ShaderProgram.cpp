@@ -7,8 +7,7 @@
 
 static inline int max(int a, int b);
 
-ShaderProgram::ShaderProgram(std::vector<Shader> &&shaders)
-{
+ShaderProgram::ShaderProgram(std::vector<Shader> &&shaders) {
 	GLint error = glGetError();
 
 	m_program = glCreateProgram();
@@ -42,10 +41,7 @@ ShaderProgram::ShaderProgram(std::vector<Shader> &&shaders)
 
 }
 
-
-
-GLuint ShaderProgram::addUniform(std::string uniform)
-{
+GLuint ShaderProgram::addUniform(std::string uniform) {
 	glLinkProgram(m_program);
 
 	GLuint uniformId = glGetUniformLocation(m_program, uniform.c_str());
@@ -54,8 +50,7 @@ GLuint ShaderProgram::addUniform(std::string uniform)
 	return uniformId;
 }
 
-void ShaderProgram::addUniforms(std::vector<std::string> uniforms)
-{
+void ShaderProgram::addUniforms(std::vector<std::string> uniforms) {
 	glLinkProgram(m_program);
 
 	m_uniforms.reserve(uniforms.size());
@@ -66,25 +61,20 @@ void ShaderProgram::addUniforms(std::vector<std::string> uniforms)
 	}
 }
 
-
-void ShaderProgram::bind()
-{
+void ShaderProgram::bind() {
 	glUseProgram(m_program);
 }
 
-void ShaderProgram::unbind()
-{
+void ShaderProgram::unbind() {
 	glUseProgram(0);
 }
 
-GLint ShaderProgram::getUniform(size_t index)
-{
+GLint ShaderProgram::getUniform(size_t index) {
 	return m_uniforms[index];
 }
 
 
-static inline int max(int a, int b)
-{
+static inline int max(int a, int b) {
 	return (a > b) ? a : b;
 }
 

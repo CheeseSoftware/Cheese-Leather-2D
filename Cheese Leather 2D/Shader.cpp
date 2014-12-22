@@ -5,39 +5,32 @@
 #include <algorithm>
 #include <vector>
 
-
-
 static GLuint CreateShader(const std::string& source, GLenum shaderType);
 static void CheckShaderError(GLuint shader, const std::string& errorMessage);
 static std::string LoadShader(const std::string& fileName);
 
 
 Shader::Shader(const GLenum shaderType, const std::string &fileName)
-	: m_shaderType(shaderType)
-{
+: m_shaderType(shaderType) {
 	GLint error = glGetError();
 	m_shader = CreateShader(LoadShader(fileName), shaderType);
 	error = glGetError();
 }
 
-Shader::~Shader(void)
-{
+Shader::~Shader(void) {
 	glDeleteShader(m_shader);
 }
 
-GLuint Shader::getShaderType()
-{
+GLuint Shader::getShaderType() {
 	return m_shaderType;
 }
 
-GLuint Shader::getShader()
-{
+GLuint Shader::getShader() {
 	return m_shader;
 }
 
 
-static GLuint CreateShader(const std::string& source, GLenum shaderType)
-{
+static GLuint CreateShader(const std::string& source, GLenum shaderType) {
 	GLuint shaderId = glCreateShader(shaderType);
 
 	if (shaderId == 0)
@@ -54,8 +47,7 @@ static GLuint CreateShader(const std::string& source, GLenum shaderType)
 	return shaderId;
 }
 
-static void CheckShaderError(GLuint shader, const std::string& errorMessage)
-{
+static void CheckShaderError(GLuint shader, const std::string& errorMessage) {
 	GLint result = GL_FALSE;
 	int errorLength;
 
@@ -67,8 +59,7 @@ static void CheckShaderError(GLuint shader, const std::string& errorMessage)
 	fprintf(stdout, "%s\n", &error[0]);
 }
 
-static std::string LoadShader(const std::string& fileName)
-{
+static std::string LoadShader(const std::string& fileName) {
 	std::ifstream file;
 	file.open((fileName).c_str());
 

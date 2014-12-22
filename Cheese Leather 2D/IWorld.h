@@ -8,6 +8,6 @@ class IWorld
 {
 public:
 	virtual ~IWorld() {}
-	virtual void Render(Game *game, ShaderProgram *shaderProgram, Camera *camera) = 0;
+	virtual void render(Game *game, ShaderProgram *shaderProgram, Camera *camera) = 0;
 };
 

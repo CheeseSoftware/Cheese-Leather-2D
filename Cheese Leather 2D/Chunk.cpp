@@ -21,8 +21,7 @@ struct Quad {
 
 
 
-Chunk::Chunk()
-{
+Chunk::Chunk() {
 }
 
 
@@ -37,63 +36,39 @@ Chunk::~Chunk(void) {
 	}
 }
 
-void Chunk::Render(glm::mat4 &mvp, Game *game, ShaderProgram *shaderProgram, Camera *camera) {
-	if (m_isBlocksChanged) { // && !m_isBlockMeshCalculating) {
-		// m_isBlockMeshCalculating = true;
+void Chunk::render(glm::mat4 &mvp, Game *game, ShaderProgram *shaderProgram, Camera *camera) {
+	if (m_isBlocksChanged) {
 		m_isBlocksChanged = false;
 
 		loadMesh(game);
 	}
 
-//	if (m_isMeshChanged) {
-		m_isMeshChanged = false;
+	//TODO: "m_isMeshChanged" creates strange things
+	//if (m_isMeshChanged) {
+		//m_isMeshChanged = false;
 
-		loadVertexBuffer();
+	loadVertexBuffer();
 	//}
 
 	if (m_vertexBuffer != 0) {
-		/*glm::mat4 mvp = glm::mat4(1.0f);
-		mvp[0][0] = 1.f * 4.f;
-		mvp[1][1] = 1.f * 4.f;
 
-		glUniformMatrix4fv(
-			0,
-			1,
-			GL_FALSE,
-			&mvp[0][0]
-			);*/
-		////////////////////////////////////////GLuint matrixId = shaderProgram->addUniform("MVP");
-		//GLuint MatrixID = glGetUniformLocation(programID, "MVP");
-
-		// Send our transformation to the currently bound shader,
-		// in the "MVP" uniform
-		// For each model you render, since the MVP will be different (at least the M part)
-		
 		glUniformMatrix4fv(shaderProgram->getMVPUniform(), 1, GL_FALSE, &mvp[0][0]);
 
-		// Load the texture using any two methods
-		//GLuint Texture = loadBMP_custom("uvtemplate.bmp");
-		///GLuint Texture = loadDDS("uvtemplate.DDS");
-		//GLuint Texture = loadDDS
-		// Get a handle for our "myTextureSampler" uniform
-		/////////////////////////////////////GLuint textureId = shaderProgram->addUniform("myTextureSampler");
-		//GLuint TextureID = glGetUniformLocation(programID, "myTextureSampler");
-		// Bind our texture in Texture Unit 0
 		glActiveTexture(GL_TEXTURE0);
 		glBindTexture(GL_TEXTURE_2D, game->getTextureHandler()->getBlockTexture(1)->getGlTexture());
-		// Set our "myTextureSampler" sampler to user Texture Unit 0
+
 		glUniform1i(shaderProgram->getTextureUniform(), 0);
 
 		glBindBuffer(GL_ARRAY_BUFFER, m_vertexBuffer);
 		{
-			glEnableVertexAttribArray(0);		
+			glEnableVertexAttribArray(0);
 			glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex),
-				reinterpret_cast<void*>(offsetof(Vertex, position)));			
+				reinterpret_cast<void*>(offsetof(Vertex, position)));
 		}
 		{
 			glEnableVertexAttribArray(1);
 			glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex),
-				reinterpret_cast<void*>(offsetof(Vertex, color)));		
+				reinterpret_cast<void*>(offsetof(Vertex, color)));
 		}
 		{
 			glEnableVertexAttribArray(2);
@@ -110,16 +85,16 @@ void Chunk::Render(glm::mat4 &mvp, Game *game, ShaderProgram *shaderProgram, Cam
 
 }
 
-void Chunk::NotifyAll() {
-	// TODO: NotifyAll (generate blockData)
+void Chunk::notifyAll() {
+	// TODO: notifyAll (generate blockData)
 }
 
 void Chunk::setBlock(i8 x, i8 y, u16 block) {
 	if (m_blocks == nullptr)
 	{
-		//if (block == 0)
-			//return;
-		//else
+		if (block == 0)
+			return;
+		else
 			initalizeBlocks();
 	}
 
@@ -166,8 +141,7 @@ void Chunk::loadMesh(Game *game) {
 		for (int y = 0; y < cChunkSize; ++y) {
 			u16 block = m_blocks[y * cChunkSize + x];
 			if (block != 0) {
-				//Texture *texture = game->getTextureHandler()->getBlockTexture(block);
-				Quad quad = { 16*x, 16*y, 16, 16, /*texture->getGlTexture()*/0 };
+				Quad quad = { 16 * x, 16 * y, 16, 16, 0 };
 				quads.push_back(quad);
 			}
 		}
@@ -268,13 +242,8 @@ void Chunk::loadVertexBuffer() {
 		//std::lock_guard<std::mutex> guard(m_meshMutex);
 		if (m_mesh.size() >= 0)
 		{
-			//////////////////////////////////////////
-			// Send our vertices as a vertex buffer.//
-			//////////////////////////////////////////
 			glGenBuffers(0, &vertexBuffer);
 			glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
-
-			// Give our vertices to OpenGL.
 			glBufferData(GL_ARRAY_BUFFER, m_mesh.size() * sizeof(Vertex), m_mesh.data(), GL_DYNAMIC_DRAW);
 
 			vertexBufferSize = m_mesh.size();

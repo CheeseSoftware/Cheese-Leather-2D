@@ -8,7 +8,7 @@
 Window::Window(int width, int height) {
 #ifdef CLIENT
 	if (!glfwInit())
-		Error("Game", "glfwInit failed!");
+		error("Game", "glfwInit failed!");
 
 	//glfwWindowHint(GLFW_SAMPLES, 4);
 	//glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
@@ -49,29 +49,24 @@ bool Window::getShouldClose() {
 #endif
 }
 
-
-void Window::Clear() {
+void Window::clear() {
 #ifdef CLIENT
 	glClear(GL_COLOR_BUFFER_BIT);
 #endif
 }
 
-void Window::SwapBuffers()
-{
+void Window::swapBuffers() {
 #ifdef CLIENT
 	glfwSwapBuffers(m_window);
 #endif
 }
 
-void Window::Error(const char *source, const char *description)
-{
+void Window::error(const char *source, const char *description) {
 #ifdef CLIENT
 	std::cout << "ERROR " << description;
-
 	// eventHandler->ErrorCallback(this, source, description);
 #endif
 }
-
 
 int Window::getWidth() const {
 	return m_width;

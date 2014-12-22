@@ -6,10 +6,10 @@ class IRenderer;
 class State 
 {
 public:
-	virtual void Load(Game *game) { m_game = game; }
+	virtual void load(Game *game) { m_game = game; }
 
-	virtual void Update(Game *game) = 0;
-	virtual void Draw(Game *game) = 0;
+	virtual void update(Game *game) = 0;
+	virtual void draw(Game *game) = 0;
 
 protected:
 	Game *m_game;
