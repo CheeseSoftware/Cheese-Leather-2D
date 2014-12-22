@@ -9,7 +9,7 @@ TextureHandler::TextureHandler()
 	m_textureIdMap = std::unordered_map<std::string, size_t>();
 	m_textureList = std::vector<Texture*>();
 
-	loadTexture("carl-bildt.jpg");
+	loadTexture("blocksheet.png");
 }
 
 TextureHandler::~TextureHandler()
