@@ -29,6 +29,8 @@ void SystemPhysicsSpriteLink::update(Game *game, World *world, Entity *entity, I
 
 	b2Vec2 pos = physics->body->GetPosition();
 
+	physics->body->ApplyForce(b2Vec2(-pos.x*pos.LengthSquared() / 1024.f, -pos.y*pos.LengthSquared() / 1024.f), pos, true);
+
 	sprite->position = glm::vec2(pos.x, pos.y);
 	sprite->angle = physics->body->GetAngle();
 	sprite->needsMatrixUpdate = true;

@@ -44,8 +44,8 @@ World::~World() {
 
 void World::update(Game *game) {
 	float32 timeStep = 1.0f / 60.0f;
-	int32 velocityIterations = 6;
-	int32 positionIterations = 2;
+	int32 velocityIterations = 1;
+	int32 positionIterations = 1;
 	m_b2World->Step(timeStep, velocityIterations, positionIterations);
 }
 

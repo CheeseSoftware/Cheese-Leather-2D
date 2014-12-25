@@ -102,6 +102,7 @@ public:
 		fixtureDef.friction = 0.3f;
 
 		body->CreateFixture(&fixtureDef);
+		body->SetLinearVelocity(b2Vec2(spawnVelocity.x, spawnVelocity.y));
 	}
 
 	virtual void onRemove(Game *game, World* world) {

@@ -78,8 +78,8 @@ PlayState::PlayState(Game *game) {
 
 			ComponentB2Physics *physics = dynamic_cast<ComponentB2Physics*>(entity->getComponent(std::type_index(typeid(ComponentB2Physics))));
 			physics->spawnPosition = glm::vec2(x * 16.f, y * 16.f);
-			physics->spawnVelocity = glm::vec2(+64 - 8.f*x, +64 - 8.f*y + 0.5f*x);
-			physics->spawnAngularVelocity = x*0.5;
+			physics->spawnVelocity = glm::vec2(+1014.f - 8.f*x, +64 - 8.f*y + 0.5f*x);
+			physics->spawnAngularVelocity = x*64.f;
 			physics->spawnAngle = (float)x / 16.f*3.14;
 			physics->spawnSize = fvec2(0.1f + y*0.0625f, 0.1f + y*0.0625f);
 
@@ -114,7 +114,8 @@ void PlayState::update(Game *game) {
 	GLFWwindow *rawWindow = window->getRawWindow();
 	int width = window->getWidth();
 	int height = window->getHeight();
-	float speed = 200.0f;
+	float speed = 600.0f;
+	float speedZoomModifier = pow(2.f, 1.f-m_position.z);
 
 	if (glfwGetKey(rawWindow, GLFW_KEY_SPACE) == GLFW_PRESS){
 		m_position.z += 1 * (GLfloat)game->getDeltaTime().count() * 4;
@@ -125,19 +126,19 @@ void PlayState::update(Game *game) {
 	}
 
 	if (glfwGetKey(rawWindow, GLFW_KEY_D) == GLFW_PRESS){
-		m_position.x += 1 * (GLfloat)game->getDeltaTime().count() * speed;
+		m_position.x += 1 * (GLfloat)game->getDeltaTime().count() * speed * speedZoomModifier;
 	}
 
 	if (glfwGetKey(rawWindow, GLFW_KEY_A) == GLFW_PRESS){
-		m_position.x -= 1 * (GLfloat)game->getDeltaTime().count() * speed;
+		m_position.x -= 1 * (GLfloat)game->getDeltaTime().count() * speed * speedZoomModifier;
 	}
 
 	if (glfwGetKey(rawWindow, GLFW_KEY_S) == GLFW_PRESS){
-		m_position.y -= 1 * (GLfloat)game->getDeltaTime().count() * speed;
+		m_position.y -= 1 * (GLfloat)game->getDeltaTime().count() * speed * speedZoomModifier;
 	}
 
 	if (glfwGetKey(rawWindow, GLFW_KEY_W) == GLFW_PRESS){
-		m_position.y += 1 * (GLfloat)game->getDeltaTime().count() * speed;
+		m_position.y += 1 * (GLfloat)game->getDeltaTime().count() * speed * speedZoomModifier;
 	}
 
 	if (glfwGetKey(rawWindow, GLFW_KEY_ESCAPE) == GLFW_PRESS){
