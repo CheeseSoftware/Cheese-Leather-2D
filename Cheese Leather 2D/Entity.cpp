@@ -8,6 +8,16 @@ Entity::~Entity() {
 	}
 }
 
+void Entity::onAdd(Game *game, World *world) {
+	for (auto componentPair : components)
+		componentPair.second->onAdd(game, world);
+}
+
+void Entity::onRemove(Game *game, World* world) {
+	for (auto componentPair : components)
+		componentPair.second->onRemove(game, world);
+}
+
 void Entity::addComponent(IComponent *component) {
 	components.emplace(typeid(*component), component);
 }

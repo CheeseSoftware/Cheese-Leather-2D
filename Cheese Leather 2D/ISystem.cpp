@@ -24,16 +24,19 @@ std::vector<std::type_index> SystemPhysics::getComponentTypes() {
 }
 
 void SystemPhysicsSpriteLink::update(Game *game, World *world, Entity *entity, IComponent **components) {
-	ComponentPhysics *physics = dynamic_cast<ComponentPhysics*>(components[0]);
+	ComponentB2Physics *physics = dynamic_cast<ComponentB2Physics*>(components[0]);
 	ComponentSprite *sprite = dynamic_cast<ComponentSprite*>(components[1]);
 
-	sprite->position = physics->position;
+	b2Vec2 pos = physics->body->GetPosition();
+
+	sprite->position = glm::vec2(pos.x, pos.y);
+	sprite->angle = physics->body->GetAngle();
 	sprite->needsMatrixUpdate = true;
 }
 
 std::vector<std::type_index> SystemPhysicsSpriteLink::getComponentTypes() {
 	const std::type_index type_index_array[] = {
-		typeid(ComponentPhysics),
+		typeid(ComponentB2Physics),
 		typeid(ComponentSprite)
 	};
 

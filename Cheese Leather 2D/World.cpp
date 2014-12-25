@@ -3,6 +3,8 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <vector>
 
+#include<Box2D\Box2D.h>
+
 #include "Chunk.h"
 #include "Camera.h"
 #include "Game.h"
@@ -30,10 +32,21 @@ World::World() {
 	};
 
 	generateChunk(0, 0, 54);
+
+
+
+	m_b2World = new b2World(b2Vec2(0.f, 0.f));
 }
 
 
 World::~World() {
+}
+
+void World::update(Game *game) {
+	float32 timeStep = 1.0f / 60.0f;
+	int32 velocityIterations = 6;
+	int32 positionIterations = 2;
+	m_b2World->Step(timeStep, velocityIterations, positionIterations);
 }
 
 void World::render(Game *game, ShaderProgram *shaderProgram, Camera *camera) {
@@ -102,6 +115,11 @@ void World::setBlock(i64 x, i64 y, u16 id) {
 
 	Chunk *chunk = m_chunks.at(i32vec2(chunkX, chunkY));
 	chunk->setBlock(blockX, blockY, id);
+}
+
+
+b2World *World::getB2World() {
+	return m_b2World;
 }
 
 /******************************************

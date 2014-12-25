@@ -91,7 +91,7 @@ void EntityManager::render(Game *game, ShaderProgram *shaderProgram, Camera *cam
 }
 
 
-u32 EntityManager::addEntity(Entity *entity) {
+u32 EntityManager::addEntity(Entity *entity, Game *game, World *world) {
 	u32 id;
 	// Find an unused id
 	{
@@ -106,6 +106,8 @@ u32 EntityManager::addEntity(Entity *entity) {
 
 	entity->id = id;
 	m_entities.emplace(id, entity);
+
+	entity->onAdd(game, world);
 
 	return id;
 }

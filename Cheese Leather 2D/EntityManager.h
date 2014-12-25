@@ -21,7 +21,7 @@ public:
 	void update(Game *game, World *world);
 	void render(Game *game, ShaderProgram *shaderProgram, Camera *camera);
 
-	u32 addEntity(Entity *entity);
+	u32 addEntity(Entity *entity, Game *game, World *world);
 
 	void addSystem(ISystem *system);
 	void addRenderSystem(IRenderSystem *renderSystem);

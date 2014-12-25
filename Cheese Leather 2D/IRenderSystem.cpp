@@ -32,13 +32,13 @@ void RenderSystemSprite::render(Game *game, ShaderProgram *shaderProgram, Camera
 
 	if (componentSprite->vertexBuffer == 0) {
 		Vertex *quad = new Vertex[6];
-		quad[0] = Vertex(-32, -32, 0, 0, 0, 0.625f, 1.f, 1.f, 1.f);
-		quad[1] = Vertex(-32, 32, 0, 0, 0.625f, 1.f, 1.f, 1.f, 1.f);
-		quad[2] = Vertex(32, 32, 0, 0.625f, 0.625f, 1.f, 1.f, 1.f, 1.f);
+		quad[0] = Vertex(-8, -8, 0, 1, 1, 1.f, 1.f, 1.f, 1.f);
+		quad[1] = Vertex(-8, 8, 0, 1, 0.9375f, 1.f, 1.f, 1.f, 1.f);
+		quad[2] = Vertex(8, 8, 0, 0.9375f, 0.9375f, 1.f, 1.f, 1.f, 1.f);
 
-		quad[3] = Vertex(-32, -32, 0, 0, 0, 0.625f, 1.f, 1.f, 1.f);
-		quad[4] = Vertex(32, 32, 0, 0.625f, 0.625f, 1.f, 1.f, 1.f, 1.f);
-		quad[5] = Vertex(32, -32, 0, 0.625f, 0, 1.f, 1.f, 1.f, 1.f);
+		quad[3] = Vertex(-8, -8, 0, 1, 1, 1.f, 1.f, 1.f, 1.f);
+		quad[4] = Vertex(8, 8, 0, 0.9375f, 0.9375f, 1.f, 1.f, 1.f, 1.f);
+		quad[5] = Vertex(8, -8, 0, 0.9375f, 1.f, 1.f, 1.f, 1.f, 1.f);
 
 
 		glGenBuffers(1, &componentSprite->vertexBuffer);

@@ -5,7 +5,9 @@
 #include <typeindex>
 #include "types.h"
 
+class Game;
 class IComponent;
+class World;
 
 struct Entity {
 	Entity(u32 id)
@@ -14,6 +16,9 @@ struct Entity {
 	}
 
 	~Entity();
+
+	void onAdd(Game *game, World *world);
+	void onRemove(Game *game, World* world);
 
 	void addComponent(IComponent *component);
 	IComponent *getComponent(std::type_index type);

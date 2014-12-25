@@ -47,10 +47,7 @@ PlayState::PlayState(Game *game) {
 
 		ComponentSprite *componentSprite = new ComponentSprite();
 
-		ComponentPhysics *componentPhysics = new ComponentPhysics();
-		componentPhysics->gravity = 1.f * glm::vec2(0.f, -1.f);
-		componentPhysics->acceleration = 2.f * glm::vec2(-1.f, 0.f);
-		componentPhysics->speed = 15.f * glm::vec2(0.7f,0.7f);
+		ComponentB2Physics *componentB2Physics = new ComponentB2Physics();
 
 		ComponentUser *componentUser = new ComponentUser();
 
@@ -58,14 +55,43 @@ PlayState::PlayState(Game *game) {
 
 		Entity *entityTemplate = new Entity(0);
 		entityTemplate->addComponent(componentSprite);
-		entityTemplate->addComponent(componentPhysics);
+		entityTemplate->addComponent(componentB2Physics);
 		entityTemplate->addComponent(componentUser);
 
 
 		entityFactory->registerEntity("player", entityTemplate);
 	}
 	// Create player entity
-	m_entityManager->addEntity(entityFactory->createEntity("player"));
+	m_entityManager->addEntity(entityFactory->createEntity("player"), game, m_world);
+
+	Entity *entity = entityFactory->createEntity("player");
+	m_entityManager->addEntity(entity, game, m_world);
+	ComponentB2Physics *physics = dynamic_cast<ComponentB2Physics*>(entity->getComponent(std::type_index(typeid(ComponentB2Physics))));
+	physics->spawnPosition = glm::vec2(13 * 16, 37 * 16);
+	physics->spawnGravity = glm::vec2(0, 0);
+	physics->spawnAcceleration = glm::vec2(0, 0);
+	physics->spawnVelocity = glm::vec2(0.1f, 0);
+
+	for (int x = 0; x < 16; ++x) {
+		for (int y = 0; y < 16; ++y) {
+			Entity *entity = entityFactory->createEntity("player");
+
+			ComponentB2Physics *physics = dynamic_cast<ComponentB2Physics*>(entity->getComponent(std::type_index(typeid(ComponentB2Physics))));
+			physics->spawnPosition = glm::vec2(x * 16.f, y * 16.f);
+			physics->spawnVelocity = glm::vec2(+64 - 8.f*x, +64 - 8.f*y + 0.5f*x);
+			physics->spawnAngularVelocity = x*0.5;
+			physics->spawnAngle = (float)x / 16.f*3.14;
+			physics->spawnSize = fvec2(0.1f + y*0.0625f, 0.1f + y*0.0625f);
+
+
+			ComponentSprite *sprite = dynamic_cast<ComponentSprite*>(entity->getComponent(std::type_index(typeid(ComponentSprite))));
+			//sprite->angle = (float)x / 16.f*3.14;
+			sprite->scale = fvec2(0.1f + y*0.0625f, 0.1f + y*0.0625f);
+
+			m_entityManager->addEntity(entity, game, m_world);
+		}
+	}
+
 
 	// Add systems (entity logic)
 	m_entityManager->addSystem(new SystemPhysics());
@@ -91,11 +117,11 @@ void PlayState::update(Game *game) {
 	float speed = 200.0f;
 
 	if (glfwGetKey(rawWindow, GLFW_KEY_SPACE) == GLFW_PRESS){
-		m_position.z += 1 * (GLfloat)game->getDeltaTime().count() * 2;
+		m_position.z += 1 * (GLfloat)game->getDeltaTime().count() * 4;
 	}
 
 	if (glfwGetKey(rawWindow, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS){
-		m_position.z -= 1 * (GLfloat)game->getDeltaTime().count() * 2;
+		m_position.z -= 1 * (GLfloat)game->getDeltaTime().count() * 4;
 	}
 
 	if (glfwGetKey(rawWindow, GLFW_KEY_D) == GLFW_PRESS){
@@ -117,7 +143,12 @@ void PlayState::update(Game *game) {
 	if (glfwGetKey(rawWindow, GLFW_KEY_ESCAPE) == GLFW_PRESS){
 		exit(EXIT_FAILURE);
 	}
-	m_camera->setPosition(m_position);
+
+	glm::vec3 position = m_position;
+
+	position.z = pow(2.f, position.z-1.f);
+
+	m_camera->setPosition(position);
 	m_camera->update();
 
 	double xpos, ypos;
@@ -151,6 +182,7 @@ void PlayState::update(Game *game) {
 #endif
 
 	m_entityManager->update(game, m_world);
+	m_world->update(game);
 }
 
 void PlayState::draw(Game *game) {
