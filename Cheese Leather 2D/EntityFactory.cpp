@@ -15,8 +15,6 @@ EntityFactory::~EntityFactory() {
 * Existing entities with same names will be overwritten.
 */
 void EntityFactory::registerEntity(std::string name, Entity* entityTemplate) {
-	float xsize = dynamic_cast<ComponentSprite*>(entityTemplate->getComponent(std::type_index(typeid(ComponentSprite))))->scale.x;
-	
 	auto it = m_entityTemplates.find(name);
 
 	if (it != m_entityTemplates.end()) {
@@ -34,8 +32,6 @@ Entity *EntityFactory::createEntity(std::string name) {
 
 	if (it != m_entityTemplates.end()) {
 		Entity *clone = it->second->clone();
-		float xsize = dynamic_cast<ComponentSprite*>(clone->getComponent(std::type_index(typeid(ComponentSprite))))->scale.x;
-		float xsize2 = dynamic_cast<ComponentSprite*>(it->second->getComponent(std::type_index(typeid(ComponentSprite))))->scale.x;
 		return clone;
 	}
 	else

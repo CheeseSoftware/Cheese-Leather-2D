@@ -93,6 +93,7 @@
     <ClInclude Include="PlayState.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="ShaderProgram.h" />
+    <ClInclude Include="SpriteBatch.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TextureHandler.h" />
@@ -114,6 +115,7 @@
     <ClCompile Include="PlayState.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="ShaderProgram.cpp" />
+    <ClCompile Include="SpriteBatch.cpp" />
     <ClCompile Include="TextureHandler.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Window.cpp" />

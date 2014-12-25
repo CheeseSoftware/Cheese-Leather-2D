@@ -23,6 +23,15 @@ struct Entity {
 	void addComponent(IComponent *component);
 	IComponent *getComponent(std::type_index type);
 
+	template<typename TComponent>
+	TComponent *getComponent() {
+		auto it = components.find(typeid(TComponent));
+		if (it != components.end())
+			return dynamic_cast<TComponent*>(it->second);
+		else
+			return nullptr;
+	}
+
 	Entity *clone();
 
 	u32 id;

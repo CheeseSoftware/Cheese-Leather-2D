@@ -66,7 +66,7 @@ PlayState::PlayState(Game *game) {
 
 	Entity *entity = entityFactory->createEntity("player");
 	m_entityManager->addEntity(entity, game, m_world);
-	ComponentB2Physics *physics = dynamic_cast<ComponentB2Physics*>(entity->getComponent(std::type_index(typeid(ComponentB2Physics))));
+	ComponentB2Physics *physics = entity->getComponent<ComponentB2Physics>();
 	physics->spawnPosition = glm::vec2(13 * 16, 37 * 16);
 	physics->spawnGravity = glm::vec2(0, 0);
 	physics->spawnAcceleration = glm::vec2(0, 0);
@@ -76,7 +76,7 @@ PlayState::PlayState(Game *game) {
 		for (int y = 0; y < 16; ++y) {
 			Entity *entity = entityFactory->createEntity("player");
 
-			ComponentB2Physics *physics = dynamic_cast<ComponentB2Physics*>(entity->getComponent(std::type_index(typeid(ComponentB2Physics))));
+			ComponentB2Physics *physics = entity->getComponent<ComponentB2Physics>();
 			physics->spawnPosition = glm::vec2(x * 16.f, y * 16.f);
 			physics->spawnVelocity = glm::vec2(+1014.f - 8.f*x, +64 - 8.f*y + 0.5f*x);
 			physics->spawnAngularVelocity = x*64.f;
@@ -84,7 +84,7 @@ PlayState::PlayState(Game *game) {
 			physics->spawnSize = fvec2(0.1f + y*0.0625f, 0.1f + y*0.0625f);
 
 
-			ComponentSprite *sprite = dynamic_cast<ComponentSprite*>(entity->getComponent(std::type_index(typeid(ComponentSprite))));
+			ComponentSprite *sprite = entity->getComponent<ComponentSprite>();
 			//sprite->angle = (float)x / 16.f*3.14;
 			sprite->scale = fvec2(0.1f + y*0.0625f, 0.1f + y*0.0625f);
 
@@ -160,7 +160,7 @@ void PlayState::update(Game *game) {
 			rmbDown = true;
 			glm::vec2 pos = m_camera->toWorldPosition(glm::vec2(xpos, ypos));
 			int x = pos.x / 16;
-			int y = pos.y / 16;
+			int y = pos.y / 16 + 1;
 			m_world->setBlock(x, y, 0);
 			std::cout << "X:" << x << " Y:" << y << std::endl;
 		}
@@ -173,9 +173,17 @@ void PlayState::update(Game *game) {
 			lmbDown = true;
 			glm::vec2 pos = m_camera->toWorldPosition(glm::vec2(xpos, ypos));
 			int x = pos.x / 16;
-			int y = pos.y / 16;
+			int y = pos.y / 16 + 1;
 			m_world->setBlock(x, y, 1);
 			std::cout << "X:" << x << " Y:" << y << std::endl;
+
+
+			Entity *entity = game->getEntityFactory()->createEntity("player");
+
+			ComponentB2Physics *physics = entity->getComponent<ComponentB2Physics>();
+			physics->spawnPosition = glm::vec2(pos.x, pos.y);
+
+			m_entityManager->addEntity(entity, game, m_world);
 		}
 	}
 	else
