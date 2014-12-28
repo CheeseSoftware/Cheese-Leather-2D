@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-#include <gl\glew.h>
+#include <GL\glew.h>
 #include <GLFW\glfw3.h>
 
 Window::Window(int width, int height) {
@@ -30,6 +30,15 @@ Window::Window(int width, int height) {
 	glfwMakeContextCurrent(m_window);
 
 	glfwGetFramebufferSize(m_window, &m_width, &m_height);
+
+	glfwSetWindowUserPointer(m_window, this);
+
+	glfwSetKeyCallback(m_window, [](GLFWwindow* window, int key, int scancode, int action, int mods){
+		Window *_this = (Window*)glfwGetWindowUserPointer(window);
+
+		if (_this->m_keyCallback)
+			_this->m_keyCallback(_this, key, scancode, action, mods);
+	});
 #endif
 }
 

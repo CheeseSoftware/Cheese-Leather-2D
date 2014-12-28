@@ -6,8 +6,6 @@
 #include <typeindex>
 
 #include "World.h"
-#include "ShaderProgram.h"
-#include "Shader.h"
 #include "Camera.h"
 #include "Game.h"
 #include "Window.h"
@@ -18,19 +16,11 @@
 #include "IRenderSystem.h"
 #include "TextureHandler.h"
 #include "ISystem.h"
+#include "InputManager.h"
 
 PlayState::PlayState(Game *game) {
 #ifdef CLIENT
-	std::vector<Shader> defaultShaders;
-	defaultShaders.emplace_back(GL_VERTEX_SHADER, "shaders\\default_Vertex.glsl");
-	defaultShaders.emplace_back(GL_FRAGMENT_SHADER, "shaders\\default_Fragment.glsl");
 
-	std::vector<std::string> defaultUniforms;
-	defaultUniforms.push_back("MVP");
-	defaultUniforms.push_back("baseTexture");
-
-	m_shaderProgram = new ShaderProgram(std::move(defaultShaders));
-	m_shaderProgram->addUniforms(defaultUniforms);
 
 	m_camera = new Camera();
 	m_camera->setSize(game->getWindow()->getWidth(), game->getWindow()->getHeight());
@@ -72,21 +62,21 @@ PlayState::PlayState(Game *game) {
 	physics->spawnAcceleration = glm::vec2(0, 0);
 	physics->spawnVelocity = glm::vec2(0.1f, 0);
 
-	for (int x = 0; x < 16; ++x) {
-		for (int y = 0; y < 16; ++y) {
+	for (int x = 8; x < 16; ++x) {
+		for (int y = 8; y < 16; ++y) {
 			Entity *entity = entityFactory->createEntity("player");
 
 			ComponentB2Physics *physics = entity->getComponent<ComponentB2Physics>();
 			physics->spawnPosition = glm::vec2(x * 16.f, y * 16.f);
-			physics->spawnVelocity = glm::vec2(+1014.f - 8.f*x, +64 - 8.f*y + 0.5f*x);
+			physics->spawnVelocity = glm::vec2(+6.4f - 0.8f*x, +6.4 - 0.8f*y + 0.5f*x);
 			physics->spawnAngularVelocity = x*64.f;
 			physics->spawnAngle = (float)x / 16.f*3.14;
-			physics->spawnSize = fvec2(0.1f + y*0.0625f, 0.1f + y*0.0625f);
+			physics->spawnSize = fvec2(y*0.0625f, y*0.0625f);
 
 
 			ComponentSprite *sprite = entity->getComponent<ComponentSprite>();
 			//sprite->angle = (float)x / 16.f*3.14;
-			sprite->scale = fvec2(0.1f + y*0.0625f, 0.1f + y*0.0625f);
+			sprite->scale = fvec2(y*0.0625f,y*0.0625f);
 
 			m_entityManager->addEntity(entity, game, m_world);
 		}
@@ -99,10 +89,17 @@ PlayState::PlayState(Game *game) {
 
 	// Add renderSystems (entity renderers)
 	m_entityManager->addRenderSystem((IRenderSystem*)(new RenderSystemSprite()));
+
+	// Add key bindings
+	{
+		InputManager *inputManager = game->getInputManager();
+
+		inputManager->bindKey(std::string("ZoomIn"), GLFW_KEY_SPACE);
+		inputManager->bindKey(std::string("ZoomOut"), GLFW_KEY_LEFT_SHIFT);
+	}
 }
 
 PlayState::~PlayState() {
-	delete m_shaderProgram;
 	delete m_camera;
 	delete m_world;
 	delete m_entityManager;
@@ -117,11 +114,17 @@ void PlayState::update(Game *game) {
 	float speed = 600.0f;
 	float speedZoomModifier = pow(2.f, 1.f-m_position.z);
 
-	if (glfwGetKey(rawWindow, GLFW_KEY_SPACE) == GLFW_PRESS){
+	InputManager *inputManager = game->getInputManager();
+
+
+
+	//if (glfwGetKey(rawWindow, GLFW_KEY_SPACE) == GLFW_PRESS){
+	if (inputManager->getKeyState("ZoomIn") == KEYSTATE_DOWN) {
 		m_position.z += 1 * (GLfloat)game->getDeltaTime().count() * 4;
 	}
 
-	if (glfwGetKey(rawWindow, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS){
+	//if (glfwGetKey(rawWindow, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS){
+	if (inputManager->getKeyState("ZoomOut") == KEYSTATE_DOWN) {
 		m_position.z -= 1 * (GLfloat)game->getDeltaTime().count() * 4;
 	}
 
@@ -176,14 +179,6 @@ void PlayState::update(Game *game) {
 			int y = pos.y / 16 + 1;
 			m_world->setBlock(x, y, 1);
 			std::cout << "X:" << x << " Y:" << y << std::endl;
-
-
-			Entity *entity = game->getEntityFactory()->createEntity("player");
-
-			ComponentB2Physics *physics = entity->getComponent<ComponentB2Physics>();
-			physics->spawnPosition = glm::vec2(pos.x, pos.y);
-
-			m_entityManager->addEntity(entity, game, m_world);
 		}
 	}
 	else
@@ -196,9 +191,7 @@ void PlayState::update(Game *game) {
 
 void PlayState::draw(Game *game) {
 #ifdef CLIENT
-	m_shaderProgram->bind();
-	m_world->render(game, m_shaderProgram, m_camera);
-	m_entityManager->render(game, m_shaderProgram, m_camera);
-	m_shaderProgram->unbind();
+	m_world->render(game, game->getMainShaderProgram(), m_camera);
+	m_entityManager->render(game, game->getMainShaderProgram(), m_camera);
 #endif
 }

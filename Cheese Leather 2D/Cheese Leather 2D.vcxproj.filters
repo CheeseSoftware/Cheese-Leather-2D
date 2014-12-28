@@ -25,6 +25,9 @@
     <Filter Include="Source Files\entity">
       <UniqueIdentifier>{14ce2187-a4e3-47ce-ab15-ca483adcc572}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\blocks">
+      <UniqueIdentifier>{9f1b1e3a-d07d-4d47-9013-0d455113c1cc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ShaderProgram.h">
@@ -93,6 +96,12 @@
     <ClInclude Include="SpriteBatch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BlockEntity.h">
+      <Filter>Header Files\blocks</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -144,6 +153,9 @@
       <Filter>Source Files\entity</Filter>
     </ClCompile>
     <ClCompile Include="SpriteBatch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

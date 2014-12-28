@@ -22,23 +22,21 @@ public:
 class ComponentSprite : virtual public IComponent {
 public:
 	ComponentSprite() {
-		vertexBuffer = 0;
 	}
 	virtual ~ComponentSprite() {}
 	virtual IComponent *clone() {
-		auto n = new ComponentSprite(*this);
-		n->scale = scale;
-		return n;
+		return new ComponentSprite(*this);
 	}
 
 	// Data:
 
 	Texture *texture = nullptr;
-	GLuint vertexBuffer = 0;
 	glm::mat4 spriteMatrix = glm::mat4(1.f);
 	glm::vec2 position = glm::vec2(0.f, 0.f);
+	glm::vec2 size = glm::vec2(16.f, 16.f);
 	glm::vec2 scale = glm::vec2(1.f, 1.f);
-	float angle = 0;
+	float angle = 13.f;
+	float depth = 0;
 
 	bool needsMatrixUpdate = true;
 };

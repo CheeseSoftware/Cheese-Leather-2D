@@ -19,7 +19,6 @@ public:
 	virtual void draw(Game *game);
 
 private:
-	ShaderProgram *m_shaderProgram;
 	Camera *m_camera;
 	World *m_world;
 	EntityManager *m_entityManager;
