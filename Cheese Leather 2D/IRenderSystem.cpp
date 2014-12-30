@@ -50,59 +50,6 @@ void RenderSystemSprite::render(Game *game, ShaderProgram *shaderProgram, Camera
 		// Sprite depth:
 		sprite->depth
 		);
-
-	/*if (componentSprite->vertexBuffer == 0) {
-		Vertex *quad = new Vertex[6];
-		quad[0] = Vertex(-8, -8, 0, 1, 1, 1.f, 1.f, 1.f, 1.f);
-		quad[1] = Vertex(-8, 8, 0, 1, 0.9375f, 1.f, 1.f, 1.f, 1.f);
-		quad[2] = Vertex(8, 8, 0, 0.9375f, 0.9375f, 1.f, 1.f, 1.f, 1.f);
-
-		quad[3] = Vertex(-8, -8, 0, 1, 1, 1.f, 1.f, 1.f, 1.f);
-		quad[4] = Vertex(8, 8, 0, 0.9375f, 0.9375f, 1.f, 1.f, 1.f, 1.f);
-		quad[5] = Vertex(8, -8, 0, 0.9375f, 1.f, 1.f, 1.f, 1.f, 1.f);
-
-
-		glGenBuffers(1, &componentSprite->vertexBuffer);
-		glBindBuffer(GL_ARRAY_BUFFER, componentSprite->vertexBuffer);
-		glBufferData(GL_ARRAY_BUFFER, 6 * sizeof(Vertex), quad, GL_STATIC_DRAW);
-	}
-
-	if (&componentSprite->vertexBuffer != 0) {
-
-		glm::mat4 mvp = camera->getCameraMatrix() * componentSprite->spriteMatrix;
-
-		glUniformMatrix4fv(shaderProgram->getMVPUniform(), 1, GL_FALSE, &mvp[0][0]);
-
-		glActiveTexture(GL_TEXTURE0);
-		glBindTexture(GL_TEXTURE_2D, game->getTextureHandler()->getBlockTexture(1)->getGlTexture());
-
-		glUniform1i(shaderProgram->getTextureUniform(), 0);
-
-		glBindBuffer(GL_ARRAY_BUFFER, componentSprite->vertexBuffer);
-		{
-			glEnableVertexAttribArray(0);
-			glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex),
-				reinterpret_cast<void*>(offsetof(Vertex, position)));
-		}
-	{
-		glEnableVertexAttribArray(1);
-		glVertexAttribPointer(1, 4, GL_FLOAT, GL_FALSE, sizeof(Vertex),
-			reinterpret_cast<void*>(offsetof(Vertex, color)));
-	}
-	{
-		glEnableVertexAttribArray(2);
-		glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex),
-			reinterpret_cast<void*>(offsetof(Vertex, uv)));
-	}
-
-		glDrawArrays(GL_TRIANGLES, 0, 6);
-
-		glDisableVertexAttribArray(0);
-		glDisableVertexAttribArray(1);
-		glDisableVertexAttribArray(2);
-	}*/
-
-
 }
 
 std::vector<std::type_index> RenderSystemSprite::getComponentTypes() {

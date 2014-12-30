@@ -39,7 +39,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(ProjectDir)\..\dependencies\glm-0.9.6.1\glm;$(ProjectDir)\..\dependencies\glfw-3.0.4\include;$(ProjectDir)\..\dependencies\glm-0.9.6.1\include;$(ProjectDir)\..\dependencies\glew-1.11.0\include;$(ProjectDir)\..\dependencies\SOIL\include;$(ProjectDir)\..\dependencies\box2d\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)\..\dependencies\glm-0.9.6.1\glm;$(ProjectDir)\..\dependencies\glfw-3.0.4\include;$(ProjectDir)\..\dependencies\glm-0.9.6.1\include;$(ProjectDir)\..\dependencies\glew-1.11.0\include;$(ProjectDir)\..\dependencies\SOIL\include;$(ProjectDir)\..\dependencies\box2d\include;$(ProjectDir)\..\dependencies\cegui-0.8.4\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(ProjectDir)\..\dependencies\glfw-3.0.4\lib;$(ProjectDir)\..\dependencies\cegui-0.8.4\lib;$(ProjectDir)\..\dependencies\glew-1.11.0\lib;$(ProjectDir)\..\dependencies\SOIL\lib;$(ProjectDir)\..\dependencies\box2d\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -58,7 +58,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>
       </AdditionalLibraryDirectories>
-      <AdditionalDependencies>opengl32.lib;glu32.lib;glew32.lib;glfw3dll.lib;SOILd.lib;Box2D.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;glu32.lib;glew32.lib;glfw3dll.lib;SOILd.lib;Box2D.lib;CEGUIBase-0_d.lib;CEGUICommonDialogs-0_d.lib;CEGUICoreWindowRendererSet_d.lib;CEGUIExpatParser_d.lib;CEGUILuaScriptModule-0_d.lib;CEGUIOpenGLRenderer-0_d.lib;CEGUISILLYImageCodec_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

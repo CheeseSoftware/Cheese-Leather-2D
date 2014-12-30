@@ -11,6 +11,10 @@ class SpriteBatch;
 class ShaderProgram;
 class InputManager;
 
+namespace CEGUI { 
+	class OpenGL3Renderer;
+};
+
 typedef unsigned int GLuint;
 
 class Game {
@@ -39,6 +43,8 @@ private:
 	SpriteBatch *m_spriteBatch;
 	ShaderProgram *m_shaderProgram;
 	InputManager *m_inputManager;
+
+	CEGUI::OpenGL3Renderer *m_ceguiRenderer;
 
 	std::chrono::time_point<std::chrono::system_clock> m_lastFrameTime;
 	std::chrono::duration<double> m_deltaTime;
