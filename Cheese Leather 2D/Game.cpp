@@ -15,8 +15,7 @@
 #include "ShaderProgram.h"
 #include "Shader.h"
 #include "InputManager.h"
-#include <CEGUI\RendererModules\OpenGL\GL3Renderer.h>
-#include <CEGUI\System.h>
+#include "CEGUIManager.h"
 
 Game::Game()
 {
@@ -25,6 +24,7 @@ Game::Game()
 	m_entityFactory = new EntityFactory();
 	m_spriteBatch = new SpriteBatch();
 	m_inputManager = new InputManager();
+	m_ceguiManager = new CEGUIManager();
 
 	
 
@@ -60,12 +60,7 @@ Game::Game()
 	m_shaderProgram->addUniforms(defaultUniforms);
 
 
-	// Initalize CEGUI
-	{
-		m_ceguiRenderer = new CEGUI::OpenGL3Renderer(CEGUI::OpenGL3Renderer::bootstrapSystem());
-		//CEGUI::System::create(*m_ceguiRenderer);
-
-	}
+	m_ceguiManager->init(m_window);
 }
 
 Game::~Game() 
@@ -92,14 +87,6 @@ void Game::run()
 
 		m_window->clear();
 
-		/*glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-		glGenerateMipmap(GL_TEXTURE_2D);*/
-		
-		/*CEGUI::System::getSingleton().renderAllGUIContexts();*/
-		
 		m_shaderProgram->bind();
 		m_spriteBatch->begin(GlyphSortType::TEXTURE);
 
@@ -109,7 +96,7 @@ void Game::run()
 		m_spriteBatch->renderBatch(m_shaderProgram);
 		m_shaderProgram->unbind();
 
-		
+		m_ceguiManager->render();
 
 		m_window->swapBuffers();
 		glfwPollEvents();

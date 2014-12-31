@@ -10,6 +10,7 @@ class EntityFactory;
 class SpriteBatch;
 class ShaderProgram;
 class InputManager;
+class CEGUIManager;
 
 namespace CEGUI { 
 	class OpenGL3Renderer;
@@ -43,8 +44,7 @@ private:
 	SpriteBatch *m_spriteBatch;
 	ShaderProgram *m_shaderProgram;
 	InputManager *m_inputManager;
-
-	CEGUI::OpenGL3Renderer *m_ceguiRenderer;
+	CEGUIManager *m_ceguiManager;
 
 	std::chrono::time_point<std::chrono::system_clock> m_lastFrameTime;
 	std::chrono::duration<double> m_deltaTime;

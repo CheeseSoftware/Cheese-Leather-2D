@@ -10,6 +10,7 @@
 class Game;
 class ShaderProgram;
 class Camera;
+class b2Body;
 
 struct BlockData
 {
@@ -58,4 +59,8 @@ private:
 
 	GLuint m_vertexBuffer = 0;
 	GLuint m_vertexBufferSize = 0;
+
+
+	// Box2d:
+	b2Body* body = nullptr;
 };
