@@ -33,12 +33,51 @@ Window::Window(int width, int height) {
 
 	glfwSetWindowUserPointer(m_window, this);
 
+#pragma region input_events
+
+	glfwSetMouseButtonCallback(m_window, [](GLFWwindow *window, int button, int action, int mods){
+		Window *_this = (Window*)glfwGetWindowUserPointer(window);
+		
+		if (_this->m_mouseButtonCallback)
+			_this->m_mouseButtonCallback(_this, button, action, mods);
+	});
+
+	glfwSetCursorPosCallback(m_window, [](GLFWwindow *window, double xpos, double ypos) {
+		Window *_this = (Window*)glfwGetWindowUserPointer(window);
+		
+		if (_this->m_cursorPosCallback)
+			_this->m_cursorPosCallback(_this, xpos, ypos);
+	});
+
+	glfwSetCursorEnterCallback(m_window, [](GLFWwindow *window, int entered){
+		Window *_this = (Window*)glfwGetWindowUserPointer(window);
+
+		if (_this->m_cursorEnterCallback)
+			_this->m_cursorEnterCallback(_this, entered);
+	});
+
+	glfwSetScrollCallback(m_window, [](GLFWwindow *window, double xoffset, double yoffset){
+		Window *_this = (Window*)glfwGetWindowUserPointer(window);
+
+		if (_this->m_scrollCallback)
+			_this->m_scrollCallback(_this, xoffset, yoffset);
+	});
+
 	glfwSetKeyCallback(m_window, [](GLFWwindow* window, int key, int scancode, int action, int mods){
 		Window *_this = (Window*)glfwGetWindowUserPointer(window);
 
 		if (_this->m_keyCallback)
 			_this->m_keyCallback(_this, key, scancode, action, mods);
 	});
+
+
+	glfwSetCharCallback(m_window, [](GLFWwindow* window, unsigned int codepoint) {
+		Window *_this = (Window*)glfwGetWindowUserPointer(window);
+
+		if (_this->m_charCallback)
+			_this->m_charCallback(_this, codepoint);
+	});
+#pragma endregion
 #endif
 }
 

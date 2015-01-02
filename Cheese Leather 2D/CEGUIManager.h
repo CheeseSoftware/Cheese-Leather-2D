@@ -2,16 +2,19 @@
 
 class Window;
 
+#include <CEGUI\InjectedInputReceiver.h>
+
 class CEGUIManager {
 public:
 	CEGUIManager();
 	~CEGUIManager();
 
-	void init(Window *window);
+	void init();
 
 	void update();
 	void render();
+
+	CEGUI::InjectedInputReceiver &getInjectedInputReceiver();
 private:
-	Window *window;
 
 };

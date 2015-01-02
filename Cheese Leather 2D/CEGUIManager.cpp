@@ -29,7 +29,7 @@ CEGUIManager::~CEGUIManager() {
 
 }
 
-void CEGUIManager::init(Window *window) {
+void CEGUIManager::init() {
 	CEGUI::OpenGLRenderer &m_renderer =
 		CEGUI::OpenGLRenderer::bootstrapSystem();
 
@@ -67,15 +67,16 @@ void CEGUIManager::init(Window *window) {
 		}
 	}
 
+	CEGUI::System::getSingleton().getDefaultGUIContext().
+		getMouseCursor().setDefaultImage("TaharezLook/MouseArrow");
+
 	// Create windows
 	{
 		CEGUI::WindowManager& wmgr = CEGUI::WindowManager::getSingleton();
 
 
-		CEGUI::Window* myRoot = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("test.layout");
+		CEGUI::Window* myRoot = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("Demo8.layout");
 		CEGUI::System::getSingleton().getDefaultGUIContext().setRootWindow(myRoot);
-		CEGUI::FrameWindow* fWnd = static_cast<CEGUI::FrameWindow*>(
-			wmgr.createWindow("TaharezLook/FrameWindow", "testWindow"));
 
 	}
 
@@ -100,4 +101,10 @@ void CEGUIManager::render() {
 	// NB: When not using >=3.2 core profile, this call should not occur
 	// between glBegin/glEnd calls.
 	CEGUI::System::getSingleton().renderAllGUIContexts();
+}
+
+
+CEGUI::InjectedInputReceiver &CEGUIManager::getInjectedInputReceiver() {
+	CEGUI::InjectedInputReceiver &injectedInputReceiver = CEGUI::System::getSingleton().getDefaultGUIContext();
+	return injectedInputReceiver;
 }

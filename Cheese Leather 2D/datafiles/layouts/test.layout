@@ -6,5 +6,10 @@
             <Property name="UnifiedSize" value="{ {0.5, 0}, {0.5, 0} }" />
             <Property name="Text" value="CEGUIManager is working!" />
         </Window>
+		<Window type="TaharezLook/FrameWindow" name="testWindow2">
+            <Property name="UnifiedPosition" value="{ {0.25, 0}, {0.25, 0} }" />
+            <Property name="UnifiedSize" value="{ {0.5, 0}, {0.5, 0} }" />
+            <Property name="Text" value="CEGUIManager is working!" />
+        </Window>
     </Window>
 </GUILayout>

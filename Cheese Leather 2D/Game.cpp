@@ -26,15 +26,60 @@ Game::Game()
 	m_inputManager = new InputManager();
 	m_ceguiManager = new CEGUIManager();
 
-	
 
-	m_window->setKeyCallback([this](Window *window, int key, int scancode, int action, int mods){
-		if (this->m_inputManager) {
+	m_window->setMouseButtonCallback([this](Window *window, int button, int action, int mods) {
+		switch (button) {
+		case GLFW_MOUSE_BUTTON_LEFT:
 			if (action == GLFW_PRESS)
-				this->m_inputManager->pressKey(key);
-			else if (action == GLFW_RELEASE)
-				this->m_inputManager->releaseKey(key);
+				this->m_ceguiManager->getInjectedInputReceiver().injectMouseButtonDown(CEGUI::MouseButton::LeftButton);
+			else
+				this->m_ceguiManager->getInjectedInputReceiver().injectMouseButtonUp(CEGUI::MouseButton::LeftButton);
+			break;
+		case GLFW_MOUSE_BUTTON_RIGHT:
+			if (action == GLFW_PRESS)
+				this->m_ceguiManager->getInjectedInputReceiver().injectMouseButtonDown(CEGUI::MouseButton::RightButton);
+			else
+				this->m_ceguiManager->getInjectedInputReceiver().injectMouseButtonUp(CEGUI::MouseButton::RightButton);
+			break;
+		case GLFW_MOUSE_BUTTON_MIDDLE:
+			if (action == GLFW_PRESS)
+				this->m_ceguiManager->getInjectedInputReceiver().injectMouseButtonDown(CEGUI::MouseButton::MiddleButton);
+			else
+				this->m_ceguiManager->getInjectedInputReceiver().injectMouseButtonUp(CEGUI::MouseButton::MiddleButton);
+			break;
 		}
+	});
+
+	m_window->setCursorPosCallback([this](Window *window, double xPos, double yPos) {
+		this->m_ceguiManager->getInjectedInputReceiver().injectMousePosition(xPos, yPos);
+	});
+
+	m_window->setCursorEnterCallback([this](Window *window, int entered) {
+		if (entered == GL_FALSE)
+			this->m_ceguiManager->getInjectedInputReceiver().injectMouseLeaves();
+	});
+
+	m_window->setScrollCallback([this](Window *window, double xOffset, double yOffset) {
+		this->m_ceguiManager->getInjectedInputReceiver().injectMouseWheelChange(yOffset);
+	});
+
+	m_window->setKeyCallback([this](Window *window, int key, int scancode, int action, int mods) {
+
+		if (this->m_inputManager) {
+			if (action == GLFW_PRESS) {
+				this->m_inputManager->pressKey(key);
+				this->m_ceguiManager->getInjectedInputReceiver().injectKeyDown(CEGUI::Key::Scan(scancode));
+			}
+			else if (action == GLFW_RELEASE) {
+				this->m_inputManager->releaseKey(key);
+				this->m_ceguiManager->getInjectedInputReceiver().injectKeyUp(CEGUI::Key::Scan(scancode));
+			}
+		}
+	});
+
+	m_window->setCharCallback([this](Window *window, unsigned int codePoint) {
+		if ((codePoint & 0xFF80) == 0)
+			this->m_ceguiManager->getInjectedInputReceiver().injectChar(codePoint & 0x7F);
 	});
 
 #ifdef CLIENT
@@ -60,7 +105,7 @@ Game::Game()
 	m_shaderProgram->addUniforms(defaultUniforms);
 
 
-	m_ceguiManager->init(m_window);
+	m_ceguiManager->init();
 }
 
 Game::~Game() 
@@ -81,6 +126,7 @@ void Game::run()
 		//std::cout << m_deltaTime.count() << std::endl;			SPAM-sjuk sak
 		m_lastFrameTime = newtime;
 		m_inputManager->update();
+		m_ceguiManager->getInjectedInputReceiver().injectTimePulse(m_deltaTime.count());
 		m_state->update(this);
 
 #ifdef CLIENT
