@@ -1,4 +1,4 @@
-<?xml version="1.0" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <GUILayout version="4">
     <Window type="DefaultWindow" name="root">
         <Window type="TaharezLook/FrameWindow" name="testWindow">
@@ -11,5 +11,82 @@
             <Property name="UnifiedSize" value="{ {0.5, 0}, {0.5, 0} }" />
             <Property name="Text" value="CEGUIManager is working!" />
         </Window>
+		
+		<Window type="TaharezLook/FrameWindow" name="ConsoleRoot" >
+			<Property name="Text" value="Chat Window" />
+			<Property name="TitlebarFont" value="DejaVuSans-10" />
+			<Property name="TitlebarEnabled" value="True" />
+			<Property name="UnifiedAreaRect" value="{{0.114991,0},{0.358182,0},{0.519469,0},{0.775455,0}}" />
+			
+			<Window name="Editbox" type="TaharezLook/Editbox">
+				<Property name="Position" value="{{0.05,0},{0.38,0}}" />
+				<Property name="MaxSize" value="{{1,0},{1,0}}" />
+				<Property name="Size" value="{{0.6,0},{0.15,0}}" />
+				<Property name="TooltipText" value="Enter the text for a new Listbox item here." />
+			</Window>
+			
+			<Window type="TaharezLook/Button" name="ConsoleRoot/SendButton" >
+				<Property name="Text" value="Send" />
+				<Property name="UnifiedAreaRect" value="{{0.732211,0},{0.812349,0},{0.928283,0},{0.946832,0}}" />
+			</Window>
+			
+			<Window type="TaharezLook/Listbox" name="ConsoleRoot/ChatBox" >
+				<Property name="UnifiedAreaRect" value="{{0.00534809,0},{0.0131038,0},{0.949636,0},{0.762443,0}}" />
+			</Window>
+			
+		</Window>
+		
+		<!--
+		-->
+		<Window name="Console" type="TaharezLook/FrameWindow">
+			<Property name="AlwaysOnTop" value="True" />
+			<Property name="MinSize" value="{{0.1,0},{0.1,0}}" />
+			<Property name="MaxSize" value="{{1.0,0},{0.8,0}}" />
+			<Property name="Position" value="{{0.0,0},{0.0,0}}" />
+			<Property name="Size" value="{{1.0,0},{0.45,0}}" />
+			<Property name="Text" value="Console" />
+			<Property name="CloseButtonEnabled" value="False" />
+	 
+			<Window name="Submit" type="TaharezLook/Button">
+				<Property name="ID" value="1" />
+				<Property name="VerticalAlignment" value="Bottom" />
+				<Property name="HorizontalAlignment" value="Right" />
+				<Property name="MaxSize" value="{{1,0},{1,0}}" />
+				<Property name="Position" value="{{0,-7},{0,-7}}" />
+				<Property name="Size" value="{{0.25,0},{0,30}}" />
+				<Property name="Text" value="Submit" />
+			</Window>
+	 
+			<Window name="Editbox" type="TaharezLook/Editbox">
+				<Property name="ID" value="2" />
+				<Property name="VerticalAlignment" value="Bottom" />
+				<Property name="MaxSize" value="{{1,0},{1,0}}" />
+				<Property name="Position" value="{{0,7},{0,-7}}" />
+				<Property name="Size" value="{{0.75,-21},{0,30}}" />
+				<Property name="Text" value="" />
+			</Window>
+	 
+			<Window name="History" type="TaharezLook/Listbox">
+				<Property name="ID" value="3" />
+				<Property name="MaxSize" value="{{1,0},{1,0}}" />
+				<Property name="Position" value="{{0,7},{0,7}}" />
+				<Property name="Size" value="{{1,-14},{1,-47}}" />
+			</Window>
+		</Window>
+		
+		
+
+		<!--<Window type="TaharezLook/Image" name="Life1" >
+			<Property name="Area" value="{{0.0140625,0},{0.0930233,0},{0.0140625,0},{0.697674,0}}" />
+			<Property name="Image" value="TaharezLook/MouseArrow" />
+			<Property name="MaxSize" value="{{1,0},{1,0}}" />
+			<Property name="AspectMode" value="Expand" />
+			<Property name="RiseOnClickEnabled" value="False" />
+		</Window>-->
+		
+		
+		
+		
+		
     </Window>
 </GUILayout>

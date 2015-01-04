@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <GUILayout version="4" >
-    <Window type="Generic/Image" name="HUDDemoRoot" >
+    <!--<Window type="Generic/Image" name="HUDDemoRoot" >
         <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
         <Property name="Image" value="HUDDemo/Background" />
-        <Property name="MaxSize" value="{{1,0},{1,0}}" />
+        <Property name="MaxSize" value="{{0.1,0},{0.1,0}}" />
         <Property name="HorzFormatting" value="Tiled" />
         <Property name="VertFormatting" value="Tiled" />
-        <Property name="MousePassThroughEnabled" value="True" />
+        <Property name="MousePassThroughEnabled" value="True" />-->
         <Window type="Generic/Image" name="TopBar" >
             <Property name="Area" value="{{0,0},{0,0},{1,0},{0.12,0}}" />
             <Property name="Image" value="HUDDemo/BGBar" />
@@ -280,5 +280,5 @@
                 <Property name="MousePassThroughEnabled" value="True" />
             </Window>
         </Window>
-    </Window>
+    <!--/Window-->
 </GUILayout>

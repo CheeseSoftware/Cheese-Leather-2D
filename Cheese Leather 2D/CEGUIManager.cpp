@@ -64,6 +64,9 @@ void CEGUIManager::init() {
 
 
 			CEGUI::SchemeManager::getSingleton().createFromFile("TaharezLook.scheme");
+			CEGUI::SchemeManager::getSingleton().createFromFile("GameMenu.scheme");
+			CEGUI::SchemeManager::getSingleton().createFromFile("Generic.scheme");
+			CEGUI::SchemeManager::getSingleton().createFromFile("HUDDemo.scheme");
 		}
 	}
 
@@ -75,7 +78,7 @@ void CEGUIManager::init() {
 		CEGUI::WindowManager& wmgr = CEGUI::WindowManager::getSingleton();
 
 
-		CEGUI::Window* myRoot = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("Demo8.layout");
+		CEGUI::Window* myRoot = CEGUI::WindowManager::getSingleton().loadLayoutFromFile("HUDDemoIngame.layout"); // test.layout
 		CEGUI::System::getSingleton().getDefaultGUIContext().setRootWindow(myRoot);
 
 	}
