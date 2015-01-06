@@ -82,3 +82,5 @@ root:getChild("Demo8/Window1/Controls/Blue"):subscribeEvent("ScrollPositionChang
 root:getChild("Demo8/Window1/Controls/Red"):subscribeEvent("ScrollPositionChanged", "colourChangeHandler")
 root:getChild("Demo8/Window1/Controls/Green"):subscribeEvent("ScrollPositionChanged", "colourChangeHandler")
 root:getChild("Demo8/Window1/Controls/Add"):subscribeEvent("Clicked", "addItemHandler")
+
+print "testing"

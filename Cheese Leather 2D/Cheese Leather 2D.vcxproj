@@ -80,6 +80,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="BlockEntity.h" />
+    <ClInclude Include="BoolArray2D.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CEGUIManager.h" />
     <ClInclude Include="Chunk.h" />
@@ -90,6 +91,10 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="IComponent.h" />
     <ClInclude Include="InputManager.h" />
+    <ClInclude Include="InventoryBase.h" />
+    <ClInclude Include="InventoryItem.h" />
+    <ClInclude Include="InventoryItemRenderer.h" />
+    <ClInclude Include="InventoryReceiver.h" />
     <ClInclude Include="IRenderSystem.h" />
     <ClInclude Include="ISystem.h" />
     <ClInclude Include="IWorld.h" />
@@ -106,6 +111,7 @@
     <ClInclude Include="World.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BoolArray2D.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CEGUIManager.cpp" />
     <ClCompile Include="Chunk.cpp" />
@@ -114,6 +120,10 @@
     <ClCompile Include="EntityManager.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="InventoryBase.cpp" />
+    <ClCompile Include="InventoryItem.cpp" />
+    <ClCompile Include="InventoryItemRenderer.cpp" />
+    <ClCompile Include="InventoryReceiver.cpp" />
     <ClCompile Include="IRenderSystem.cpp" />
     <ClCompile Include="ISystem.cpp" />
     <ClCompile Include="main.cpp" />

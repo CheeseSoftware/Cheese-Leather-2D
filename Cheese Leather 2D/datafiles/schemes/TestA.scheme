@@ -1,0 +1,7 @@
+<?xml version="1.0" ?>
+<GUIScheme version="5" name="TestA">
+    <Imageset filename="TestA.imageset" />
+	<Imageset filename="TestA2.imageset" />
+    
+</GUIScheme>
+

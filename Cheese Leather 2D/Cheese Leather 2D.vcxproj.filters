@@ -28,6 +28,12 @@
     <Filter Include="Header Files\blocks">
       <UniqueIdentifier>{9f1b1e3a-d07d-4d47-9013-0d455113c1cc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\CEGUI">
+      <UniqueIdentifier>{09d0e9bc-3f21-4b42-8cba-60948d0fbc46}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\CEGUI">
+      <UniqueIdentifier>{340ce729-0e4b-4fc1-87fb-2a1d7b42e35c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ShaderProgram.h">
@@ -105,6 +111,21 @@
     <ClInclude Include="CEGUIManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="BoolArray2D.h">
+      <Filter>Header Files\CEGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="InventoryBase.h">
+      <Filter>Header Files\CEGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="InventoryItem.h">
+      <Filter>Header Files\CEGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="InventoryItemRenderer.h">
+      <Filter>Header Files\CEGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="InventoryReceiver.h">
+      <Filter>Header Files\CEGUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -163,6 +184,21 @@
     </ClCompile>
     <ClCompile Include="CEGUIManager.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="InventoryReceiver.cpp">
+      <Filter>Source Files\CEGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="InventoryItemRenderer.cpp">
+      <Filter>Source Files\CEGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="InventoryItem.cpp">
+      <Filter>Source Files\CEGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="InventoryBase.cpp">
+      <Filter>Source Files\CEGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="BoolArray2D.cpp">
+      <Filter>Source Files\CEGUI</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

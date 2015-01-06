@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<GUILayout version="4" >
+    <Window type="DefaultWindow" name="root" >
+        <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
+        <Property name="MaxSize" value="{{1,0},{1,0}}" />
+        <Window type="Generic/Image" name="BotBar" >
+            <Property name="Area" value="{{0,0},{0,0},{1,0},{0.12,0}}" />
+            <Property name="Image" value="HUDDemo/BGBar" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="AlwaysOnTop" value="true" />
+            <Property name="VerticalAlignment" value="Bottom" />
+            <Property name="RiseOnClickEnabled" value="false" />
+            <Window type="DefaultWindow" name="BonusItemsWindow" >
+                <Property name="Area" value="{{0,0},{0,32},{0.3,0},{1,32}}" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="VerticalAlignment" value="Bottom" />
+                <Property name="RiseOnClickEnabled" value="false" />
+                <Property name="HorizontalAlignment" value="Centre" />
+                <Window type="Generic/Image" name="BonusItemBG1" >
+                    <Property name="Area" value="{{0,0},{0,0},{0,0},{1,0}}" />
+                    <Property name="Image" value="HUDDemo/ToolBG" />
+                    <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                    <Property name="AspectMode" value="Expand" />
+                    <Property name="AspectRatio" value="1.644" />
+                    <Property name="VerticalAlignment" value="Bottom" />
+                    <Property name="RiseOnClickEnabled" value="false" />
+                    <Window type="Generic/Image" name="ToolMixerImage" >
+                        <Property name="Area" value="{{0,0},{0,0},{0,0},{0.8,0}}" />
+                        <Property name="Image" value="HUDDemo/ToolMixer" />
+                        <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                        <Property name="AspectMode" value="Expand" />
+                        <Property name="VerticalAlignment" value="Centre" />
+                        <Property name="RiseOnClickEnabled" value="false" />
+                        <Property name="HorizontalAlignment" value="Centre" />
+                    </Window>
+                </Window>
+                <Window type="Generic/Image" name="BonusItemBG2" >
+                    <Property name="Area" value="{{0,0},{0,0},{0,0},{1,0}}" />
+                    <Property name="Image" value="HUDDemo/ToolBG" />
+                    <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                    <Property name="AspectMode" value="Expand" />
+                    <Property name="AspectRatio" value="1.644" />
+                    <Property name="VerticalAlignment" value="Bottom" />
+                    <Property name="RiseOnClickEnabled" value="false" />
+                    <Property name="HorizontalAlignment" value="Centre" />
+                    <Window type="Generic/Image" name="ToolMixerImage" >
+                        <Property name="Area" value="{{0,0},{0,0},{0,0},{0.8,0}}" />
+                        <Property name="Image" value="HUDDemo/ToolGlove" />
+                        <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                        <Property name="AspectMode" value="Expand" />
+                        <Property name="VerticalAlignment" value="Centre" />
+                        <Property name="RiseOnClickEnabled" value="false" />
+                        <Property name="HorizontalAlignment" value="Centre" />
+                    </Window>
+                </Window>
+                <Window type="Generic/Image" name="BonusItemBG3" >
+                    <Property name="Area" value="{{0,0},{0,0},{0,0},{1,0}}" />
+                    <Property name="Image" value="HUDDemo/ToolBG" />
+                    <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                    <Property name="AspectMode" value="Expand" />
+                    <Property name="AspectRatio" value="1.644" />
+                    <Property name="VerticalAlignment" value="Bottom" />
+                    <Property name="RiseOnClickEnabled" value="false" />
+                    <Property name="HorizontalAlignment" value="Right" />
+                    <Window type="Generic/Image" name="ToolMixerImage" >
+                        <Property name="Area" value="{{0,0},{0,0},{0,0},{0.8,0}}" />
+                        <Property name="Image" value="HUDDemo/ToolPot" />
+                        <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                        <Property name="AspectMode" value="Expand" />
+                        <Property name="VerticalAlignment" value="Centre" />
+                        <Property name="RiseOnClickEnabled" value="false" />
+                        <Property name="HorizontalAlignment" value="Centre" />
+                    </Window>
+                </Window>
+            </Window>
+            <Window type="Generic/Image" name="WeaponBGImage" >
+                <Property name="Area" value="{{0,0},{0,0},{0,0},{1,0}}" />
+                <Property name="Image" value="HUDDemo/WeaponBG" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="AspectMode" value="Expand" />
+                <Property name="AspectRatio" value="3" />
+                <Property name="RiseOnClickEnabled" value="false" />
+                <Window type="Generic/Label" name="WeaponLabel" >
+                    <Property name="Area" value="{{0,0},{0,0},{1,0},{1,0}}" />
+                    <Property name="Font" value="GreatVibes-22" />
+                    <Property name="Text" value="Le Spoon" />
+                    <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                    <Property name="NormalTextColour" value="FF472D1C" />
+                    <Property name="VerticalAlignment" value="Bottom" />
+                    <Property name="DisabledTextColour" value="FF472D1C" />
+                    <Property name="RiseOnClickEnabled" value="false" />
+                    <Property name="HorizontalAlignment" value="Centre" />
+                    <Property name="MousePassThroughEnabled" value="true" />
+                </Window>
+                <Window type="DefaultWindow" name="LeftArrowArea" >
+                    <Property name="Area" value="{{0.0310078,0},{0.139535,0},{0.208527,0},{0.739535,0}}" />
+                    <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                    <Property name="AutoRepeatDelay" value="0" />
+                </Window>
+                <Window type="DefaultWindow" name="RightArrowArea" >
+                    <Property name="Area" value="{{0.790698,0},{0.162791,0},{0.952713,0},{0.762791,0}}" />
+                    <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                    <Property name="AutoRepeatDelay" value="0" />
+                </Window>
+            </Window>
+            <Window type="Generic/Image" name="WeaponSpoon" >
+                <Property name="Area" value="{{0.0648438,-1},{-1.0814,0},{0.124531,-1},{-1.0814,0}}" />
+                <Property name="Image" value="HUDDemo/IconSpoon" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="AspectMode" value="Expand" />
+                <Property name="AspectRatio" value="0.404" />
+                <Property name="ClippedByParent" value="false" />
+                <Property name="VerticalAlignment" value="Bottom" />
+                <Property name="RiseOnClickEnabled" value="false" />
+                <Property name="MousePassThroughEnabled" value="true" />
+            </Window>
+            <Window type="Generic/Image" name="WeaponKnife" >
+                <Property name="Area" value="{{0.130469,0},{-0.813953,0},{0.158906,0},{-0.813953,0}}" />
+                <Property name="Image" value="HUDDemo/IconKnife" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="AspectMode" value="Expand" />
+                <Property name="AspectRatio" value="0.213" />
+                <Property name="ClippedByParent" value="false" />
+                <Property name="VerticalAlignment" value="Bottom" />
+                <Property name="RiseOnClickEnabled" value="false" />
+                <Property name="MousePassThroughEnabled" value="true" />
+            </Window>
+            <Window type="Generic/Image" name="WeaponFork" >
+                <Property name="Area" value="{{0.0304688,0},{-0.848837,0},{0.0796877,0},{-0.848837,0}}" />
+                <Property name="Image" value="HUDDemo/IconFork" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="AspectMode" value="Expand" />
+                <Property name="AspectRatio" value="0.421" />
+                <Property name="ClippedByParent" value="false" />
+                <Property name="VerticalAlignment" value="Bottom" />
+                <Property name="RiseOnClickEnabled" value="false" />
+                <Property name="MousePassThroughEnabled" value="true" />
+            </Window>
+            <Window type="Generic/Image" name="Inventory" >
+                <Property name="Area" value="{{0,-0},{0,-48},{0,684},{0,20}}" />
+                <Property name="Image" value="TestA2/InventoryA" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="ClippedByParent" value="false" />
+                <Property name="VerticalAlignment" value="Bottom" />
+                <Property name="HorizontalAlignment" value="Centre" />
+                <Window type="DragContainer" name="DragContainer" >
+                    <Property name="Area" value="{{0,4},{0,0},{0,68},{0,64}}" />
+                    <Property name="DragAlpha" value="1" />
+                    <Property name="StickyMode" value="false" />
+                    <Property name="DragThreshold" value="4" />
+                    <Property name="VerticalAlignment" value="Centre" />
+                    <Window type="Generic/Image" name="Image" >
+                        <Property name="Area" value="{{0,0},{0,0},{0,64},{0,64}}" />
+                        <Property name="Image" value="TestA2/Vine" />
+                        <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                        <Property name="ClippedByParent" value="false" />
+                        <Property name="VerticalAlignment" value="Centre" />
+                        <Property name="HorizontalAlignment" value="Centre" />
+                        <Property name="MousePassThroughEnabled" value="true" />
+                    </Window>
+                </Window>
+                <Window type="DragContainer" name="DragContainer2" >
+                    <Property name="Area" value="{{0,72},{0,0},{0,136},{0,64}}" />
+                    <Property name="DragAlpha" value="1" />
+                    <Property name="StickyMode" value="false" />
+                    <Property name="DragThreshold" value="4" />
+                    <Property name="VerticalAlignment" value="Centre" />
+                    <Window type="Generic/Image" name="Image" >
+                        <Property name="Area" value="{{0,0},{0,0},{0,64},{0,128}}" />
+                        <Property name="Image" value="TestA2/MadBug" />
+                        <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                        <Property name="ClippedByParent" value="false" />
+                        <Property name="VerticalAlignment" value="Centre" />
+                        <Property name="HorizontalAlignment" value="Centre" />
+                        <Property name="MousePassThroughEnabled" value="true" />
+                    </Window>
+                </Window>
+            </Window>
+        </Window>
+    </Window>
+</GUILayout>

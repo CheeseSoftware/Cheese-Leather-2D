@@ -1,0 +1,6 @@
+<Imageset autoScaled="false" imagefile="testA2.png" name="TestA2" nativeHorzRes="684" nativeVertRes="684" version="2">
+    <Image height="72" name="InventoryA" width="684" xPos="0" yPos="0" />
+    <Image height="32" name="Crown" width="32" xPos="0" yPos="128" />
+    <Image height="32" name="Vine" width="32" xPos="32" yPos="128" />
+    <Image height="128" name="MadBug" width="64" xPos="64" yPos="128" />
+</Imageset>
