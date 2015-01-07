@@ -15,6 +15,7 @@ public:
 
 	bool getShouldClose();
 	GLFWwindow *getRawWindow() { return m_window; }
+	void update();
 	void clear();
 	void swapBuffers();
 
@@ -40,6 +41,10 @@ public:
 		m_charCallback = charCallback;
 	}
 
+	void setWindowSizeCallback(std::function<void(Window *window, int width, int height)> windowSizeCallback) {
+		m_windowSizeCallback = windowSizeCallback;
+	}
+
 private:
 
 
@@ -55,4 +60,6 @@ private:
 	std::function<void(Window *window, double xOffset, double yOffset)> m_scrollCallback;
 	std::function<void(Window *window, int key, int scancode, int action, int mods)> m_keyCallback;
 	std::function<void(Window *window, unsigned int codePoint)> m_charCallback;
+
+	std::function<void(Window *window, int width, int height)> m_windowSizeCallback;
 };

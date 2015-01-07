@@ -2,6 +2,9 @@
 <GUIScheme version="5" name="TestA">
     <Imageset filename="TestA.imageset" />
 	<Imageset filename="TestA2.imageset" />
+	<LookNFeel filename="TestA2.looknfeel" />
+	<WindowRendererSet filename="CEGUICoreWindowRendererSet" />
+    <FalagardMapping windowType="TestA2/InventoryWindow"  targetType="CEGUI/FrameWindow" renderer="Core/FrameWindow"  lookNFeel="TestA2/InventoryWindow" />
     
 </GUIScheme>
 

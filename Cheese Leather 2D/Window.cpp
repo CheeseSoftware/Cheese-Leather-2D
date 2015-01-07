@@ -77,6 +77,13 @@ Window::Window(int width, int height) {
 		if (_this->m_charCallback)
 			_this->m_charCallback(_this, codepoint);
 	});
+
+	glfwSetWindowSizeCallback(m_window, [](GLFWwindow *window, int width, int height) {
+		Window *_this = (Window*)glfwGetWindowUserPointer(window);
+
+		if (_this->m_windowSizeCallback)
+			_this->m_windowSizeCallback(_this, width, height);
+	});
 #pragma endregion
 #endif
 }
@@ -94,6 +101,12 @@ bool Window::getShouldClose() {
 	return glfwWindowShouldClose(m_window);
 #else
 	return false;
+#endif
+}
+
+void Window::update() {
+#ifdef CLIENT
+
 #endif
 }
 

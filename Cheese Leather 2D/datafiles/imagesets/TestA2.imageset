@@ -1,6 +1,26 @@
 <Imageset autoScaled="false" imagefile="testA2.png" name="TestA2" nativeHorzRes="684" nativeVertRes="684" version="2">
-    <Image height="72" name="InventoryA" width="684" xPos="0" yPos="0" />
+    <Image height="72" name="InventoryA" width="684" xPos="0" yPos="1" />
     <Image height="32" name="Crown" width="32" xPos="0" yPos="128" />
     <Image height="32" name="Vine" width="32" xPos="32" yPos="128" />
     <Image height="128" name="MadBug" width="64" xPos="64" yPos="128" />
+    <Image height="64" name="InventorySlot" width="64" xPos="0" yPos="160" />
+    <Image height="64" name="InventoryBackground" width="64" xPos="0" yPos="224" />
+    <Image height="30" name="InventoryBackground2TL" width="30" xPos="0" yPos="288" />
+    <Image height="30" name="InventoryBackground2TR" width="30" xPos="34" yPos="288" />
+    <Image height="30" name="InventoryBackground2BR" width="30" xPos="34" yPos="322" />
+    <Image height="30" name="InventoryBackground2BL" width="30" xPos="0" yPos="322" />
+    <Image height="30" name="InventoryBackground2T" width="4" xPos="30" yPos="288" />
+    <Image height="30" name="InventoryBackground2B" width="4" xPos="30" yPos="322" />
+    <Image height="4" name="InventoryBackground2L" width="30" xPos="0" yPos="318" />
+    <Image height="4" name="InventoryBackground2R" width="30" xPos="34" yPos="318" />
+    <Image height="4" name="InventoryBackground2M" width="4" xPos="30" yPos="318" />
+    <Image height="16" name="InventoryBackground3TL" width="16" xPos="0" yPos="352" />
+    <Image height="16" name="InventoryBackground3TR" width="16" xPos="48" yPos="352" />
+    <Image height="32" name="InventoryBackground3L" width="16" xPos="0" yPos="368" />
+    <Image height="16" name="InventoryBackground3T" width="32" xPos="16" yPos="352" />
+    <Image height="32" name="InventoryBackground3R" width="16" xPos="48" yPos="368" />
+    <Image height="16" name="InventoryBackground3B" width="32" xPos="16" yPos="400" />
+    <Image height="32" name="InventoryBackground3M" width="32" xPos="16" yPos="368" />
+    <Image height="16" name="InventoryBackground3BL" width="16" xPos="0" yPos="400" />
+    <Image height="16" name="InventoryBackground3BR" width="16" xPos="48" yPos="400" />
 </Imageset>

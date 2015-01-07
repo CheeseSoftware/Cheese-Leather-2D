@@ -146,21 +146,23 @@ void CEGUIManager::init() {
 		// Inventory testing:
 		{
 			// Create Backpack window
-			CEGUI::Window* wnd = wmgr.createWindow("TaharezLook/FrameWindow");
-			root->addChild(wnd);
-			wnd->setPosition(CEGUI::UVector2(CEGUI::UDim(0.1f, 0), CEGUI::UDim(0.1f, 0)));
-			wnd->setSize(CEGUI::USize(CEGUI::UDim(0.2f, 0), CEGUI::UDim(0.4f, 0)));
+
+			CEGUI::Window *inventoryImageWindow = root->getChild("Inventory");
+			CEGUI::Window* wnd = inventoryImageWindow;//wmgr.createWindow("TaharezLook/FrameWindow");
+			//root->addChild(wnd);
+			/*wnd->setPosition(CEGUI::UVector2(CEGUI::UDim(0.1f, 0), CEGUI::UDim(0.1f, 0)));
+			wnd->setSize(CEGUI::USize(CEGUI::UDim(0.2f, 0), CEGUI::UDim(0.4f, 0)));*/
 			wnd->setText("Backpack");
 
 			CEGUI::InventoryReceiver& receiver1 = dynamic_cast<CEGUI::InventoryReceiver&>(*wmgr.createWindow("InventoryReceiver"));
 			wnd->addChild(&receiver1);
 			receiver1.setPosition(CEGUI::UVector2(cegui_reldim(0.0f), cegui_reldim(0.0f)));
 			receiver1.setSize(CEGUI::USize(cegui_reldim(1.0f), cegui_reldim(1.0f)));
-			receiver1.setContentSize(3, 6);
-			receiver1.setUserString("BlockImage", "TaharezLook/GenericBrush");
+			receiver1.setContentSize(20, 2);
+			receiver1.setUserString("BlockImage", "TestA2/InventorySlot");
 
 			// Create vault window
-			CEGUI::Window* wnd2 = wmgr.createWindow("TaharezLook/FrameWindow");
+			CEGUI::Window* wnd2 = wmgr.createWindow("TestA2/InventoryWindow");
 			root->addChild(wnd2);
 			wnd2->setPosition(CEGUI::UVector2(CEGUI::UDim(0.48f, 0), CEGUI::UDim(0.2f, 0)));
 			wnd2->setSize(CEGUI::USize(CEGUI::UDim(0.5f, 0), CEGUI::UDim(0.5f, 0)));
@@ -171,7 +173,7 @@ void CEGUIManager::init() {
 			receiver2.setPosition(CEGUI::UVector2(cegui_reldim(0.0f), cegui_reldim(0.0f)));
 			receiver2.setSize(CEGUI::USize(cegui_reldim(1.0f), cegui_reldim(1.0f)));
 			receiver2.setContentSize(10, 10);
-			receiver2.setUserString("BlockImage", "TaharezLook/GenericBrush");
+			receiver2.setUserString("BlockImage", "TestA2/InventorySlot");
 
 			// create some items and add them to the vault.
 			CEGUI::InventoryItem& item1 = dynamic_cast<CEGUI::InventoryItem&>(*wmgr.createWindow("TaharezLook/InventoryItem"));
@@ -179,10 +181,10 @@ void CEGUIManager::init() {
 			receiver2.addItemAtLocation(item1, 0, 0);
 			item1.setProperty("Image", "TaharezLook/MouseArrow");
 
-			CEGUI::InventoryItem& item2 = dynamic_cast<CEGUI::InventoryItem&>(*wmgr.createWindow("InventoryItem"));
-			item2.setUserString("BlockImage", "TaharezLook/GenericBrush");
-			item2.setContentSize(3, 1);
+			CEGUI::InventoryItem& item2 = dynamic_cast<CEGUI::InventoryItem&>(*wmgr.createWindow("TaharezLook/InventoryItem"));
+			item2.setContentSize(1, 2);
 			receiver2.addItemAtLocation(item2, 1, 3);
+			item2.setProperty("Image", "TestA2/MadBug");
 
 			CEGUI::InventoryItem& item3 = dynamic_cast<CEGUI::InventoryItem&>(*wmgr.createWindow("InventoryItem"));
 			item3.setUserString("BlockImage", "TaharezLook/GenericBrush");

@@ -178,5 +178,83 @@
                 </Window>
             </Window>
         </Window>
+        <Window type="Generic/Image" name="Inventory" >
+            <Property name="Area" value="{{0,0},{0,-128},{0.75,0},{0,-56}}" />
+            <Property name="Image" value="TestA2/InventoryBackground" />
+            <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            <Property name="AspectMode" value="Shrink" />
+            <Property name="AspectRatio" value="10" />
+            <Property name="VerticalAlignment" value="Bottom" />
+            <Property name="HorizontalAlignment" value="Centre" />
+            <Window type="Generic/Image" name="TL" >
+                <Property name="Area" value="{{0,0},{0,0},{0,30},{0,30}}" />
+                <Property name="Image" value="TestA2/InventoryBackground2TL" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+            </Window>
+            <Window type="Generic/Image" name="TR" >
+                <Property name="Area" value="{{0,0},{0,0},{0,30},{0,30}}" />
+                <Property name="Image" value="TestA2/InventoryBackground2TR" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="HorizontalAlignment" value="Right" />
+            </Window>
+            <Window type="Generic/Image" name="BL" >
+                <Property name="Area" value="{{0,0},{0,0},{0,30},{0,30}}" />
+                <Property name="Image" value="TestA2/InventoryBackground2BL" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="VerticalAlignment" value="Bottom" />
+            </Window>
+            <Window type="Generic/Image" name="BR" >
+                <Property name="Area" value="{{0,0},{0,0},{0,30},{0,30}}" />
+                <Property name="Image" value="TestA2/InventoryBackground2BR" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="VerticalAlignment" value="Bottom" />
+                <Property name="HorizontalAlignment" value="Right" />
+            </Window>
+            <Window type="Generic/Image" name="T" >
+                <Property name="Area" value="{{0,0},{0,0},{1,-60},{0,30}}" />
+                <Property name="Image" value="TestA2/InventoryBackground2T" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="HorizontalAlignment" value="Centre" />
+            </Window>
+            <Window type="Generic/Image" name="B" >
+                <Property name="Area" value="{{0,0},{0,0},{1,-60},{0,30}}" />
+                <Property name="Image" value="TestA2/InventoryBackground2B" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="VerticalAlignment" value="Bottom" />
+                <Property name="HorizontalAlignment" value="Centre" />
+            </Window>
+            <Window type="Generic/Image" name="L" >
+                <Property name="Area" value="{{0,0},{0,0},{0,30},{1,-60}}" />
+                <Property name="Image" value="TestA2/InventoryBackground2L" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="VerticalAlignment" value="Centre" />
+            </Window>
+            <Window type="Generic/Image" name="R" >
+                <Property name="Area" value="{{0,0},{0,0},{0,30},{1,-60}}" />
+                <Property name="Image" value="TestA2/InventoryBackground2R" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="VerticalAlignment" value="Centre" />
+                <Property name="HorizontalAlignment" value="Right" />
+            </Window>
+            <Window type="Generic/Image" name="M" >
+                <Property name="Area" value="{{0,0},{0,0},{0.75,0},{0,72}}" />
+                <Property name="Image" value="TestA2/InventoryBackground2M" />
+                <Property name="MaxSize" value="{{1,0},{1,0}}" />
+                <Property name="VerticalAlignment" value="Centre" />
+                <Property name="HorizontalAlignment" value="Centre" />
+            </Window>
+        </Window>
+        <Window type="TestA2/InventoryWindow" name="InventoryWindow" >
+            <Property name="Area" value="{{0,175},{0,175},{0.3,175},{0.3,181}}" />
+            <Property name="Text" value="Test" />
+            <Property name="TooltipText" value="Test" />
+            <AutoWindow namePath="__auto_titlebar__" >
+                <Property name="TooltipText" value="Test" />
+            </AutoWindow>
+            <AutoWindow namePath="__auto_closebutton__" >
+                <Property name="NonClient" value="true" />
+                <Property name="TooltipText" value="Test" />
+            </AutoWindow>
+        </Window>
     </Window>
 </GUILayout>

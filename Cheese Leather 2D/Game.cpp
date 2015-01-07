@@ -16,6 +16,7 @@
 #include "Shader.h"
 #include "InputManager.h"
 #include "CEGUIManager.h"
+#include <CEGUI\System.h>
 
 Game::Game()
 {
@@ -82,6 +83,11 @@ Game::Game()
 			this->m_ceguiManager->getInjectedInputReceiver().injectChar(codePoint & 0x7F);
 	});
 
+	m_window->setWindowSizeCallback([this](Window *window, int width, int height) {
+		glViewport(0, 0, width, height);
+		CEGUI::System::getSingleton().notifyDisplaySizeChanged(CEGUI::Sizef(width, height));
+	});
+
 #ifdef CLIENT
 	if (glewInit() != GLEW_OK) {
 		fprintf(stderr, "failed to initialize glew\n");
@@ -121,6 +127,8 @@ void Game::run()
 
 	while (m_state && !m_window->getShouldClose())
 	{
+
+		m_window->update();
 		std::chrono::time_point<std::chrono::system_clock> newtime = std::chrono::system_clock::now();
 		m_deltaTime = newtime - m_lastFrameTime;
 		//std::cout << m_deltaTime.count() << std::endl;			SPAM-sjuk sak

@@ -1,0 +1,274 @@
+<?xml version="1.0" ?>
+<Falagard version="7">   
+
+    <!--
+:::: Frame Window
+-->
+    <WidgetLook name="TestA2/InventoryWindow">
+        <PropertyLinkDefinition targetProperty="CaptionColour" widget="__auto_titlebar__" initialValue="FFe5ffb2" type="ColourRect" name="CaptionColour"/>
+        <PropertyLinkDefinition targetProperty="Font" widget="__auto_titlebar__" type="Font" name="CaptionFont"/>
+        
+        <Property name="AutoRenderingSurface" value="true"/>
+        <Property name="Size" value="{{0.3, 0}, {0.3, 0}}" />
+        <NamedArea name="ClientWithTitleWithFrame">
+            <Area>
+                <Dim type="LeftEdge">
+                    <OperatorDim op="Divide">
+                        <ImageDim name="TestA2/InventoryBackground3L" dimension="Width"/>
+                        <AbsoluteDim value="2"/>
+                    </OperatorDim>
+                </Dim>
+                <Dim type="TopEdge">
+                    <OperatorDim op="Add">
+                        <WidgetDim widget="__auto_titlebar__" dimension="BottomEdge"/>
+                        <OperatorDim op="Divide">
+                            <ImageDim name="TestA2/InventoryBackground3T" dimension="Height"/>
+                            <AbsoluteDim value="2"/>
+                        </OperatorDim>
+                    </OperatorDim>
+                </Dim>
+                <Dim type="RightEdge">
+                    <OperatorDim op="Subtract">
+                        <UnifiedDim scale="1" type="RightEdge"/>
+                        <OperatorDim op="Divide">
+                            <ImageDim name="TestA2/InventoryBackground3R" dimension="Width"/>
+                            <AbsoluteDim value="2"/>
+                        </OperatorDim>
+                    </OperatorDim>
+                </Dim>
+                <Dim type="BottomEdge">
+                    <OperatorDim op="Subtract">
+                        <UnifiedDim scale="1" type="BottomEdge"/>
+                        <OperatorDim op="Divide">
+                            <ImageDim name="TestA2/InventoryBackground3B" dimension="Height"/>
+                            <AbsoluteDim value="2"/>
+                        </OperatorDim>
+                    </OperatorDim>
+                </Dim>
+            </Area>
+        </NamedArea>
+        <NamedArea name="ClientWithTitleNoFrame">
+            <Area>
+                <Dim type="LeftEdge">
+                    <AbsoluteDim value="0"/>
+                </Dim>
+                <Dim type="TopEdge">
+                    <WidgetDim widget="__auto_titlebar__" dimension="BottomEdge"/>
+                </Dim>
+                <Dim type="Width">
+                    <UnifiedDim scale="1" type="Width"/>
+                </Dim>
+                <Dim type="BottomEdge">
+                    <WidgetDim dimension="BottomEdge"/>
+                </Dim>
+            </Area>
+        </NamedArea>
+        <NamedArea name="ClientNoTitleWithFrame">
+            <Area>
+                <Dim type="LeftEdge">
+                    <OperatorDim op="Divide">
+                        <ImageDim name="TestA2/InventoryBackground3L" dimension="Width"/>
+                        <AbsoluteDim value="2"/>
+                    </OperatorDim>
+                </Dim>
+                <Dim type="TopEdge">
+                    <OperatorDim op="Divide">
+                        <ImageDim name="TestA2/InventoryBackground3T" dimension="Height"/>
+                        <AbsoluteDim value="2"/>
+                    </OperatorDim>
+                </Dim>
+                <Dim type="RightEdge">
+                    <OperatorDim op="Subtract">
+                        <UnifiedDim scale="1" type="RightEdge"/>
+                        <OperatorDim op="Divide">
+                            <ImageDim name="TestA2/InventoryBackground3R" dimension="Width"/>
+                            <AbsoluteDim value="2"/>
+                        </OperatorDim>
+                    </OperatorDim>
+                </Dim>
+                <Dim type="BottomEdge">
+                    <OperatorDim op="Subtract">
+                        <UnifiedDim scale="1" type="BottomEdge"/>
+                        <OperatorDim op="Divide">
+                            <ImageDim name="TestA2/InventoryBackground3B" dimension="Height"/>
+                            <AbsoluteDim value="2"/>
+                        </OperatorDim>
+                    </OperatorDim>
+                </Dim>
+            </Area>
+        </NamedArea>
+        <NamedArea name="ClientNoTitleNoFrame">
+            <Area>
+                <Dim type="LeftEdge">
+                    <AbsoluteDim value="0"/>
+                </Dim>
+                <Dim type="TopEdge">
+                    <AbsoluteDim value="0"/>
+                </Dim>
+                <Dim type="Width">
+                    <UnifiedDim scale="1" type="Width"/>
+                </Dim>
+                <Dim type="Height">
+                    <UnifiedDim scale="1" type="Height"/>
+                </Dim>
+            </Area>
+        </NamedArea>
+        <Child nameSuffix="__auto_titlebar__" type="TaharezLook/Titlebar">
+            <Area>
+                <Dim type="LeftEdge">
+                    <OperatorDim op="Divide">
+                        <ImageDim name="TestA2/InventoryBackground3L" dimension="Width"/>
+                        <AbsoluteDim value="2"/>
+                    </OperatorDim>
+                </Dim>
+                <Dim type="TopEdge">
+                    <OperatorDim op="Divide">
+                        <ImageDim name="TestA2/InventoryBackground3T" dimension="Height"/>
+                        <AbsoluteDim value="2"/>
+                    </OperatorDim>
+                </Dim>
+                <Dim type="Width">
+                    <OperatorDim op="Subtract">
+                        <UnifiedDim scale="1" type="Width"/>
+                        <ImageDim name="TestA2/InventoryBackground3L" dimension="Width"/>
+                    </OperatorDim>
+                </Dim>
+                <Dim type="Height">
+                    <FontDim padding="8" type="LineSpacing"/>
+                </Dim>
+            </Area>
+            <Property name="AlwaysOnTop" value="false"/>
+        </Child>
+        <!-- here we basically nullify the close button, for now at least -->
+        <Child nameSuffix="__auto_closebutton__" type="DefaultWindow">
+            <Area>
+                <Dim type="LeftEdge">
+                    <AbsoluteDim value="0"/>
+                </Dim>
+                <Dim type="TopEdge">
+                    <AbsoluteDim value="0"/>
+                </Dim>
+                <Dim type="Width">
+                    <UnifiedDim scale="0" type="Width"/>
+                </Dim>
+                <Dim type="Height">
+                    <UnifiedDim scale="0" type="Height"/>
+                </Dim>
+            </Area>
+            <Property name="NonClient" value="true"/>
+        </Child>
+        <ImagerySection name="frame">
+            <FrameComponent>
+                <Area>
+                    <Dim type="LeftEdge">
+                        <AbsoluteDim value="0"/>
+                    </Dim>
+                    <Dim type="TopEdge">
+                        <AbsoluteDim value="0"/>
+                    </Dim>
+                    <Dim type="RightEdge">
+                        <UnifiedDim scale="1" type="RightEdge"/>
+                    </Dim>
+                    <Dim type="BottomEdge">
+                        <UnifiedDim scale="1" type="BottomEdge"/>
+                    </Dim>
+                </Area>
+                <Image component="TopLeftCorner" name="TestA2/InventoryBackground3TL"/>
+                <Image component="TopRightCorner" name="TestA2/InventoryBackground3TR"/>
+                <Image component="BottomLeftCorner" name="TestA2/InventoryBackground3BL"/>
+                <Image component="BottomRightCorner" name="TestA2/InventoryBackground3BR"/>
+                <Image component="LeftEdge" name="TestA2/InventoryBackground3L"/>
+                <Image component="TopEdge" name="TestA2/InventoryBackground3T"/>
+                <Image component="RightEdge" name="TestA2/InventoryBackground3R"/>
+                <Image component="BottomEdge" name="TestA2/InventoryBackground3B"/>
+                <Image component="Background" name="TestA2/InventoryBackground3M"/>
+            </FrameComponent>
+        </ImagerySection>
+        <ImagerySection name="noframe">
+            <ImageryComponent>
+                <Area>
+                    <Dim type="LeftEdge">
+                        <AbsoluteDim value="0"/>
+                    </Dim>
+                    <Dim type="TopEdge">
+                        <AbsoluteDim value="0"/>
+                    </Dim>
+                    <Dim type="Width">
+                        <UnifiedDim scale="1" type="Width"/>
+                    </Dim>
+                    <Dim type="BottomEdge">
+                        <UnifiedDim scale="1" type="BottomEdge"/>
+                    </Dim>
+                </Area>
+                <Image name="TestA2/InventoryBackground3M"/>
+                <VertFormat type="Stretched"/>
+                <HorzFormat type="Stretched"/>
+            </ImageryComponent>
+        </ImagerySection>
+        <StateImagery name="ActiveWithTitleWithFrame">
+            <Layer>
+                <Section section="frame"/>
+            </Layer>
+        </StateImagery>
+        <StateImagery name="InactiveWithTitleWithFrame">
+            <Layer>
+                <Section section="frame"/>
+            </Layer>
+        </StateImagery>
+        <StateImagery name="DisabledWithTitleWithFrame">
+            <Layer>
+                <Section section="frame"/>
+            </Layer>
+        </StateImagery>
+        <StateImagery name="ActiveWithTitleNoFrame">
+            <Layer>
+                <Section section="noframe"/>
+            </Layer>
+        </StateImagery>
+        <StateImagery name="InactiveWithTitleNoFrame">
+            <Layer>
+                <Section section="noframe"/>
+            </Layer>
+        </StateImagery>
+        <StateImagery name="DisabledWithTitleNoFrame">
+            <Layer>
+                <Section section="noframe"/>
+            </Layer>
+        </StateImagery>
+        <StateImagery name="ActiveNoTitleWithFrame">
+            <Layer>
+                <Section section="frame"/>
+            </Layer>
+        </StateImagery>
+        <StateImagery name="InactiveNoTitleWithFrame">
+            <Layer>
+                <Section section="frame"/>
+            </Layer>
+        </StateImagery>
+        <StateImagery name="DisabledNoTitleWithFrame">
+            <Layer>
+                <Section section="frame"/>
+            </Layer>
+        </StateImagery>
+        <StateImagery name="ActiveNoTitleNoFrame">
+            <Layer>
+                <Section section="noframe"/>
+            </Layer>
+        </StateImagery>
+        <StateImagery name="InactiveNoTitleNoFrame">
+            <Layer>
+                <Section section="noframe"/>
+            </Layer>
+        </StateImagery>
+        <StateImagery name="DisabledNoTitleNoFrame">
+            <Layer>
+                <Section section="noframe"/>
+            </Layer>
+        </StateImagery>
+    </WidgetLook>
+
+
+
+</Falagard>
+
+

@@ -205,9 +205,10 @@ void InventoryReceiver::populateGeometryBuffer()
     {
         for (int x = 0; x < d_content.width(); ++x)
         {
-            argb_t colour = 0xFFFFFFFF;
+            argb_t colour = 0x7FFFFFFF;
             if (d_content.elementAtLocation(x, y))
-                colour = 0xFF0000FF;
+                colour = 0x20FFFFFF;
+
 
             img->render(*d_geometry,
                         Vector2f(x * square_size.d_width + 1, y * square_size.d_height + 1),
