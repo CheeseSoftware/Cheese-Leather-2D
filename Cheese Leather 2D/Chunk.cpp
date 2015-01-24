@@ -9,6 +9,10 @@
 #include "Camera.h"
 #include "TextureHandler.h"
 #include "Texture.h"
+#include "ChunkManager.h"
+#include "BlockRegister.h"
+#include "BlockType.h"
+#include "BlockEntity.h"
 
 #ifdef CLIENT
 struct Quad {
@@ -24,7 +28,8 @@ struct Quad {
 
 
 
-Chunk::Chunk() {
+Chunk::Chunk(ChunkManager *chunkManager) {
+	m_chunkManager = chunkManager;
 }
 
 
@@ -107,6 +112,20 @@ void Chunk::setBlock(i8 x, i8 y, u16 block) {
 	{
 		m_blocks[y*cChunkSize + x] = block;
 		m_isBlocksChanged = true;
+
+		BlockType *blockType = m_chunkManager->getBlockRegister()->getBlock(block);
+
+		if (blockType->isBlockEntity()) {
+			BlockEntity *blockEntity = blockType->blockEntity->clone();
+
+			m_blockEntities.emplace(i8vec2(x, y), blockEntity);
+		}
+		else {
+			auto it = m_blockEntities.find(i8vec2(x, y));
+			if (it != m_blockEntities.end())
+				m_blockEntities.erase(it);
+		}
+
 	}
 }
 //void placeBlockWithoutLock(i8 x, i8 y, u16 block);

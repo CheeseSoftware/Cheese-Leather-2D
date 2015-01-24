@@ -34,6 +34,9 @@
     <Filter Include="Source Files\CEGUI">
       <UniqueIdentifier>{340ce729-0e4b-4fc1-87fb-2a1d7b42e35c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Block">
+      <UniqueIdentifier>{8a5f22d3-45b0-4452-b14c-a2762bb452b8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ShaderProgram.h">
@@ -64,9 +67,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TextureHandler.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ChunkMesher.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="IWorld.h">
@@ -125,6 +125,30 @@
     </ClInclude>
     <ClInclude Include="InventoryReceiver.h">
       <Filter>Header Files\CEGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="ChunkMesher.h">
+      <Filter>Header Files\world</Filter>
+    </ClInclude>
+    <ClInclude Include="BlockRegister.h">
+      <Filter>Header Files\blocks</Filter>
+    </ClInclude>
+    <ClInclude Include="ChunkMesherPool.h">
+      <Filter>Header Files\world</Filter>
+    </ClInclude>
+    <ClInclude Include="ChunkManager.h">
+      <Filter>Header Files\world</Filter>
+    </ClInclude>
+    <ClInclude Include="TaskScheduler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BlockType.h">
+      <Filter>Header Files\blocks</Filter>
+    </ClInclude>
+    <ClInclude Include="Block.h">
+      <Filter>Header Files\blocks</Filter>
+    </ClInclude>
+    <ClInclude Include="DefaultBlock.h">
+      <Filter>Header Files\blocks</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -199,6 +223,12 @@
     </ClCompile>
     <ClCompile Include="BoolArray2D.cpp">
       <Filter>Source Files\CEGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="TaskScheduler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BlockRegister.cpp">
+      <Filter>Source Files\Block</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

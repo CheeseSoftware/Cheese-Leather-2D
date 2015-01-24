@@ -10,19 +10,21 @@ class World;
  * "TileEntity"
  * BlockEntioty
 */
-class IBlockEntity {
+class BlockEntity {
 public:
-	virtual ~IBlockComponent() {}
+	virtual ~BlockEntity() {}
 
 	virtual void onPlace(World *world, u32vec2 position) = 0;
 	virtual void onDestroy(World *world, u32vec2 position) = 0;
+
+	virtual BlockEntity *clone() = 0;
 
 	//virtual void onVolumeChange(World *world, u32vec2 position, u32 volume) = 0;
 
 	//void onPlayerClick(World *world, u32vec2 position, MouseEventType mouseEventType, int mouseButton) = 0;
 };
 
-class BlockChest : virtual public IBlockEntity {
-public:
-	virtual ~IBlockComponent() {}
-};
+//class BlockChest : virtual public IBlockEntity {
+//public:
+//	virtual ~BlockChest() {}
+//};

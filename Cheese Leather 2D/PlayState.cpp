@@ -164,7 +164,7 @@ void PlayState::update(Game *game) {
 			glm::vec2 pos = m_camera->toWorldPosition(glm::vec2(xpos, ypos));
 			int x = pos.x / 16;
 			int y = pos.y / 16 + 1;
-			m_world->setBlock(x, y, 0);
+			//m_world->setBlock(x, y, 0);
 			std::cout << "X:" << x << " Y:" << y << std::endl;
 		}
 	}
@@ -177,7 +177,7 @@ void PlayState::update(Game *game) {
 			glm::vec2 pos = m_camera->toWorldPosition(glm::vec2(xpos, ypos));
 			int x = pos.x / 16;
 			int y = pos.y / 16 + 1;
-			m_world->setBlock(x, y, 1);
+			//m_world->setBlock(x, y, 1);
 			std::cout << "X:" << x << " Y:" << y << std::endl;
 		}
 	}

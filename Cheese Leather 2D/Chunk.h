@@ -4,6 +4,7 @@
 #include <mutex>
 #include <atomic>
 #include <vector>
+#include <unordered_map>
 #include "types.h"
 #include "Vertex.h"
 
@@ -11,6 +12,8 @@ class Game;
 class ShaderProgram;
 class Camera;
 class b2Body;
+class BlockEntity;
+class ChunkManager;
 
 struct BlockData
 {
@@ -23,7 +26,7 @@ struct BlockData
 
 class Chunk {
 public:
-	Chunk();
+	Chunk(ChunkManager *chunkManager);
 	~Chunk(void);
 
 
@@ -45,7 +48,10 @@ private:
 	void loadMesh(Game *game);
 	void loadVertexBuffer();
 
+	ChunkManager *m_chunkManager;
+
 	u16 *m_blocks = nullptr;
+	std::unordered_map<i8vec2, BlockEntity*, hash<i8vec2>, hash<i8vec2>> m_blockEntities;
 	//std::mutex m_blockMutex;
 	bool m_isBlocksChanged = false;
 
@@ -63,4 +69,7 @@ private:
 
 	// Box2d:
 	b2Body* body = nullptr;
+
+	// ChunkMesher:
+	//ChunkMesher *m_chunkMesher;
 };
